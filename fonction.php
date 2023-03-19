@@ -1,4 +1,17 @@
 <?php
+function connexion()
+{
+    try {
+        $pdo = new PDO('mysql:dbname=ecebook;host=127.0.0.1', 'root', '');
+        $pdo->exec("SET CHARACTER SET utf8mb4");
+    } catch (PDOException $e) {
+        $pdo = new PDO('mysql:dbname=ecebook;host=127.0.0.1;port=3307', 'root', '');
+        $pdo->exec("SET CHARACTER SET utf8mb4");
+    }
+    return $pdo;
+}
+
+
 function footer()
 {
 ?>
