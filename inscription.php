@@ -19,30 +19,34 @@ $pdo = connexion();
 <body id="second">
     <form action="" method="post">
 
-        <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center" id="primal">
+        <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true"></button>
+                    <button class="nav-link disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true"></button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false"></button>
+                    <button class="nav-link disabled" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false"></button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false"></button>
+                    <button class="nav-link disabled" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false"></button>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
 
                 <!-- page 1 -->
 
+                <h1>Inscription</h1>
                 <div class="tab-pane fade show active" id="insc1-tab-pane" role="tabpanel" aria-labelledby="insc1-tab" tabindex="0">
-                    <input type="email" id="email" name="email" placeholder="Adresse mail" required><span class="etoile">*</span><br><br>
-                    <input type="password" id="password" name="password" placeholder="Mot de passe" required><span class="etoile">*</span><br><br>
-                    <!-- <button type="button" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane">Suivant</button> -->
-                    <!-- <input type="submit" class="btn btn-primary" onclick="document.getElementById('insc1-tab').classList.remove('active'); document.getElementById('insc2-tab').classList.add('active'); document.getElementById('insc1-tab-pane').classList.remove('show', 'active'); document.getElementById('insc2-tab-pane').classList.add('show', 'active');" value="Suivant"> -->
+                    <label for="validationDefault01" class="form-label">Entré votre adresse mail</label> <span class="etoile">*</span><br>
+                    <div class="input-group">
+                        <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                        <input type="email" name="mail" class="form-control" id="mail" aria-describedby="inputGroupPrepend2" placeholder="Adresse mail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Entré votre mot de passe</label><span class="etoile">*</span>
+                        <input type="password" class="form-control" id="exampleInputPassword1" id="mdp" name="mdp" placeholder="Mot de passe" required>
+                    </div>
 
-
-                    <!-- <button class="btn btn-primary" type="button" onclick="document.getElementById('insc1-tab').classList.remove('active'); document.getElementById('insc2-tab').classList.add('active'); document.getElementById('insc1-tab-pane').classList.remove('show', 'active'); document.getElementById('insc2-tab-pane').classList.add('show', 'active');">Suivant</button> -->
                     <input type="submit" class="btn btn-primary" value="Suivant" onclick="document.getElementById('insc1-tab').classList.remove('active'); document.getElementById('insc2-tab').classList.add('active'); document.getElementById('insc1-tab-pane').classList.remove('show', 'active'); document.getElementById('insc2-tab-pane').classList.add('show', 'active');">
 
                 </div>
@@ -50,33 +54,38 @@ $pdo = connexion();
                 <!-- page 2 -->
 
                 <div class="tab-pane fade" id="insc2-tab-pane" role="tabpanel" aria-labelledby="insc2-tab" tabindex="0">
-                    <input type="text" id="name" name="nom" required placeholder="nom"><span class="etoile">*</span><br>
-                    <input type="text" id="prenom" name="prenom" required placeholder="prenom"><span class="etoile">*</span><br>
-                    <input type="date" name="naissance" id="naissance" required>selectionné votre date de naissance <span class="etoile">*</span><br>
-                    <input type="text" name="ville" id="ville" required placeholder="Ville de résidence"><span class="etoile">*</span><br>
-                    <label for="classe">Classe: </label><br>
-                    <input type="checkbox" name="ING1" id="ING1">ING1 &nbsp;
-                    <input type="checkbox" name="ING2" id="ING2">ING2 &nbsp;
-                    <input type="checkbox" name="ING3" id="ING3">ING3 &nbsp;
-                    <input type="checkbox" name="ING4" id="ING4">ING4 &nbsp;
-                    <input type="checkbox" name="ING5" id="ING5">ING5 &nbsp;
-                    <input type="checkbox" name="B1" id="B1">B1 &nbsp;
-                    <input type="checkbox" name="B2" id="B2">B2 &nbsp;
-                    <input type="checkbox" name="B3" id="B3">B3 &nbsp;
+                    <label for="validationDefault01" class="form-label">Nom</label> <span class="etoile">*</span><br>
+                    <input type="text" id="name" name="nom" required placeholder="nom"><br>
+                    <label for="validationDefault01" class="form-label">Prenom</label> <span class="etoile">*</span><br>
+                    <input type="text" id="prenom" name="prenom" required placeholder="prenom"><br>
+                    <label for="validationDefault01" class="form-label">Selectionné votre date de naissance</label> <span class="etoile">*</span><br>
+                    <input type="date" name="naissance" id="naissance" required><br>
+                    <label for="validationDefault01" class="form-label">Rentré votre ville de residence</label> <span class="etoile">*</span><br>
+                    <input type="text" name="ville" id="ville" required placeholder="Ville de résidence"><br>
+                    <label for="classe">Rentré votre classe: </label><br>
+                    <input type="checkbox" name="promo" value="ING1" id="ING1">ING1 &nbsp;
+                    <input type="checkbox" name="promo" value="ING2" id="ING2">ING2 &nbsp;
+                    <input type="checkbox" name="promo" value="ING3" id="ING3">ING3 &nbsp;
+                    <input type="checkbox" name="promo" value="ING4" id="ING4">ING4 &nbsp;
+                    <input type="checkbox" name="promo" value="ING5" id="ING5">ING5 &nbsp;
+                    <input type="checkbox" name="promo" value="B1" id="B1">B1 &nbsp;
+                    <input type="checkbox" name="promo" value="B2" id="B2">B2 &nbsp;
+                    <input type="checkbox" name="promo" value="B3" id="B3">B3 &nbsp;
                     <br>
-
-                    <input type="text" name="description" id="description" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255"><span class="etoile">*</span><br>
-                    <input type="text" name="interet" id="interet" required placeholder="Vos centre d'interet" minlength="25" maxlength="255"><span class="etoile">*</span><br>
+                    <label for="validationDefault01" class="form-label">Rentré votre descritpion</label> <span class="etoile">*</span><br>
+                    <input type="text" name="desc" id="desc" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255"><br>
+                    <label for="validationDefault01" class="form-label">Rentré vos centres d'interets</label> <span class="etoile">*</span><br>
+                    <input type="text" name="interet" id="interet" required placeholder="Vos centres d'interets" minlength="25" maxlength="255"><br>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Chargé votre photo de profil</label> <span class="etoile">*</span>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" id="pp" name="pp">
                     </div>
                     <br>
-                    <!-- <input type="submit" class="btn btn-primary" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" value="Suivant"> -->
                     <!-- <button class="btn btn-primary" type="button" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane">Suivant</button> <br> -->
 
-                    <button class="btn btn-primary" type="button" onclick="document.getElementById('insc2-tab').classList.remove('active'); document.getElementById('insc3-tab').classList.add('active'); document.getElementById('insc2-tab-pane').classList.remove('show', 'active'); document.getElementById('insc3-tab-pane').classList.add('show', 'active');">Suivant</button>
+                    <input type="submit" class="btn btn-primary" value="Suivant" name="valide" onclick="document.getElementById('insc2-tab').classList.remove('active'); document.getElementById('insc3-tab').classList.add('active'); document.getElementById('insc2-tab-pane').classList.remove('show', 'active'); document.getElementById('insc3-tab-pane').classList.add('show', 'active');">
 
+                    <!-- <button class="btn btn-primary" type="submit" value='suivant' name="valide">Valider l'inscription</button> -->
                 </div>
 
                 <!-- page 3 -->
@@ -88,6 +97,31 @@ $pdo = connexion();
             </div>
         </div>
     </form>
+    <?php
+    if (isset($_POST["valide"])) {
+        extract($_POST);
+        // $ext = strtolower(substr(strrchr($_FILES['pp']['name'], '.'), 1));
+        // if (($_FILES['pp']['size'] < 20971520) && (in_array($ext, $extensions))) {
+        //     $pp = 'produit/' . $_SESSION["idu"] . '-' . $nomp . '.' . $ext;
+        //     move_uploaded_file($_FILES['pp']['tmp_name'], $pp);
+        // }
+        $mdp2 = encode($mdp, $mail);
+        if ($mdp == $mdp) {
+            $stmt = $pdo->prepare("SELECT mail FROM user WHERE mail=?");
+            $stmt->execute([$mail]);
+            $user = $stmt->fetch();
+            if ($user) {
+                // echo "Cette adresse mail est déjà utilisée";
+            } else {
+                $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp, $naissance, $promo, $pp, $ville, $desc, $interet]);
+            }
+            exit();
+        }
+        // else echo "Le mot de passe est incorect ";
+    }
+
+    ?>
 </body>
 
 </html>
