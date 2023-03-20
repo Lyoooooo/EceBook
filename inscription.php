@@ -19,7 +19,7 @@ $pdo = connexion();
 <body id="second">
     <form action="" method="post">
 
-        <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center" id="primal">
+        <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true"></button>
@@ -34,18 +34,19 @@ $pdo = connexion();
             <div class="tab-content" id="myTabContent">
 
                 <!-- page 1 -->
+
                 <h1>Inscription</h1>
                 <div class="tab-pane fade show active" id="insc1-tab-pane" role="tabpanel" aria-labelledby="insc1-tab" tabindex="0">
                     <label for="validationDefault01" class="form-label">Entré votre adresse mail</label> <span class="etoile">*</span><br>
                     <div class="input-group">
                         <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                        <input type="text" name="mail" class="form-control" id="mail" aria-describedby="inputGroupPrepend2" placeholder="Adresse mail" required>
+                        <input type="email" name="mail" class="form-control" id="mail" aria-describedby="inputGroupPrepend2" placeholder="Adresse mail" required>
                     </div>
-                    <!-- <input type="email" id="email" name="email" placeholder="Adresse mail" required><br><br> -->
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Entré votre mot de passe</label><span class="etoile">*</span>
                         <input type="password" class="form-control" id="exampleInputPassword1" id="mdp" name="mdp" placeholder="Mot de passe" required>
                     </div>
+
                     <input type="submit" class="btn btn-primary" value="Suivant" onclick="document.getElementById('insc1-tab').classList.remove('active'); document.getElementById('insc2-tab').classList.add('active'); document.getElementById('insc1-tab-pane').classList.remove('show', 'active'); document.getElementById('insc2-tab-pane').classList.add('show', 'active');">
 
                 </div>
@@ -82,9 +83,9 @@ $pdo = connexion();
                     <br>
                     <!-- <button class="btn btn-primary" type="button" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane">Suivant</button> <br> -->
 
-                    <!-- <input type="submit" class="btn btn-primary" value="Suivant" name="valide" onclick="document.getElementById('insc2-tab').classList.remove('active'); document.getElementById('insc3-tab').classList.add('active'); document.getElementById('insc2-tab-pane').classList.remove('show', 'active'); document.getElementById('insc3-tab-pane').classList.add('show', 'active');"> -->
+                    <input type="submit" class="btn btn-primary" value="Suivant" name="valide" onclick="document.getElementById('insc2-tab').classList.remove('active'); document.getElementById('insc3-tab').classList.add('active'); document.getElementById('insc2-tab-pane').classList.remove('show', 'active'); document.getElementById('insc3-tab-pane').classList.add('show', 'active');">
 
-                    <button class="btn btn-primary" type="submit" value='suivant' name="valide">Valider l'inscription</button>
+                    <!-- <button class="btn btn-primary" type="submit" value='suivant' name="valide">Valider l'inscription</button> -->
                 </div>
 
                 <!-- page 3 -->
@@ -99,19 +100,25 @@ $pdo = connexion();
     <?php
     if (isset($_POST["valide"])) {
         extract($_POST);
+        // $ext = strtolower(substr(strrchr($_FILES['pp']['name'], '.'), 1));
+        // if (($_FILES['pp']['size'] < 20971520) && (in_array($ext, $extensions))) {
+        //     $pp = 'produit/' . $_SESSION["idu"] . '-' . $nomp . '.' . $ext;
+        //     move_uploaded_file($_FILES['pp']['tmp_name'], $pp);
+        // }
         $mdp2 = encode($mdp, $mail);
         if ($mdp == $mdp) {
             $stmt = $pdo->prepare("SELECT mail FROM user WHERE mail=?");
             $stmt->execute([$mail]);
             $user = $stmt->fetch();
             if ($user) {
-                echo "Cette adresse mail est déjà utilisée";
+                // echo "Cette adresse mail est déjà utilisée";
             } else {
                 $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
                 $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp, $naissance, $promo, $pp, $ville, $desc, $interet]);
             }
             exit();
-        } else echo "Le mot de passe est incorect ";
+        }
+        // else echo "Le mot de passe est incorect ";
     }
 
     ?>
