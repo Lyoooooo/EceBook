@@ -14,3 +14,23 @@ span.etoile {
     color: red;
 }
 
+#mid{
+    border-color: rgb(92, 85, 85);
+    border-style: solid;
+    border-radius: 8px;
+    border-width: 1px;
+    padding-top: 2%;
+}
+
+#legende{
+    text-align: end;
+    font-weight: bold;
+}
+
+#pn{
+    padding-top: 0.3em;
+}
+
+h3{
+    text-align: center;
+}
