@@ -1,5 +1,6 @@
 body{
     background-color:#FFE2D6;
+    z-index: 1;
 }
 
 .central{
