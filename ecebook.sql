@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 19 Mars 2023 à 17:33
+-- Généré le :  Lun 20 Mars 2023 à 22:52
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `message` (
 DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
   `idp` int(4) NOT NULL AUTO_INCREMENT,
+  `idu` int(4) NOT NULL,
   `titre` varchar(50) NOT NULL,
   `texte` varchar(500) NOT NULL,
   `photo` varchar(255) DEFAULT NULL,
@@ -91,10 +92,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `promo` varchar(30) DEFAULT NULL,
   `pp` varchar(255) DEFAULT NULL,
   `ville` varchar(30) DEFAULT NULL,
-  `desc` varchar(255) DEFAULT NULL,
+  `descrip` varchar(255) DEFAULT NULL,
   `interet` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idu`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `user`
+--
+
+INSERT INTO `user` (`idu`, `nom`, `pnom`, `grade`, `mail`, `mdp`, `naissance`, `promo`, `pp`, `ville`, `descrip`, `interet`) VALUES
+(13, 'Novier', 'Nathan', 1, 'nathannovier@gmail.com', 'mdp', '2002-01-13', 'BS2', NULL, 'Melun', 'J''aime coder en légende et beaucoup de choses comme par exemple j''aime le fait de ratio léo c''est vraiment mon plaisir ultime', 'Ratio léo');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
