@@ -26,41 +26,61 @@ $user = $stmt->fetch();
 </head>
 
 <?php
-  mainHeader()
-  ?>
+mainHeader()
+?>
 
 <body style="background-color: #FFE2D6;">
-  
-  <header>
-    <div class="container">
-      <div class="profile">
-
-        <div class="profile-image">
-          <!-- <img src="<?= $user["pp"] ?>" alt=""> -->
-          <img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=750&h=750&fit=crop">
+  <div class="col-md-8 mx-auto">
+    <div class="bg-white shadow overflow-hidden">
+      <div class="px-5 pt-0 pb-4">
+        <div class="profile-head">
+          <div class="d-flex">
+            <img src="<?php echo $user["pp"] ?>" alt="..." width="130" class="rounded mb-2 img-thumbnail me-5 mb-5">
+            <div class="grid gap-0 column-gap-3">
+              <h4 class="mt-4 mb-2"><?php echo $user["pnom"] ?> <?php echo $user["nom"] ?></h4>
+              <p class="small align-bottom mb-2"><?php echo $user["ville"] ?></p>
+              <p class="small align-bottom"><?php echo $user["promo"] ?></p>
+            </div>
+          </div>
+          <a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
+          
         </div>
+      </div>
+      <div class="bg-light p-4 d-flex justify-content-end text-center">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item">
+            <h5 class="font-weight-bold mb-0 d-block">215</h5>
+            <small class="text-muted"> <i class="fas fa-image mr-1">
 
-        <div class="profile-user-settings">
-          <h1 class="profile-user-name"><?= $user["pnom"] ?> <?= $user["nom"] ?></h1>
-          <button class="btn profile-edit-btn">Edit Profile</button>
+              </i>Photos</small>
+          </li>
+          <li class="list-inline-item">
+            <h5 class="font-weight-bold mb-0 d-block">745</h5>
+            <small class="text-muted">
+              <i class="fas fa-user mr-1">
+
+              </i>Followers</small>
+          </li>
+          <li class="list-inline-item">
+            <h5 class="font-weight-bold mb-0 d-block">340</h5>
+            <small class="text-muted">
+              <i class="fas fa-user mr-1">
+
+              </i>Following</small>
+          </li>
+        </ul>
+      </div>
+      <div class="px-4 py-3">
+        <h5 class="mb-0">About</h5>
+        <div class="p-4 rounded shadow-sm bg-light">
+          <p class="font-italic mb-0">Web Developer</p>
+          <p class="font-italic mb-0">Lives in New York</p>
+          <p class="font-italic mb-0">Photographer</p>
         </div>
-
-        <div class="profile-stats">
-          <ul>
-            <li><span class="profile-stat-count">???</span> post(s)</li>
-            <li><span class="profile-stat-count">???</span> ami(s)</li>
-          </ul>
-        </div>
-
-        <div class="profile-bio">
-          <p><?= $user["descrip"] ?></p>
-          <p><?= $user["interet"] ?></p>
-        </div>
-
       </div>
     </div>
-  </header>
-  
+  </div>
+
   <main>
 
 
