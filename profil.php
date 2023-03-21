@@ -30,58 +30,50 @@ mainHeader()
 ?>
 
 <body style="background-color: #FFE2D6;">
-  <div class="col-md-8 mx-auto">
+  <header class="col-md-8 mx-auto">
     <div class="bg-white shadow overflow-hidden">
       <div class="px-5 pt-0 pb-4">
-        <div class="profile-head">
+
+        <div class="profile-head border border-light">
           <div class="d-flex">
-            <img src="<?php echo $user["pp"] ?>" alt="..." width="130" class="rounded mb-2 img-thumbnail me-5 mb-5">
-            <div class="grid gap-0 column-gap-3">
-              <h4 class="mt-4 mb-2"><?php echo $user["pnom"] ?> <?php echo $user["nom"] ?></h4>
+            <img src="<?php echo $user["pp"] ?>" alt="Photo de @<?php echo $user["mail"] ?>" width="130" class="rounded img-thumbnail me-5 ms-2 mb-2 mt-2">
+            <div class="grid">
+              <h4 class="mt-2 mb-2"><?php echo $user["pnom"] ?> <?php echo $user["nom"] ?></h4>
               <p class="small align-bottom mb-2"><?php echo $user["ville"] ?></p>
               <p class="small align-bottom"><?php echo $user["promo"] ?></p>
             </div>
+            <div class="grid ms-3 mt-2" style="color:royalblue; font-weight: 600;">@<?php echo $user["mail"] ?></div>
+            <div class="grid">
+              <div class="grid ms-5 mt-2 mb-4"><a href="modifuser.php" class="btn btn-outline-dark btn-sm btn-block">Modifier profil</a></div>
+              <div class="grid ms-5 mt-2 text-center"><a href="messagerie.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
+            </div>
+            <div class="grid ms-5 mt-2 d-flex justify-content-end text-center">
+              <ul class="list-inline mb-0">
+                <li class="list-inline-item">
+                  <h5 class="font-weight-bold d-block">????</h5>
+                  <small class="text-muted"><i class="fas fa-image mr-1"></i>Post(s)</small>
+                </li>
+                <li class="list-inline-item">
+                  <h5 class="font-weight-bold d-block">????</h5>
+                  <small class="text-muted"><i class="fas fa-user mr-1"></i>Ami(s)</small>
+                </li>
+              </ul>
+            </div>
           </div>
-          <a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
-          
         </div>
-      </div>
-      <div class="bg-light p-4 d-flex justify-content-end text-center">
-        <ul class="list-inline mb-0">
-          <li class="list-inline-item">
-            <h5 class="font-weight-bold mb-0 d-block">215</h5>
-            <small class="text-muted"> <i class="fas fa-image mr-1">
 
-              </i>Photos</small>
-          </li>
-          <li class="list-inline-item">
-            <h5 class="font-weight-bold mb-0 d-block">745</h5>
-            <small class="text-muted">
-              <i class="fas fa-user mr-1">
+        <div class="p-5 m-2"></div>
 
-              </i>Followers</small>
-          </li>
-          <li class="list-inline-item">
-            <h5 class="font-weight-bold mb-0 d-block">340</h5>
-            <small class="text-muted">
-              <i class="fas fa-user mr-1">
-
-              </i>Following</small>
-          </li>
-        </ul>
-      </div>
-      <div class="px-4 py-3">
-        <h5 class="mb-0">About</h5>
-        <div class="p-4 rounded shadow-sm bg-light">
-          <p class="font-italic mb-0">Web Developer</p>
-          <p class="font-italic mb-0">Lives in New York</p>
-          <p class="font-italic mb-0">Photographer</p>
+        <h5 class="mb-4">A propos de moi</h5>
+        <div class="p-3 border border-light">
+          <p class="font-italic mb-2"><?php echo $user["descrip"] ?></p>
+          <p class="font-italic mb-0"><span style="font-weight:600;">Centre d'intérêt :</span> <?php echo $user["interet"] ?></p>
         </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <main>
+  <main class="col-md-8 mx-auto">
 
 
   </main>
