@@ -1,12 +1,12 @@
 <?php
 include "fonction.php";
 session_start();
-if (connecte() == False) {
-  header("location:index.php");
-}
+// if (connecte() == False) {
+//   header("location:index.php");
+// }
 $pdo = connexion();
 // $idu = $_SESSION["idu"];
-$idu = 13;
+$idu = 1;
 $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
 $stmt->execute([$idu]);
 $user = $stmt->fetch();
@@ -25,100 +25,66 @@ $user = $stmt->fetch();
   <title>Profil</title>
 </head>
 
-<body>
-  <header>
-    <div class="container">
-      <div class="profile">
+<?php
+mainHeader()
+?>
 
-        <div class="profile-image">
-          <!-- <img src="<?= $user["pp"] ?>" alt=""> -->
-          <img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=750&h=750&fit=crop">
-        </div>
-
-        <div class="profile-user-settings">
-          <h1 class="profile-user-name"><?= $user["pnom"] ?> <?= $user["nom"] ?></h1>
-          <button class="btn profile-edit-btn">Edit Profile</button>
-        </div>
-
-        <div class="profile-stats">
-          <ul>
-            <li><span class="profile-stat-count">???</span> post(s)</li>
-            <li><span class="profile-stat-count">???</span> ami(s)</li>
-          </ul>
-        </div>
-
-        <div class="profile-bio">
-          <p><?= $user["desc"] ?></p>
-          <p><?= $user["interet"] ?></p>
-        </div>
-
-      </div>
-    </div>
-  </header>
-  
-  <div class="feed">
-      <div class="post">
-        <div class="body">
-          <div class="head">
-            <div class="post__headerText">
-              <h3>
-                Somanath Goudar
-                <span class="post__headerSpecial"><span class="material-icons post__badge"> verified </span>@somanathg</span
-                >
-              </h3>
-            </div>
-            <div class="post__headerDescription">
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+<body style="background-color: #FFE2D6;">
+  <div class="col-md-8 mx-auto">
+    <div class="bg-white shadow overflow-hidden">
+      <div class="px-5 pt-0 pb-4">
+        <div class="profile-head">
+          <div class="d-flex">
+            <img src="<?php echo $user["pp"] ?>" alt="..." width="130" class="rounded mb-2 img-thumbnail me-5 mb-5">
+            <div class="grid gap-0 column-gap-3">
+              <h4 class="mt-4 mb-2"><?php echo $user["pnom"] ?> <?php echo $user["nom"] ?></h4>
+              <p class="small align-bottom mb-2"><?php echo $user["ville"] ?></p>
+              <p class="small align-bottom"><?php echo $user["promo"] ?></p>
             </div>
           </div>
-          <img
-            src="https://www.focus2move.com/wp-content/uploads/2020/01/Tesla-Roadster-2020-1024-03.jpg"
-            alt=""
-          />
-          <div class="post__footer">
-            <span class="material-icons"> repeat </span>
-            <span class="material-icons"> favorite_border </span>
-            <span class="material-icons"> publish </span>
-          </div>
+          <a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
+          
         </div>
       </div>
-      <!-- post ends -->
+      <div class="bg-light p-4 d-flex justify-content-end text-center">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item">
+            <h5 class="font-weight-bold mb-0 d-block">215</h5>
+            <small class="text-muted"> <i class="fas fa-image mr-1">
 
-      <!-- post starts -->
-      <div class="post">
-        <div class="post__avatar">
-          <img
-            src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
-            alt=""
-          />
-        </div>
+              </i>Photos</small>
+          </li>
+          <li class="list-inline-item">
+            <h5 class="font-weight-bold mb-0 d-block">745</h5>
+            <small class="text-muted">
+              <i class="fas fa-user mr-1">
 
-        <div class="post__body">
-          <div class="post__header">
-            <div class="post__headerText">
-              <h3>
-                Somanath Goudar
-                <span class="post__headerSpecial"
-                  ><span class="material-icons post__badge"> verified </span>@somanathg</span
-                >
-              </h3>
-            </div>
-            <div class="post__headerDescription">
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-            </div>
-          </div>
-          <img
-            src="https://www.focus2move.com/wp-content/uploads/2020/01/Tesla-Roadster-2020-1024-03.jpg"
-            alt=""
-          />
-          <div class="post__footer">
-            <span class="material-icons"> repeat </span>
-            <span class="material-icons"> favorite_border </span>
-            <span class="material-icons"> publish </span>
-          </div>
+              </i>Followers</small>
+          </li>
+          <li class="list-inline-item">
+            <h5 class="font-weight-bold mb-0 d-block">340</h5>
+            <small class="text-muted">
+              <i class="fas fa-user mr-1">
+
+              </i>Following</small>
+          </li>
+        </ul>
+      </div>
+      <div class="px-4 py-3">
+        <h5 class="mb-0">About</h5>
+        <div class="p-4 rounded shadow-sm bg-light">
+          <p class="font-italic mb-0">Web Developer</p>
+          <p class="font-italic mb-0">Lives in New York</p>
+          <p class="font-italic mb-0">Photographer</p>
         </div>
       </div>
     </div>
+  </div>
+
+  <main>
+
+
+  </main>
 
   <?php
   footer();

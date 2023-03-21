@@ -73,7 +73,7 @@ $pdo = connexion();
                     <input type="checkbox" name="promo" value="B3" id="B3">B3 &nbsp;
                     <br>
                     <label for="validationDefault01" class="form-label">Rentré votre descritpion</label> <span class="etoile">*</span><br>
-                    <input type="text" name="desc" id="desc" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255"><br>
+                    <input type="text" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255"><br>
                     <label for="validationDefault01" class="form-label">Rentré vos centres d'interets</label> <span class="etoile">*</span><br>
                     <input type="text" name="interet" id="interet" required placeholder="Vos centres d'interets" minlength="25" maxlength="255"><br>
                     <div class="mb-3">
@@ -114,7 +114,7 @@ $pdo = connexion();
                 // echo "Cette adresse mail est déjà utilisée";
             } else {
                 $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-                $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp, $naissance, $promo, $pp, $ville, $desc, $interet]);
+                $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp, $naissance, $promo, $pp, $ville, $descrip, $interet]);
             }
             exit();
         }

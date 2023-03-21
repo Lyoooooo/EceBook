@@ -27,10 +27,6 @@ function connecte()
   } else return True;
 }
 
-
-
-
-
 function footer()
 {
 ?>

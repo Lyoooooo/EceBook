@@ -1,4 +1,10 @@
-body{
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}  
+
+body {
     background-color:#FFE2D6;
     z-index: 1;
 }
@@ -182,4 +188,8 @@ h3{
 
 #pn{
     margin-top: 10px;
+}
+
+.profile-head {
+  transform: translateY(5rem)
 }
