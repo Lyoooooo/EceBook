@@ -2,24 +2,9 @@
 include "fonction.php";
 mainHeader();
 
-
-$idp=$_GET["idp"];
-$pdo = connexion();
-$statement = $pdo ->prepare ("SELECT * from post where idp = :idp");
-//le 'prepare' prepare la requete 
-$statement -> bindValue(':idp', $idp, PDO::PARAM_INT);
-//bindValue donne la valeur *
-$statement->execute();   
-$result = $statement->fetch(PDO::FETCH_ASSOC);
-
-$statement2 = $pdo -> prepare ("SELECT * from user where idu=:idu");
-$statement2 -> bindValue(':idu', $idu, PDO::PARAM_INT);
-$statement2->execute();   
-$result2 = $statement2->fetch(PDO::FETCH_ASSOC);
-
-
-
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +14,7 @@ $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
@@ -47,41 +33,8 @@ $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
                     <div class="grid-margin stretch-card">
                         
                             <div class="card-body">
-                            <?php foreach($result as $ligne){ 
-                                foreach ($result2 as $ligne2){?>
-                                <div class= 'p-5 text-center' style='background-color:#F3F781'>
-                                    <div class='card'>
-                                        <div class='row'>
-                                            <div class="card-body product-img-outer text-center">
-                                                <h1><p>Bonjour!</p></h1>
-                                                    <h1><?=$ligne['titre']?></h1> <br>
-                                                   
-                                                    <img class="product_image rounded" style="height: 300px; width: 300px" src="<?= $ligne['photo'] ?>" alt="...">
-                                                    <p class=''><?=$ligne['texte']?></p> <br>
-                                                    <?php if(empty($ligne['photo'])):?><p class=''><?=$ligne['texte']?></p> <br>
-                                                    <?php else: ?><p class=''><?=$ligne['photo']?></p> 
-                                                    <?php endif; ?>
-                                            </div>
-                                            
-                                            <div class='card-body col-7 text-start'>    
-                                                <h2><p>Mymy</p> </h2>
-                                                <h2><p class="float-end h3"><?=$ligne2['nom']?></p></h2> 
-                                                <a class="btn btn-success float-end"  href="profil.php?idu=<?= $ligne['ida'] ?>">Voir profil</a> 
-                                                  <!-- on affiche un bouton voir plus, accedant à un lien vers la page profil, à voir si on garde ça  -->
-                                            </div>
-                                    
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } }?>
-                           
-
-
-
-
-
-                            
-                        </div>
+                                <?php AfficherPost(); ?>                        
+                            </div>
                     </div>
                 </div>
             </div>
