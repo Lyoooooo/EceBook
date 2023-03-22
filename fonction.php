@@ -134,10 +134,14 @@ function AfficherPost()
 $pdo = connexion();
 $statement = $pdo ->prepare ("SELECT * from post");
 //le 'prepare' prepare la requete 
+
+//bindValue donne la valeur *
 $statement->execute();   
 $result = $statement->fetch(PDO::FETCH_ASSOC);
 
+
 $statement2 = $pdo -> prepare ("SELECT * from user where idu=:idu");
+$statement2 -> bindValue(':idu', $idu, PDO::PARAM_INT);
 $statement2->execute();   
 $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
 
