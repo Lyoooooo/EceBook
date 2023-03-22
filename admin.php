@@ -50,7 +50,7 @@ mainHeader();
                     connexion();
                     $req="select * from user";
                     $resultat = $pdo->prepare($req);
-                    $resultat = execute();
+                    $resultat->execute();
                     while($ligne=$resultat->fetchAll())
                 {
                     
