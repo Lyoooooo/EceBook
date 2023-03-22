@@ -34,10 +34,7 @@ $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
 
 <body>
     <div class="central">
-<<<<<<< Updated upstream
         <!-- post feed actualité -->
-=======
->>>>>>> Stashed changes
     <div class="container-fluid page-body-wrapper">
         <div class="main-panel">
             <div class="content-wrapper container">
