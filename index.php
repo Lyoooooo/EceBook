@@ -76,10 +76,12 @@ if (isset($_POST["bouton"])) {
     $pdo = connexion();
     if ($photo == "") {
         $photo = "vide";
+    }else{
+        $photo = "imagesPosts/" + $photo;
     }
     $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?)");
     $stmt->execute([null, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
-    header("Location: .$index.php");
+    header("Location: index.php");
     die();
 }
 ?>
