@@ -1,9 +1,6 @@
 <?php
 include "fonction.php";
 mainHeader();
-
-
-
 $pdo = connexion();
 $statement = $pdo ->prepare ("SELECT * from post");
 //le 'prepare' prepare la requete 
@@ -17,9 +14,9 @@ $statement2 -> bindValue(':idu', $idu, PDO::PARAM_INT);
 $statement2->execute();   
 $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
 
-
-
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +26,7 @@ $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
@@ -36,7 +34,10 @@ $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
 
 <body>
     <div class="central">
+<<<<<<< Updated upstream
         <!-- post feed actualité -->
+=======
+>>>>>>> Stashed changes
     <div class="container-fluid page-body-wrapper">
         <div class="main-panel">
             <div class="content-wrapper container">
