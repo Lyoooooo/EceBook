@@ -2,36 +2,36 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}  
+}
 
 body {
-    background-color:#FFE2D6;
+    background-color: #FFE2D6;
     z-index: 1;
 }
 
 .central {
-  background-color: white;
-  height: 100vmax;
-  width: 70%;
-  margin-left: 15%;
+    background-color: white;
+    height: 100vmax;
+    width: 70%;
+    margin-left: 15%;
 }
 
 span.etoile {
-  color: red;
+    color: red;
 }
 
-h3{
+h3 {
     text-align: center;
 }
 
-#mid{
+#mid {
     border-radius: 10px;
     border-color: rgb(120, 112, 112);
     border-width: 1px;
     border-style: solid;
 }
 
-#legende{
+#legende {
     text-align: end;
     font-weight: bold;
 }
@@ -43,5 +43,14 @@ h3{
 /* PROFIL */
 
 .profile-head {
-  transform: translateY(5rem)
+    transform: translateY(5rem)
+}
+
+.colonneAdmin {
+    width: 80%;
+    margin-left: 10%;
+    height: 800;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    background-color: white;
 }
