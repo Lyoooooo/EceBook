@@ -1,18 +1,6 @@
 <?php
 include "fonction.php";
 mainHeader();
-$pdo = connexion();
-$statement = $pdo ->prepare ("SELECT * from post");
-//le 'prepare' prepare la requete 
-$statement -> bindValue(':idp', $idp, PDO::PARAM_INT);
-//bindValue donne la valeur *
-$statement->execute();   
-$result = $statement->fetch(PDO::FETCH_ASSOC);
-
-$statement2 = $pdo -> prepare ("SELECT * from user where idu=:idu");
-$statement2 -> bindValue(':idu', $idu, PDO::PARAM_INT);
-$statement2->execute();   
-$result2 = $statement2->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -34,10 +22,7 @@ $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
 
 <body>
     <div class="central">
-<<<<<<< Updated upstream
         <!-- post feed actualité -->
-=======
->>>>>>> Stashed changes
     <div class="container-fluid page-body-wrapper">
         <div class="main-panel">
             <div class="content-wrapper container">
