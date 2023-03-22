@@ -30,7 +30,7 @@ function connecte()
 function footer()
 {
 ?>
-    <footer class='text-center text-white' style='background-color: rgba(0, 0, 0, 0.904);color:white; width: 100%; z-index: 9;position: fixed;bottom:0'>
+    <footer class='text-center text-white' style='background-color: rgba(0, 0, 0, 0.904);color:white; width: 100%; z-index: 9;'>
 
         <div class='container pt-4'>
             <section class='text-center text-light'>
