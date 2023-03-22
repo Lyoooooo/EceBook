@@ -1,12 +1,16 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-    background-color:#FFE2D6;
-    z-index: 1;
+  background-color: #ffe2d6;
+  z-index: 1;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .central {
@@ -20,28 +24,30 @@ span.etoile {
   color: red;
 }
 
-h3{
-    text-align: center;
+h3 {
+  text-align: center;
 }
 
-#mid{
-    border-radius: 10px;
-    border-color: rgb(120, 112, 112);
-    border-width: 1px;
-    border-style: solid;
+#mid {
+  border-radius: 10px;
+  border-color: rgb(120, 112, 112);
+  border-width: 1px;
+  border-style: solid;
 }
 
-#legende{
-    text-align: end;
-    font-weight: bold;
+#legende {
+  text-align: end;
+  font-weight: bold;
 }
 
-#pn{
-    margin-top: 10px;
+#pn {
+  margin-top: 10px;
 }
 
 /* PROFIL */
 
 .profile-head {
-  transform: translateY(5rem)
+  transform: translateY(5rem);
+  display: flex;
+  flex-wrap: wrap;
 }
