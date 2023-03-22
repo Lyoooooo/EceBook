@@ -177,3 +177,16 @@ $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
 <?php
 }
 ?>
+
+
+<?php
+
+function ajoutphoto($idu, $photo) {
+    $extensions = array('jpg', 'jpeg', 'png');
+    $ext = strtolower(substr(strrchr($_FILES['photo']['name'], '.'), 1));
+    if (($_FILES['photo']['size'] < 20971520) && (in_array($ext, $extensions))) {
+        $photo = 'images/post/' . $idu . '-' . $_FILES['photo']['name'] . '.' . $ext;
+        move_uploaded_file($_FILES['photo']['tmp_name'], $photo);
+    }
+    return $photo;
+}

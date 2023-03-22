@@ -34,41 +34,41 @@ $ami = $res->fetchAll();
 </head>
 
 <?php
-mainHeader()
+// mainHeader()
 ?>
 
-<body style="background-color: #FFE2D6;">
+<body style="background-color: #f0dfd8;">
   <header class="col-8 mx-auto">
     <div class="bg-white shadow overflow-hidden rounded-top">
       <div class="px-5 pt-0 pb-4">
 
         <div class="profile-head border border-light">
-            <img src="<?=$user["pp"]?>" alt="Photo de @<?=$user["mail"]?>" width="130" class="rounded img-thumbnail me-5 ms-2 mb-2 mt-2">
-            <div class="grid">
-              <h4 class="mt-2 mb-2"><?=$user["pnom"]?> <?=$user["nom"]?></h4>
-              <p class="small align-bottom mb-2"><?=$user["ville"]?></p> 
-              <p class="small align-bottom"><?=$user["promo"]?></p>
-            </div>
-            <div class="grid">
-              <div class="grid ms-3 mt-2" style="color:royalblue; font-weight: 600;">@<?=$user["mail"]?></div>
-              <div class="grid ms-3 mt-2 text-center" style="font-weight: 600;"><?=$user["grade"]?></div>
-            </div>
-            <div class="grid">
-              <div class="grid ms-5 mt-2 mb-4"><a href="modifuser.php" class="btn btn-outline-dark btn-sm btn-block">Modifier profil</a></div>
-              <div class="grid ms-5 mt-2 text-center"><a href="messagerie.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
-            </div>
-            <div class="grid ms-5 mt-2 d-flex justify-content-end text-center">
-              <ul class="list-inline mb-0">
-                <li class="list-inline-item">
-                  <h5 class="font-weight-bold d-block"><?=count($tab)?></h5>
-                  <small class="text-muted"><i class="fas fa-image mr-1"></i>Post(s)</small>
-                </li>
-                <li class="list-inline-item">
-                  <h5 class="font-weight-bold d-block"><?=count($ami)?></h5>
-                  <small class="text-muted"><i class="fas fa-user mr-1"></i>Ami(s)</small>
-                </li>
-              </ul>
-            </div>
+          <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" width="130" class="rounded img-thumbnail me-5 ms-2 mb-2 mt-2">
+          <div class="grid">
+            <h4 class="mt-2 mb-2"><?= $user["pnom"] ?> <?= $user["nom"] ?></h4>
+            <p class="small align-bottom mb-2"><?= $user["ville"] ?></p>
+            <p class="small align-bottom"><?= $user["promo"] ?></p>
+          </div>
+          <div class="grid">
+            <div class="grid ms-3 mt-2" style="color:royalblue; font-weight: 600;">@<?= $user["mail"] ?></div>
+            <div class="grid ms-3 mt-2 text-center" style="font-weight: 600;"><?= $user["grade"] ?></div>
+          </div>
+          <div class="grid">
+            <div class="grid ms-5 mt-2 mb-4"><a href="modifuser.php" class="btn btn-outline-dark btn-sm btn-block">Modifier profil</a></div>
+            <div class="grid ms-5 mt-2 text-center"><a href="messagerie.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
+          </div>
+          <div class="grid ms-5 mt-2 d-flex justify-content-end text-center">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <h5 class="font-weight-bold d-block"><?= count($tab) ?></h5>
+                <small class="text-muted"><i class="fas fa-image mr-1"></i>Post(s)</small>
+              </li>
+              <li class="list-inline-item">
+                <h5 class="font-weight-bold d-block"><?= count($ami) ?></h5>
+                <small class="text-muted"><i class="fas fa-user mr-1"></i>Ami(s)</small>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div class="p-5 m-2"></div>
@@ -82,47 +82,96 @@ mainHeader()
     </div>
   </header>
 
-  <h4 class="col-8 mx-auto px-5 p-3 bg-white border-top border-warning">Posts</h4>
-
-  <main class="col-8 mx-auto bg-white">
-
-<?php
-  if (count($tab) > 0) {
-    // Value exists in database
-} else {
-?> 
-  
-<?php
-}
-?>
-  <div class="container" style="width: 80%;">
-      <div class="row">
-        <?php foreach ($tab as $prod) { ?>
-          <div class="col-4">
-            <div id="annonce">
-              <div class="card" style="height: 25rem;">
-                <div style="width: 100%; height: 100%; overflow: hidden;">
-                  <img src="<?php echo $prod["photo1"] ?>" height="50%" class="d-block w-5" style="margin:auto">
-                  <div class="card-body">
-                    <h5 class="card-title"><?php echo $prod["nomp"] ?></h5><br>
-                    <h5 class="card-title"><?php echo $prod["prix"] ?>€</h5><br>
-                    <a href="detailprod.php?idp=<?php echo $prod["idp"] ?>" class="btn btn-primary">
-                      <img src="image/voir.png" width="20">Voir l'annonce</a>
-                  </div>
+  <main class="col-8 mx-auto bg-white pb-5">
+    <h4 class="px-5 p-3 bg-white border-top border-warning">Posts</h4>
+    <?php
+    if (count($tab) > 0) {
+    ?>
+      <div class="container px-5 p-3">
+        <div class="row">
+          <?php foreach ($tab as $post) { ?>
+            <div id="post">
+              <div class="card" style="overflow: hidden;">
+                <div class="card-body">
+                  <h5 class="card-title"><?=$post["titre"]?></h5><br>
+                  <p></p>
                 </div>
+                <?php if ($post["photo"]!="vide") { ?>
+                <img src="<?=$post["photo"]?>" height="50%" class="d-block w-5" style="margin:auto">
+              <?php } ?>
               </div>
             </div>
-          </div>
-        <?php } ?>
+          <?php } ?>
+        </div>
       </div>
-    </div>
+    <?php
+    } else {
+    ?>
+      <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous n'avez pas de post !!</p>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="color:#FF621F;border-radius:5px;padding:2px;font-weight: 500;font-size: 20px;margin-left:23rem">
+        Créez votre premier post ici
+      </button>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau post</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="post">
+              <div class="modal-body">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" name="titre" required>
+                  <label for="floatingInput">Titre<span class="etoile">*</span> </label>
+                </div>
+
+                <div class="form-floating">
+                  <textarea class="form-control" id="floatingTextarea2" name="texte" style="height: 100px" required></textarea>
+                  <label for="floatingTextarea2">Texte<span class="etoile">*</span></label>
+                </div><br>
+
+                <h8>Type de post</h8><span class="etoile">*</span>
+                <select class="form-select" aria-label="Default select example" name="type" required>
+                  <option value="Général">Général</option>
+                  <option value="Actualité">Actualité</option>
+                  <option value="Evènement">Evènement</option>
+                </select><br>
+
+                <div class="input-group mb-3">
+                  <label class="input-group-text" for="inputGroupFile01">Photo</label>
+                  <input type="file" class="form-control" id="inputGroupFile01" name="photo" accept=".png, .jpg, .jpeg">
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary" name="bouton">Poster</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    <?php
+      if (isset($_POST["bouton"])) {
+        extract($_POST);
+        $pdo = connexion();
+        if ($photo == "") {
+          $photo = "vide";
+        } else {
+          $photo = ajoutphoto($idu, $photo);
+        }
+        $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
+        $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
+        die();
+      }
+    }
+    ?>
   </main>
 
-
-
-  <body>
-    <?php
-    footer();
-    ?>
+</body>
+<?php
+footer();
+?>
 
 </html>
