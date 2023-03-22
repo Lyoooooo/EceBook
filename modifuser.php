@@ -11,12 +11,13 @@ $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
 $stmt->execute([$idu]);
 $user = $stmt->fetch();
 
-if (isset($_POST["bouton"])) {
+if (isset($_POST["modif"])) {
   extract($_POST);
   $sql = "UPDATE user SET nom=?, pnom=?, mdp=?, naissance=?, promo=?, ville=?, descrip=?, interet=? WHERE idu=?";
   $pdo->prepare($sql)->execute([$nom, $pnom, $mdp, $naissance, $promo, $ville, $descrip, $interet, $idu]);
   header("location:index.php");
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +44,26 @@ if (isset($_POST["bouton"])) {
                 <div id="mid"><br>
                 <h3>Modifier Profil</h3><br>
 
+                <div class=text-end>
+                    <form action="" method="post">
+                </div>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">reset</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">valider</button>
+                    </div>
+                    </div>
+                </div>
+                </div><br>
+
+
                 <div>  
                     <div class="container">
                         <div class="row">
@@ -50,7 +71,7 @@ if (isset($_POST["bouton"])) {
                                 <label id="pn" for="validationDefault01" class="form-label">Nom</label><span class="etoile">*</span>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="pnom" class="form-control" id="second" value="<?= $user["nom"] ?>" required>
+                                <input type="text" name="nom" class="form-control" value="<?= $user["nom"] ?>" required>
                             </div>
                             <div class="col-2">
                             </div>
@@ -65,7 +86,7 @@ if (isset($_POST["bouton"])) {
                                 <label id="pn" for="validationDefault02" class="form-label">Prénom</label><span class="etoile">*</span>
                             </div>
                             <div class="col-6">
-                            <input type="text" name="nom" class="form-control" id="second" value="<?= $user["pnom"] ?>" required>
+                            <input type="text" name="pnom" class="form-control" value="<?= $user["pnom"] ?>" required>
                             </div>
                             <div class="col-2">
                             </div>
@@ -80,7 +101,7 @@ if (isset($_POST["bouton"])) {
                                 <label id="pn" for="validationDefault02" class="form-label">Mot de Passe</label><span class="etoile">*</span>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="mdp" class="form-control" id="second" value="<?= $user["mdp"] ?>" required>
+                                <input type="text" name="mdp" class="form-control" value="<?= $user["mdp"] ?>" required>
                             </div>
                             <div class="col-2">
                             </div>
@@ -95,7 +116,7 @@ if (isset($_POST["bouton"])) {
                                 <label id="pn" for="validationDefault02" class="form-label">Date de naissance</label><span class="etoile">*</span>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="naissance" class="form-control" id="second" value="<?= $user["naissance"] ?>"required>
+                                <input type="text" name="naissance" class="form-control" value="<?= $user["naissance"] ?>"required>
                             </div>
                             <div class="col-2">
                             </div>
@@ -112,7 +133,7 @@ if (isset($_POST["bouton"])) {
                             <div class="col-6">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                    <input type="text" name="mail" class="form-control" id="second" aria-describedby="inputGroupPrepend2" value="<?= $user["mail"] ?>" disabled required>
+                                    <input type="text" name="mail" class="form-control" aria-describedby="inputGroupPrepend2" value="<?= $user["mail"] ?>" disabled required>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -128,7 +149,7 @@ if (isset($_POST["bouton"])) {
                                 <label id="pn" for="validationDefault04" class="form-label">Promo</label><span class="etoile">*</span>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="promo" class="form-control" id="second" value="<?= $user["promo"] ?>" required>
+                                <input type="text" name="promo" class="form-control" value="<?= $user["promo"] ?>" required>
                             </div>
                             <div class="col-2">
                             </div>
@@ -143,7 +164,7 @@ if (isset($_POST["bouton"])) {
                                 <label id="pn" for="6" class="form-label">Ville</label><span class="etoile">*</span>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="ville" class="form-control" id="second" value="<?= $user["ville"] ?>" required>
+                                <input type="text" name="ville" class="form-control" value="<?= $user["ville"] ?>" required>
                             </div>
                             <div class="col-2">
                             </div>
@@ -158,7 +179,7 @@ if (isset($_POST["bouton"])) {
                                 <label id="pn" for="validationDefault04" class="form-label">Description</label><span class="etoile">*</span>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="descrip" class="form-control" id="second" value="<?= $user["descrip"] ?>" required>
+                                <input type="text" name="descrip" class="form-control" value="<?= $user["descrip"] ?>" required>
                             </div>
                             <div class="col-2">
                             </div>
@@ -173,14 +194,13 @@ if (isset($_POST["bouton"])) {
                                 <label id="pn" for="validationDefault05" class="form-label">Interet</label><span class="etoile">*</span>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="interet" class="form-control" id="second" value="<?= $user["interet"] ?>" required>
+                                <input type="text" name="interet" class="form-control" value="<?= $user["interet"] ?>" required>
                             </div>
                             <div class="col-2">
                             </div>
                         </div>
                     </div>
                 </div><br>
-
 
                 <div>  
                     <div class="container">
@@ -197,20 +217,21 @@ if (isset($_POST["bouton"])) {
                 </div><br>
 
                 <div class="d-grid gap-2 col-6 mx-auto">
-                    <input class="btn btn-success text-center" type="submit" value="Modifier" name="bouton"><br><br>
+                    <input class="btn btn-success text-center" type="submit" value="Modifier" name="modif"><br><br>
                 </div>
 
                 </div>
-            </div>
+            </div><!-- col-8 etc...-->
             <div class="col-xl-2 col-lg-2 col-md-1 col-sm-1">
             </div>
 
-        </div>
-    </div><br><br>
-  <?php
-  footer();
-  ?>
+        </div> <!-- row -->
+    </div><br><br><!-- container -->
 
-  <body>
+    <?php
+    footer();
+    ?>
+
+<body>
 
 </html>
