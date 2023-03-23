@@ -149,7 +149,16 @@ if (isset($_POST["modif"])) {
                                 <label id="pn" for="validationDefault04" class="form-label">Promo</label><span class="etoile">*</span>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="promo" class="form-control" value="<?= $user["promo"] ?>" required>
+                            <label for="classe"></label><br>
+                                <input type="radio" name="promo" value="ING1" id="ING1" checked>ING1 &nbsp;
+                                <input type="radio" name="promo" value="ING2" id="ING2">ING2 &nbsp;
+                                <input type="radio" name="promo" value="ING3" id="ING3">ING3 &nbsp;
+                                <input type="radio" name="promo" value="ING4" id="ING4">ING4 &nbsp;
+                                <input type="radio" name="promo" value="ING5" id="ING5">ING5 &nbsp;
+                                <input type="radio" name="promo" value="B1" id="B1">B1 &nbsp;
+                                <input type="radio" name="promo" value="B2" id="B2">B2 &nbsp;
+                                <input type="radio" name="promo" value="B3" id="B3">B3 &nbsp;
+                                <br>
                             </div>
                             <div class="col-2">
                             </div>

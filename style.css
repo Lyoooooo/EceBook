@@ -1,15 +1,19 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body{
-    background-color:#f0dfd8;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #FFE2D6;
-    z-index: 1;
+  background-color:#f0dfd8;
+  z-index: 1;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .central {
@@ -28,7 +32,7 @@ h3 {
 }
 
 #mid {
-    border-radius: 10px;
+    border-radius: 5px;
     border-color: rgb(120, 112, 112);
     border-width: 1px;
     border-style: solid;
@@ -43,10 +47,27 @@ h3 {
     margin-top: 6px;
 }
 
+#separation{
+  border-color: rgb(120, 112, 112);
+  border-width: 1px;
+  border-left: 0px;
+  border-bottom: 0px;
+  border-top: 0px;
+  border-style: solid;
+  text-align: center;
+}
+
+
 /* PROFIL */
 
 .profile-head {
-    transform: translateY(5rem)
+  transform: translateY(5rem);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid a, .grid a:hover {
+  color: inherit;
 }
 
 .colonneAdmin {
