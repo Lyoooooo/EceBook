@@ -28,7 +28,7 @@ $ami = $res->fetchAll();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   <title>Profil</title>
 </head>
@@ -38,7 +38,7 @@ $ami = $res->fetchAll();
 ?>
 
 <body style="background-color: #f0dfd8;">
-  <header class="col-8 mx-auto">
+  <header class="col-7 mx-auto">
     <div class="bg-white shadow overflow-hidden rounded-top">
       <div class="px-5 pt-0 pb-4">
 
@@ -82,7 +82,7 @@ $ami = $res->fetchAll();
     </div>
   </header>
 
-  <main class="col-8 mx-auto bg-white pb-5">
+  <main class="col-7 mx-auto bg-white pb-5">
     <h4 class="px-5 p-3 bg-white border-top border-warning" style="color:#FF621F">Posts</h4>
     <?php
     if (count($tab) > 0) {
@@ -93,32 +93,34 @@ $ami = $res->fetchAll();
             $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
             $stmt->execute([$post["idu"]]);
             $upost = $stmt->fetch();
-
           ?>
-            <div class="card">
-              <div class="d-flex">
-                <div class="p-1"><a href="profil.php?<?=$upost["idu"]?>"><img src="<?=$upost["pp"]?>" style="border-radius:50%;height:4rem"></a></div>
+            <div class="card p-0 mb-4">
+
+              <div class="header d-flex ps-2">
+                <div class="pt-2"><a href="profil.php?<?= $upost["idu"] ?>"><img src="<?= $upost["pp"] ?>" style="border-radius:50%;height:4rem"></a></div>
                 <div class="grid">
-                  <a href="profil.php?<?=$upost["idu"]?>"><div class="ps-2 pt-2 fs-6 fst-italic text-decoration-underline"><?=$upost["pnom"]?> <?= $upost["nom"] ?></div></a>
-                  <div class="ps-1 pt-0 fs-4 fw-bolder"><?=$post["titre"]?></div>
+                  <a href="profil.php?<?= $upost["idu"] ?>">
+                    <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $upost["pnom"] ?> <?= $upost["nom"] ?></div>
+                  </a>
+                  <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
                 </div>
-                <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?=$post["type"]?></div>
+                <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
               </div>
+
               <div class="card-body">
-                <p class="ms-5 px-2"><?=$post["texte"]?></p>
+                <p class="ms-5 px-2"><?= $post["texte"] ?></p>
+                <?php if ($post["photo"] != "vide") { ?>
+                  <img src="<?= $post["photo"] ?>" class="d-block object-fit-cover border rounded" height="75%" style="margin:auto">
+                <?php } ?>
               </div>
-              <div class="card-footer text-muted">
-                2 days ago
+
+              <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
+                <span class="ps-3"><?= $post["like"] ?> Likes</span>
+                <span class=""><?= $post["dislike"] ?> Dislikes</span>
+                <span class=""><?= $post["vu"] ?> Vus</span>
+                <span class=""><?= $post["date"] ?></span>
               </div>
-            </div>
-            <div class="card" style="overflow: hidden;">
-              <div class="card-body">
-                <h5 class="card-title"><?= $post["titre"] ?></h5><br>
-                <p></p>
-              </div>
-              <?php if ($post["photo"] != "vide") { ?>
-                <img src="<?= $post["photo"] ?>" height="50%" class="d-block w-5" style="margin:auto">
-              <?php } ?>
+
             </div>
           <?php } ?>
         </div>
