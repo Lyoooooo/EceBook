@@ -85,7 +85,7 @@ mainHeader();
         </div>
     </div>
     <?php
-    footer();
+        footer();
     ?>
 </body>
 
