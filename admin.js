@@ -6,13 +6,11 @@ $('#tri').on('click',function(){
 
 function trierPosts(val) 
 {
-    alert("coucou " + val);
     $.ajax({
         type:"POST",
         url:"triAdmin.php",
         data:{idd:val},
         success: function(data){
-            alert("touvabien");
             $("#afficherPosts").html(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {

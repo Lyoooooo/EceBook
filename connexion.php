@@ -3,10 +3,9 @@ include "fonction.php";
 $pdo = connexion();
 if (isset($_POST["bouton"])) {
     extract($_POST);
-    // $mdp2 = encode($mdp, $mail);
+    $mdp2 = encode($mdp, $mail);
     $stmt = $pdo->prepare("SELECT * FROM user WHERE mail=? AND mdp=?");
-    // $stmt->execute([$mail, $mdp2]);
-    $stmt->execute([$mail, $mdp]);
+    $stmt->execute([$mail, $mdp2]);
     $ligne = $stmt->fetch();
     if ($ligne) {
         session_start();
