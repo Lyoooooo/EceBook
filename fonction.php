@@ -125,58 +125,6 @@ function mainHeader()
 }
 ?>
 
-<?php
-function AfficherPost()
-{
-
-$idu=1;
-$pdo = connexion();
-$statement = $pdo ->prepare ("SELECT * from post");
-//le 'prepare' prepare la requete 
-
-//bindValue donne la valeur *
-$statement->execute();   
-$result = $statement->fetch(PDO::FETCH_ASSOC);
-
-
-$statement2 = $pdo -> prepare ("SELECT * from user where idu=:idu");
-$statement2 -> bindValue(':idu', $idu, PDO::PARAM_INT);
-$statement2->execute();   
-$result2 = $statement2->fetch(PDO::FETCH_ASSOC);
-
-
-?>
- <div class="card-body">
-    <?php foreach($result as $ligne){ 
-        foreach ($result2 as $ligne2){
-            ?>
-        <div class= 'p-5 text-center' style='background-color:#F3F781'>
-            <div class='card'>
-                <div class='row'>
-                    <div class="card-body product-img-outer text-center">
-                        <h1><p>Bonjour!</p></h1> 
-                        <p><?=$ligne['titre']?></p>   
-                        <img class="product_image rounded" style="height: 300px; width: 300px" src="<?= $ligne['photo'] ?>" alt="...">
-                            <p class=''><?=$ligne['texte']?></p> <br>
-                                                    
-                    </div>
-                                            
-                    <div class='card-body col-7 text-start'>    
-                        <h2><p>Mymy</p> </h2>
-                        <h2><p class="float-end h3"><?=$ligne2['nom']?></p></h2> 
-                        <a class="btn btn-success float-end"  href="profil.php?idu=<?= $ligne['ida'] ?>">Voir profil</a> 
-                            <!-- on affiche un bouton voir plus, accedant à un lien vers la page profil, à voir si on garde ça  -->
-                        </div>
-                                    
-                    </div>
-            </div>
-    </div>
-        <?php } }?>
-                           
-
-<?php
-}
-?>
 
 
 <?php
@@ -216,6 +164,7 @@ function post($post) {
         <?php if ($post["photo"] != "vide") { ?>
           <img src="<?= $post["photo"] ?>" class="d-block object-fit-cover border rounded" height="75%" style="margin:auto">
         <?php } ?>
+
       </div>
     <!-- FOOTER -->
       <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
@@ -223,8 +172,19 @@ function post($post) {
         <span class=""><?= $post["dislike"] ?> Dislikes</span>
         <span class=""><?= $post["vu"] ?> Vus</span>
         <span class=""><?= $post["date"] ?></span>
+        
+       
       </div>
 
     </div>
   <?php
 }
+
+
+
+
+ 
+  
+
+
+
