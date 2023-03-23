@@ -126,7 +126,7 @@ $ami = $res->fetchAll();
 
               <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupFile01">Photo</label>
-                <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg" required><br>
+                <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg .webp" required><br>
               </div>
 
             </div>
