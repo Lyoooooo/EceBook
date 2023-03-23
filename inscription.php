@@ -85,9 +85,9 @@ $pdo = connexion();
                         <input type="text" class="form-control" id="name" name="nom" required placeholder="Nom"><br>
                         <label for="validationDefault01" class="form-label">Prenom</label> <span class="etoile">*</span><br>
                         <input type="text" class="form-control" id="prenom" name="prenom" required placeholder="Prenom"><br>
-                        <label for="validationDefault01" class="form-label">Selectionné votre date de naissance</label> <span class="etoile">*</span><br>
+                        <label for="validationDefault01" class="form-label">Selectionnez votre date de naissance</label> <span class="etoile">*</span><br>
                         <input type="date" class="form-control" name="naissance" id="naissance" required><br>
-                        <label for="validationDefault01" class="form-label">Rentré votre ville de residence</label> <span class="etoile">*</span><br>
+                        <label for="validationDefault01" class="form-label">Rentrez votre ville de residence</label> <span class="etoile">*</span><br>
                         <input type="text" class="form-control" name="ville" id="ville" required placeholder="Ville de résidence"><br>
                         <label for="validationDefault02" class="form-label">Vous etes un :</label><span class="etoile"> *</span><br>
 
@@ -102,7 +102,7 @@ $pdo = connexion();
                     </label> <br><br>
 
                     <div id="classe-selection">
-                        <label for="classe" required>Selectionné votre classe</label></label><span class="etoile"> *</span><br>
+                        <label for="classe" required>Selectionnez votre classe</label></label><span class="etoile"> *</span><br>
                         <select name="promo[]" id="classe">
                             <option name="promo[]" value="ING1">ING1</option>
                             <option name="promo[]" value="ING2">ING2</option>
@@ -148,19 +148,19 @@ $pdo = connexion();
                     </script>
                     <div class="text-start">
                         <div class="mb-3"><br>
-                            <label for="exampleFormControlTextarea1" class="form-label">Rentré votre descritpion</label> <span class="etoile">*</span><br>
+                            <label for="exampleFormControlTextarea1" class="form-label">Rentrez votre descritpion</label> <span class="etoile">*</span><br>
                             <textarea class="form-control" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255" rows="2"></textarea>
                         </div>
                         <!-- <label for="validationDefault01" class="form-label">Rentré votre descritpion</label> <span class="etoile">*</span><br>
                     <input type="text" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255"><br> -->
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Rentré vos centres d'interets</label> <span class="etoile">*</span><br>
+                            <label for="exampleFormControlTextarea1" class="form-label">Rentrez vos centres d'interets</label> <span class="etoile">*</span><br>
                             <textarea class="form-control" name="interet" id="interet" required placeholder="Vos centres d'interets:" minlength="25" maxlength="255" rows="2"></textarea>
                         </div>
                         <!-- <label for="validationDefault01" class="form-label">Rentré vos centres d'interets</label> <span class="etoile">*</span><br>
                     <input type="text" name="interet" id="interet" required placeholder="Vos centres d'interets" minlength="25" maxlength="255"><br> -->
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Chargé votre photo de profil</label> <span class="etoile">*</span>
+                            <label for="formFile" class="form-label">Chargez votre photo de profil</label> <span class="etoile">*</span>
                             <input class="form-control" type="file" id="pp" name="pp">
                         </div>
                         <br>
