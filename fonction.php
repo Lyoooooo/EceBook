@@ -1,6 +1,5 @@
 <?php
 
-
 function connexion()
 {
   try {
@@ -189,4 +188,42 @@ function ajoutphoto($idu, $photo) {
         move_uploaded_file($_FILES['photo']['tmp_name'], $photo); //place l'image dans le dossier
     }
     return $photo;
+}
+
+function post($post) {
+    
+    $pdo = connexion();
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
+    $stmt->execute([$post["idu"]]);
+    $upost = $stmt->fetch();
+  ?>
+    <div class="card p-0 mb-4">
+    <!-- HEADER -->
+      <div class="header d-flex ps-2">
+        <div class="pt-2"><a href="profil.php?<?= $upost["idu"] ?>"><img src="<?= $upost["pp"] ?>" style="border-radius:50%;height:4rem"></a></div>
+        <div class="grid">
+          <a href="profil.php?<?= $upost["idu"] ?>">
+            <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $upost["pnom"] ?> <?= $upost["nom"] ?></div>
+          </a>
+          <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
+        </div>
+        <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
+      </div>
+    <!-- MAIN -->
+      <div class="card-body">
+        <p class="ms-5 px-2"><?= $post["texte"] ?></p>
+        <?php if ($post["photo"] != "vide") { ?>
+          <img src="<?= $post["photo"] ?>" class="d-block object-fit-cover border rounded" height="75%" style="margin:auto">
+        <?php } ?>
+      </div>
+    <!-- FOOTER -->
+      <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
+        <span class="ps-3"><?= $post["like"] ?> Likes</span>
+        <span class=""><?= $post["dislike"] ?> Dislikes</span>
+        <span class=""><?= $post["vu"] ?> Vus</span>
+        <span class=""><?= $post["date"] ?></span>
+      </div>
+
+    </div>
+  <?php
 }

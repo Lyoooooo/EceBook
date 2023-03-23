@@ -84,112 +84,78 @@ $ami = $res->fetchAll();
 
   <main class="col-7 mx-auto bg-white pb-5">
     <h4 class="px-5 p-3 bg-white border-top border-warning" style="color:#FF621F">Posts</h4>
-    <?php
-    if (count($tab) > 0) {
-    ?>
-      <div class="container px-5 p-3">
-        <div class="row">
-          <?php foreach ($tab as $post) {
-            $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
-            $stmt->execute([$post["idu"]]);
-            $upost = $stmt->fetch();
-          ?>
-            <div class="card p-0 mb-4">
-
-              <div class="header d-flex ps-2">
-                <div class="pt-2"><a href="profil.php?<?= $upost["idu"] ?>"><img src="<?= $upost["pp"] ?>" style="border-radius:50%;height:4rem"></a></div>
-                <div class="grid">
-                  <a href="profil.php?<?= $upost["idu"] ?>">
-                    <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $upost["pnom"] ?> <?= $upost["nom"] ?></div>
-                  </a>
-                  <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
-                </div>
-                <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
-              </div>
-
-              <div class="card-body">
-                <p class="ms-5 px-2"><?= $post["texte"] ?></p>
-                <?php if ($post["photo"] != "vide") { ?>
-                  <img src="<?= $post["photo"] ?>" class="d-block object-fit-cover border rounded" height="75%" style="margin:auto">
-                <?php } ?>
-              </div>
-
-              <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
-                <span class="ps-3"><?= $post["like"] ?> Likes</span>
-                <span class=""><?= $post["dislike"] ?> Dislikes</span>
-                <span class=""><?= $post["vu"] ?> Vus</span>
-                <span class=""><?= $post["date"] ?></span>
-              </div>
-
-            </div>
-          <?php } ?>
-        </div>
-      </div>
-    <?php
-    } else {
-    ?>
-      <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous n'avez pas de post !!</p>
-      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="color:#FF621F;border-radius:5px;padding:2px;font-weight: 500;font-size: 20px;margin-left:23rem">
-        Créez votre premier post ici
-      </button>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau post</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="post" enctype="multipart/form-data">
-              <div class="modal-body">
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" name="titre" required>
-                  <label for="floatingInput">Titre<span class="etoile">*</span> </label>
-                </div>
-
-                <div class="form-floating">
-                  <textarea class="form-control" id="floatingTextarea2" name="texte" style="height: 100px" required></textarea>
-                  <label for="floatingTextarea2">Texte<span class="etoile">*</span></label>
-                </div><br>
-
-                <h8>Type de post</h8><span class="etoile">*</span>
-                <select class="form-select" aria-label="Default select example" name="type" required>
-                  <option value="Général">Général</option>
-                  <option value="Actualité">Actualité</option>
-                  <option value="Evènement">Evènement</option>
-                </select><br>
-
-                <div class="input-group mb-3">
-                  <label class="input-group-text" for="inputGroupFile01">Photo</label>
-                  <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg" required><br>
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary" name="bouton">Poster</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <?php
-      if (isset($_POST["bouton"])) {
-        extract($_POST);
-        extract($_FILES);
-        $pdo = connexion();
-        if ($photo == "") {
-          $photo = "vide";
+    <div class="container px-5 p-3">
+      <div class="row">
+        <?php
+        if (count($tab) > 0) {
+          foreach ($tab as $post) {
+            post($post);
+          } 
         } else {
-          $photo = ajoutphoto($idu, $photo);
-        }
-        $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
-        $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
-      ?>
-        <meta http-equiv="refresh" content="1"><?php
-                                              }
+        ?></div>
+    </div>
+    <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous n'avez pas de post !!</p>
+    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="color:#FF621F;border-radius:5px;padding:2px;font-weight: 500;font-size: 20px;margin-left:23rem">
+      Créez votre premier post ici
+    </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau post</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="" method="post" enctype="multipart/form-data">
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="titre" required>
+                <label for="floatingInput">Titre<span class="etoile">*</span> </label>
+              </div>
+
+              <div class="form-floating">
+                <textarea class="form-control" id="floatingTextarea2" name="texte" style="height: 100px" required></textarea>
+                <label for="floatingTextarea2">Texte<span class="etoile">*</span></label>
+              </div><br>
+
+              <h8>Type de post</h8><span class="etoile">*</span>
+              <select class="form-select" aria-label="Default select example" name="type" required>
+                <option value="Général">Général</option>
+                <option value="Actualité">Actualité</option>
+                <option value="Evènement">Evènement</option>
+              </select><br>
+
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile01">Photo</label>
+                <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg" required><br>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-primary" name="bouton">Poster</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <?php
+          if (isset($_POST["bouton"])) {
+            extract($_POST);
+            extract($_FILES);
+            $pdo = connexion();
+            if ($photo == "") {
+              $photo = "vide";
+            } else {
+              $photo = ajoutphoto($idu, $photo);
+            }
+            $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
+            $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
+    ?>
+      <meta http-equiv="refresh" content="1"><?php
                                             }
-                                                ?>
+                                          }
+                                              ?>
   </main>
 
 </body>
