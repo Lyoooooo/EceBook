@@ -35,23 +35,27 @@ if (isset($_POST["bouton"])) {
 </head>
 
 <body id="second">
-        <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center" id="primal">
-            <div class="h1">
-                <h1>Formulaire de connexion</h1>
-            </div>
-            <hr>
-            <div class="container">
-                <form action="" method="post">
-                    <input type="email" name="mail" style="width:250px" placeholder="Entrez votre mail:" required>
-                    <input type="password" style="width:250px" name="mdp" placeholder="Entrez votre mot de passe: " required> <br><br>
-                    <input type="reset" value="ANNULER">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="submit" value="ENVOYER" name="bouton"> <br> <br>
-                </form>
-                <div class='text-start'>
-                    Pas de compte?<a href="inscription.php" class="btn btn-primary p-2 m-2" style="text-decoration:none">S'INSCRIRE</a>
-                </div>
-            </div>
+    <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center" id="primal">
+        <div class="h1">
+            <h1>Formulaire de connexion</h1>
         </div>
+        <hr>
+        <div class="container">
+            <form action="" method="post">
+                <input type="email" name="mail" style="width:250px" placeholder="Entrez votre mail:" required>
+                <input type="password" style="width:250px" name="mdp" placeholder="Entrez votre mot de passe: " required> <br><br>
+                <input type="reset" value="ANNULER">&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="ENVOYER" name="bouton"> <br> <br>
+            </form>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="inscription.php">Pas de compte? Inscrivez vous</a>
+            <a class="dropdown-item" href="#">Mot de passe oublié?</a>
+        </div>
+        <!-- <div class='text-start'>
+                Pas de compte?<a href="inscription.php" class="btn btn-primary p-2 m-2" style="text-decoration:none">S'INSCRIRE</a>
+            </div> -->
+    </div>
+    </div>
 
 </body>
 
