@@ -10,9 +10,11 @@ body{
   margin-left: 15%;
 }
 
-span.etoile {
+/* etoiles de validation */
+span.etoile { 
   color: red;
 }
+
 
 /* PROFIL */
 

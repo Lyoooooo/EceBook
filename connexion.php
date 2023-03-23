@@ -2,7 +2,7 @@
 include "fonction.php";
 $pdo = connexion();
 if (isset($_POST["bouton"])) {
-    extract($_POST);    
+    extract($_POST);
     // $mdp2 = encode($mdp, $mail);
     $stmt = $pdo->prepare("SELECT * FROM user WHERE mail=? AND mdp=?");
     // $stmt->execute([$mail, $mdp2]);
@@ -47,10 +47,14 @@ if (isset($_POST["bouton"])) {
                 <input type="reset" value="ANNULER">&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="submit" value="ENVOYER" name="bouton"> <br> <br>
             </form>
-            <div class='text-start'>
-                Pas de compte?<a href="inscription.php" class="btn btn-primary p-2 m-2" style="text-decoration:none">S'INSCRIRE</a>
-            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="inscription.php">Pas de compte? Inscrivez vous</a>
+            <a class="dropdown-item" href="#">Mot de passe oublié?</a>
         </div>
+        <!-- <div class='text-start'>
+                Pas de compte?<a href="inscription.php" class="btn btn-primary p-2 m-2" style="text-decoration:none">S'INSCRIRE</a>
+            </div> -->
+    </div>
     </div>
 
 </body>
