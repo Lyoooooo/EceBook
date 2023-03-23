@@ -88,20 +88,24 @@ mainHeader();
     footer();
     ?>
 </body>
+
 <?php
-if (isset($_POST["bouton"])) {
-    extract($_POST);
-    $pdo = connexion();
-    if ($photo == "") {
-        $photo = "vide";
-    }else{
-        $photo = "imagesPosts/" + $photo;
-    }
-    $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?)");
-    $stmt->execute([null, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
-    header("Location: index.php");
-    die();
-}
-?>
+          if (isset($_POST["bouton"])) {
+            extract($_POST);
+            extract($_FILES);
+            $pdo = connexion();
+            if ($photo == "") {
+              $photo = "vide";
+            } else {
+              $photo = ajoutphoto($idu, $photo);
+            }
+            $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
+            $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
+    ?>
+      <meta http-equiv="refresh" content="1">
+  <?php
+        die();  
+        }
+  ?>
 
 </html>

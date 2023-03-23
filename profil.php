@@ -6,7 +6,7 @@ session_start();
 // }
 $pdo = connexion();
 // $idu = $_SESSION["idu"];
-$idu = 1;
+$idu = 2;
 $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
 $stmt->execute([$idu]);
 $user = $stmt->fetch();
@@ -90,7 +90,7 @@ $ami = $res->fetchAll();
         if (count($tab) > 0) {
           foreach ($tab as $post) {
             post($post);
-          } 
+          }
         } else {
         ?></div>
     </div>
@@ -152,10 +152,12 @@ $ami = $res->fetchAll();
             $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
             $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
     ?>
-      <meta http-equiv="refresh" content="1"><?php
-                                            }
-                                          }
-                                              ?>
+      <meta http-equiv="refresh" content="1">
+  <?php
+        die();  
+        }
+        }
+  ?>
   </main>
 
 </body>

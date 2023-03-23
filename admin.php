@@ -93,7 +93,7 @@ mainHeader();
                     </div>
                 </nav>
                 <div class="colonneAdmin" id="afficherPosts">
-
+                    
                 </div>
             </div>
         </div>
