@@ -47,20 +47,20 @@ mainHeader();
                         <th>Photo</th><th>ID</th><th>Nom</th><th>Action</th>
                     </tr>
                 <?php
-                    connexion();
-                    $req="select * from user";
-                    $resultat = $pdo->prepare($req);
-                    $resultat->execute();
-                    while($ligne=$resultat->fetchAll())
-                {
+                //     connexion();
+                //     $req="select * from user";
+                //     $resultat = $pdo->prepare($req);
+                //     $resultat->execute();
+                //     while($ligne=$resultat->fetchAll())
+                // {
                     
-                    echo "<tr>
-                    <td class='align-middle'><img src='". $ligne["photo"]."' width='60'></td>
-                    <td class='align-middle'>". $ligne["idu"]."</td>
-                    <td class='align-middle'>". $ligne["nom"]."</td>
-                    <a class='btn btn-danger' href='#>Supprimer</a></td>
-                    </tr>";
-                }
+                //     echo "<tr>
+                //     <td class='align-middle'><img src='". $ligne["photo"]."' width='60'></td>
+                //     <td class='align-middle'>". $ligne["idu"]."</td>
+                //     <td class='align-middle'>". $ligne["nom"]."</td>
+                //     <a class='btn btn-danger' href='#>Supprimer</a></td>
+                //     </tr>";
+                // }
                 ?>
 
                 </table>

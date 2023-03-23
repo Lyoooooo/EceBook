@@ -130,7 +130,7 @@ function mainHeader()
 function AfficherPost()
 {
 
-
+$idu=1;
 $pdo = connexion();
 $statement = $pdo ->prepare ("SELECT * from post");
 //le 'prepare' prepare la requete 
@@ -149,13 +149,14 @@ $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
 ?>
  <div class="card-body">
     <?php foreach($result as $ligne){ 
-        foreach ($result2 as $ligne2){?>
+        foreach ($result2 as $ligne2){
+            ?>
         <div class= 'p-5 text-center' style='background-color:#F3F781'>
             <div class='card'>
                 <div class='row'>
                     <div class="card-body product-img-outer text-center">
-                        <h1><p>Bonjour!</p></h1>
-                        <h1><?=$ligne['titre']?></h1> <br>    
+                        <h1><p>Bonjour!</p></h1> 
+                        <p><?=$ligne['titre']?></p>   
                         <img class="product_image rounded" style="height: 300px; width: 300px" src="<?= $ligne['photo'] ?>" alt="...">
                             <p class=''><?=$ligne['texte']?></p> <br>
                                                     

@@ -26,12 +26,8 @@ mainHeader();
     <div class="container-fluid page-body-wrapper">
         <div class="main-panel">
             <div class="content-wrapper container">
-
-
                 <div class="row">
-
                     <div class="grid-margin stretch-card">
-                        
                             <div class="card-body">
                                 <?php AfficherPost(); ?>                        
                             </div>
