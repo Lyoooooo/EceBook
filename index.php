@@ -55,7 +55,7 @@ mainHeader();
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau post</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" name="titre" required>

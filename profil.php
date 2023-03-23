@@ -50,12 +50,12 @@ $ami = $res->fetchAll();
             <p class="small align-bottom"><?= $user["promo"] ?></p>
           </div>
           <div class="grid">
-            <div class="grid ms-3 mt-2" style="color:royalblue; font-weight: 600;">@<?= $user["mail"] ?></div>
-            <div class="grid ms-3 mt-2 text-center" style="font-weight: 600;"><?= $user["grade"] ?></div>
+            <div class="ms-3 mt-2" style="color:royalblue; font-weight: 600;">@<?= $user["mail"] ?></div>
+            <div class="ms-3 mt-2 text-center" style="font-weight: 600;"><?= $user["grade"] ?></div>
           </div>
           <div class="grid">
-            <div class="grid ms-5 mt-2 mb-4"><a href="modifuser.php" class="btn btn-outline-dark btn-sm btn-block">Modifier profil</a></div>
-            <div class="grid ms-5 mt-2 text-center"><a href="messagerie.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
+            <div class="ms-5 mt-2 mb-4"><a href="modifuser.php" class="btn btn-outline-dark btn-sm btn-block">Modifier profil</a></div>
+            <div class="ms-5 mt-2 text-center"><a href="messagerie.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
           </div>
           <div class="grid ms-5 mt-2 d-flex justify-content-end text-center">
             <ul class="list-inline mb-0">
@@ -73,7 +73,7 @@ $ami = $res->fetchAll();
 
         <div class="p-5 m-2"></div>
 
-        <h5 class="mb-4">A propos de moi</h5>
+        <h5 class="mb-4" style="color:#FF621F">A propos de moi</h5>
         <div class="p-3 border border-light">
           <p class="font-italic mb-2"><?php echo $user["descrip"] ?></p>
           <p class="font-italic mb-0"><span style="font-weight:600;">Centre d'intérêt :</span> <?php echo $user["interet"] ?></p>
@@ -83,23 +83,42 @@ $ami = $res->fetchAll();
   </header>
 
   <main class="col-8 mx-auto bg-white pb-5">
-    <h4 class="px-5 p-3 bg-white border-top border-warning">Posts</h4>
+    <h4 class="px-5 p-3 bg-white border-top border-warning" style="color:#FF621F">Posts</h4>
     <?php
     if (count($tab) > 0) {
     ?>
       <div class="container px-5 p-3">
         <div class="row">
-          <?php foreach ($tab as $post) { ?>
-            <div id="post">
-              <div class="card" style="overflow: hidden;">
-                <div class="card-body">
-                  <h5 class="card-title"><?=$post["titre"]?></h5><br>
-                  <p></p>
+          <?php foreach ($tab as $post) {
+            $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
+            $stmt->execute([$post["idu"]]);
+            $upost = $stmt->fetch();
+
+          ?>
+            <div class="card">
+              <div class="d-flex">
+                <div class="p-1"><a href="profil.php?<?=$upost["idu"]?>"><img src="<?=$upost["pp"]?>" style="border-radius:50%;height:4rem"></a></div>
+                <div class="grid">
+                  <a href="profil.php?<?=$upost["idu"]?>"><div class="ps-2 pt-2 fs-6 fst-italic text-decoration-underline"><?=$upost["pnom"]?> <?= $upost["nom"] ?></div></a>
+                  <div class="ps-1 pt-0 fs-4 fw-bolder"><?=$post["titre"]?></div>
                 </div>
-                <?php if ($post["photo"]!="vide") { ?>
-                <img src="<?=$post["photo"]?>" height="50%" class="d-block w-5" style="margin:auto">
-              <?php } ?>
+                <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?=$post["type"]?></div>
               </div>
+              <div class="card-body">
+                <p class="ms-5 px-2"><?=$post["texte"]?></p>
+              </div>
+              <div class="card-footer text-muted">
+                2 days ago
+              </div>
+            </div>
+            <div class="card" style="overflow: hidden;">
+              <div class="card-body">
+                <h5 class="card-title"><?= $post["titre"] ?></h5><br>
+                <p></p>
+              </div>
+              <?php if ($post["photo"] != "vide") { ?>
+                <img src="<?= $post["photo"] ?>" height="50%" class="d-block w-5" style="margin:auto">
+              <?php } ?>
             </div>
           <?php } ?>
         </div>
@@ -118,7 +137,7 @@ $ami = $res->fetchAll();
               <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau post</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
               <div class="modal-body">
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="floatingInput" name="titre" required>
@@ -139,7 +158,7 @@ $ami = $res->fetchAll();
 
                 <div class="input-group mb-3">
                   <label class="input-group-text" for="inputGroupFile01">Photo</label>
-                  <input type="file" class="form-control" id="inputGroupFile01" name="photo" accept=".png, .jpg, .jpeg">
+                  <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg" required><br>
                 </div>
 
               </div>
@@ -152,9 +171,10 @@ $ami = $res->fetchAll();
         </div>
       </div>
 
-    <?php
+      <?php
       if (isset($_POST["bouton"])) {
         extract($_POST);
+        extract($_FILES);
         $pdo = connexion();
         if ($photo == "") {
           $photo = "vide";
@@ -163,10 +183,11 @@ $ami = $res->fetchAll();
         }
         $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
         $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
-        die();
-      }
-    }
-    ?>
+      ?>
+        <meta http-equiv="refresh" content="1"><?php
+                                              }
+                                            }
+                                                ?>
   </main>
 
 </body>

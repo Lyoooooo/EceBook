@@ -66,6 +66,10 @@ h3 {
   flex-wrap: wrap;
 }
 
+.grid a, .grid a:hover {
+  color: inherit;
+}
+
 .colonneAdmin {
     width: 80%;
     margin-left: 10%;
