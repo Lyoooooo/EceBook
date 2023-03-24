@@ -330,7 +330,10 @@ $pdo = connexion();
                 <!-- page 1 -->
 
                 <div class="tab-pane fade show active" id="insc1-tab-pane" role="tabpanel" aria-labelledby="insc1-tab" tabindex="0">
-                    <a href="connexion.php" class="text-end" style="text-decoration: none;">retour</a>
+                    <!-- </div> -->
+                    <div class="text-end">
+                        <a href="connexion.php" class="text-end" style="text-decoration: none;">retour</a>
+                    </div>
                     <h1>Inscription</h1>
                     <label for="validationDefault01" class="form-label">Entrez votre adresse mail</label> <span class="etoile">*</span><br>
                     <div class="input-group">
@@ -340,26 +343,6 @@ $pdo = connexion();
 
                     <p id="email-error" style="display: none; color: red;">Adresse email invalide <br> Veuillez entrer une adresse e-mail valide de la forme prenom.non@edu.ece.fr/omnesintervenant.com</p>
 
-
-                    <script>
-                        const emailInput = document.querySelector("#mail");
-                        const submitButton = document.querySelector("input[type='submit']");
-                        const emailError = document.querySelector("#email-error");
-
-                        emailInput.addEventListener("input", () => {
-                            const email = emailInput.value.trim();
-                            const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-                            const isAllowedDomain = /.*@(edu\.ece\.fr|omnesintervenant\.com)$/.test(email);
-
-                            if (!isValidEmail || !isAllowedDomain) {
-                                emailError.style.display = "block";
-                                submitButton.disabled = true;
-                            } else {
-                                emailError.style.display = "none";
-                                submitButton.disabled = false;
-                            }
-                        });
-                    </script>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Entrez votre mot de passe</label><span class="etoile">*</span>
                         <input type="password" class="form-control" id="exampleInputPassword1" id="mdp" name="mdp" placeholder="Mot de passe" required>
@@ -503,13 +486,24 @@ $pdo = connexion();
     if (isset($_POST["valide"])) {
         extract($_POST);
         $promo = implode(',', $promo);
+
+        // fonction ajout de la pp
+        // if ($pp == "") {
+        //     $pp = "vide";
+        // } else {
+        //     $pp = ajoutpp($idu, $pp);
+        // }
+
+
+
+        // echo $pp;
         // $ext = strtolower(substr(strrchr($_FILES['pp']['name'], '.'), 1));
         // if (($_FILES['pp']['size'] < 20971520) && (in_array($ext, $extensions))) {
         //     $pp = 'produit/' . $_SESSION["idu"] . '-' . $nomp . '.' . $ext;
         //     move_uploaded_file($_FILES['pp']['tmp_name'], $pp);
         // }
         $mdp2 = encode($mdp, $mail);
-        // echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
+        echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
         if ($mdp == $mdp) {
             $stmt = $pdo->prepare("SELECT mail FROM user WHERE mail=?");
             $stmt->execute([$mail]);
