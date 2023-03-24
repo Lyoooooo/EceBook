@@ -9,20 +9,20 @@ session_start();
 if (!empty($_POST["idd"])) {
     $pdo = connexion();
     if($_POST["idd"] == "date"){
-        $stmt = $pdo->prepare("SELECT * FROM post ORDER BY date desc");
+        $stmt = $pdo->prepare("SELECT * FROM post ORDER BY date desc LIMIT 10");
         $stmt->execute();
     }else if($_POST["idd"] == "fav"){
-        $stmt = $pdo->prepare("SELECT * FROM post ORDER BY likes desc");
+        $stmt = $pdo->prepare("SELECT * FROM post ORDER BY likes desc LIMIT 10");
         $stmt->execute();
     }else if($_POST["idd"] == "actu"){
-        $stmt = $pdo->prepare("SELECT * FROM post WHERE type=? ORDER BY likes desc");
+        $stmt = $pdo->prepare("SELECT * FROM post WHERE type=? ORDER BY likes desc LIMIT 10");
         $stmt->execute(["Actualité"]);
     }else if($_POST["idd"] == "event"){
-        $stmt = $pdo->prepare("SELECT * FROM post WHERE type=? ORDER BY likes desc");
+        $stmt = $pdo->prepare("SELECT * FROM post WHERE type=? ORDER BY likes desc LIMIT 10");
         $stmt->execute(["Evènement"]);
     }else{
         $txt = $_POST["idd"];
-        $stmt = $pdo->prepare("SELECT * FROM post WHERE titre LIKE '%$txt%' OR texte LIKE '%$txt%'");
+        $stmt = $pdo->prepare("SELECT * FROM post WHERE titre LIKE '%$txt%' OR texte LIKE '%$txt%' LIMIT 10");
         
         //$stmt->bindParam(1, $txt);
         //$stmt->bindParam(2, $_POST["idd"]);
