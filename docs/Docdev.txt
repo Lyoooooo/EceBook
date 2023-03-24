@@ -2,3 +2,8 @@
 Primary - #FFE2D6
 Accentuation - #FF621F
 --------------------------------------------------------------------------
+0=pas valide
+1=eleve
+2=prof
+3=desactive
+4=admin

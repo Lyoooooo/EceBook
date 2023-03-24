@@ -210,8 +210,6 @@ function recherche()
     }
 }
 ?>
-?>
-
   <?php
   function AfficherPost()
   {
@@ -275,32 +273,26 @@ function recherche()
 
     <?php
 
-    function ajoutphoto($idu, $photo)
-    {
-      $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
-      $ext = strtolower(substr(strrchr($_FILES['photo']['name'], '.'), 1)); //extrait l'extension de l'image et la rend en minuscule
-      if (($_FILES['photo']['size'] < 20971520) && (in_array($ext, $extensions))) { //limite la taille et compare l'extension
-        $photo = 'images/post/' . $idu . '-' . $_FILES['photo']['name']; //renome avec l'idu devant
-        move_uploaded_file($_FILES['photo']['tmp_name'], $photo); //place l'image dans le dossier
-      }
-      return $photo;
-    }
 
     function post($post)
     {
-
       $pdo = connexion();
       $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
       $stmt->execute([$post["idu"]]);
-      $upost = $stmt->fetch();
+      $user = $stmt->fetch();
     ?>
       <div class="card p-0 mb-4">
         <!-- HEADER -->
         <div class="header d-flex ps-2">
-          <div class="pt-2"><a href="profil.php?<?= $upost["idu"] ?>"><img src="<?= $upost["pp"] ?>" style="border-radius:50%;height:4rem"></a></div>
+          <div class="pt-2"><a href="profil.php?<?= $user["idu"] ?>">
+          <?php if ($user["pp"] == 'vide') { ?>
+            <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
+          <?php } else { ?>
+            <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
+          <?php } ?></a></div>
           <div class="grid">
-            <a href="profil.php?<?= $upost["idu"] ?>">
-              <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $upost["pnom"] ?> <?= $upost["nom"] ?></div>
+            <a href="profil.php?<?= $user["idu"] ?>">
+              <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
             </a>
             <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
           </div>
@@ -318,41 +310,74 @@ function recherche()
         </div>
         <!-- MAIN -->
         <div class="card-body">
-          <p class="ms-5 px-2"><?= $post["texte"] ?></p>
+          <p class="ms-5 px-3"><?= $post["texte"] ?></p>
           <?php if ($post["photo"] != "vide") { ?>
-            <img src="<?= $post["photo"] ?>" class="d-block object-fit-cover border rounded" height="75%" style="margin:auto">
+            <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:60rem;height: auto;">
           <?php } ?>
         </div>
         <!-- FOOTER -->
         <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
-          <span class="ps-3"><?= $post["like"] ?> Likes</span>
+          <span class="ps-3"><?= $post["likes"] ?> Likes</span>
           <span class=""><?= $post["dislike"] ?> Dislikes</span>
           <span class=""><?= $post["vu"] ?> Vus</span>
           <span class=""><?= $post["date"] ?></span>
         </div>
         <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
       </div>
-    <!-- MAIN -->
-      <div class="card-body">
-        <p class="ms-5 px-2"><?= $post["texte"] ?></p>
-        <?php if ($post["photo"] != "vide") { ?>
-          <img src="<?= $post["photo"] ?>" class="d-block object-fit-cover border rounded" height="75%" style="margin:auto">
-        <?php } ?>
-
-      </div>
-    <!-- FOOTER -->
-      <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
-        <span class="ps-3"><?= $post["like"] ?> Likes</span>
-        <span class=""><?= $post["dislike"] ?> Dislikes</span>
-        <span class=""><?= $post["vu"] ?> Vus</span>
-        <span class=""><?= $post["date"] ?></span>
-        
-       
-      </div>
-
     </div>
   <?php
 }
 
+function ajoutpost() { ?>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau post</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" name="titre" required>
+            <label for="floatingInput">Titre<span class="etoile">*</span> </label>
+          </div>
 
-?>
+          <div class="form-floating">
+            <textarea class="form-control" id="floatingTextarea2" name="texte" style="height: 100px" required></textarea>
+            <label for="floatingTextarea2">Texte<span class="etoile">*</span></label>
+          </div><br>
+
+          <h8>Type de post</h8><span class="etoile">*</span>
+          <select class="form-select" aria-label="Default select example" name="type" required>
+            <option value="Général">Général</option>
+            <option value="Actualité">Actualité</option>
+            <option value="Evènement">Evènement</option>
+          </select><br>
+
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupFile01">Photo</label>
+            <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg .webp" required><br>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-primary" name="bouton">Poster</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<?php }
+
+function ajoutphoto($idu, $photo)
+    {
+      $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
+      $ext = strtolower(substr(strrchr($_FILES['photo']['name'], '.'), 1)); //extrait l'extension de l'image et la rend en minuscule
+      if (($_FILES['photo']['size'] < 20971520) && (in_array($ext, $extensions))) { //limite la taille et compare l'extension
+        $photo = 'images/post/' . $idu . '-' . $_FILES['photo']['name']; //renome avec l'idu devant
+        move_uploaded_file($_FILES['photo']['tmp_name'], $photo); //place l'image dans le dossier
+      }
+      return $photo;
+    }
