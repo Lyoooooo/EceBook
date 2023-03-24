@@ -11,7 +11,7 @@ $pdo = connexion();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="securite.js"></script>
+    <script src="admin.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Incription</title>
 </head>
@@ -30,13 +30,14 @@ $pdo = connexion();
                 <li class="nav-item" role="presentation">
                     <button class="nav-link disabled" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false"></button>
                 </li>
+
             </ul>
             <div class="tab-content" id="myTabContent">
 
                 <!-- page 1 -->
 
                 <div class="tab-pane fade show active" id="insc1-tab-pane" role="tabpanel" aria-labelledby="insc1-tab" tabindex="0">
-
+                    <a href="connexion.php" class="text-end" style="text-decoration: none;">retour</a>
                     <h1>Inscription</h1>
                     <label for="validationDefault01" class="form-label">Entrez votre adresse mail</label> <span class="etoile">*</span><br>
                     <div class="input-group">
@@ -72,8 +73,32 @@ $pdo = connexion();
                     </div>
 
                     <!-- <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="val"> -->
-                    <input type="submit" class="btn btn-primary mb-3" value="Suivant" onclick="document.getElementById('insc1-tab').classList.remove('active'); document.getElementById('insc2-tab').classList.add('active'); document.getElementById('insc1-tab-pane').classList.remove('show', 'active'); document.getElementById('insc2-tab-pane').classList.add('show', 'active');">
+                    <input type="submit" class="btn btn-primary mb-3" value="Suivant" id="bouton-suivant" onclick="pageSuivante()">
+                    <script>
+                        function pageSuivante() {
+                            document.getElementById('insc1-tab').classList.remove('active');
+                            document.getElementById('insc2-tab').classList.add('active');
+                            document.getElementById('insc1-tab-pane').classList.remove('show', 'active');
+                            document.getElementById('insc2-tab-pane').classList.add('show', 'active');
 
+                        }
+
+                        function pageSuivante2() {
+                            document.getElementById('insc2-tab').classList.remove('active');
+                            document.getElementById('insc3-tab').classList.add('active');
+                            document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
+                            document.getElementById('insc3-tab-pane').classList.add('show', 'active');
+
+                        }
+
+                        function pageSuivante3() {
+                            document.getElementById('insc2-tab').classList.remove('active');
+                            document.getElementById('insc1-tab').classList.add('active');
+                            document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
+                            document.getElementById('insc1-tab-pane').classList.add('show', 'active');
+
+                        }
+                    </script>
                 </div>
                 <!-- supprimer sinon pas de tab2  -->
 
@@ -85,9 +110,9 @@ $pdo = connexion();
                         <input type="text" class="form-control" id="name" name="nom" required placeholder="Nom"><br>
                         <label for="validationDefault01" class="form-label">Prenom</label> <span class="etoile">*</span><br>
                         <input type="text" class="form-control" id="prenom" name="prenom" required placeholder="Prenom"><br>
-                        <label for="validationDefault01" class="form-label">Selectionné votre date de naissance</label> <span class="etoile">*</span><br>
+                        <label for="validationDefault01" class="form-label">Selectionnez votre date de naissance</label> <span class="etoile">*</span><br>
                         <input type="date" class="form-control" name="naissance" id="naissance" required><br>
-                        <label for="validationDefault01" class="form-label">Rentré votre ville de residence</label> <span class="etoile">*</span><br>
+                        <label for="validationDefault01" class="form-label">Rentrez votre ville de residence</label> <span class="etoile">*</span><br>
                         <input type="text" class="form-control" name="ville" id="ville" required placeholder="Ville de résidence"><br>
                         <label for="validationDefault02" class="form-label">Vous etes un :</label><span class="etoile"> *</span><br>
 
@@ -102,7 +127,7 @@ $pdo = connexion();
                     </label> <br><br>
 
                     <div id="classe-selection">
-                        <label for="classe" required>Selectionné votre classe</label></label><span class="etoile"> *</span><br>
+                        <label for="classe" required>Selectionnez votre classe</label></label><span class="etoile"> *</span><br>
                         <select name="promo[]" id="classe">
                             <option name="promo[]" value="ING1">ING1</option>
                             <option name="promo[]" value="ING2">ING2</option>
@@ -148,26 +173,26 @@ $pdo = connexion();
                     </script>
                     <div class="text-start">
                         <div class="mb-3"><br>
-                            <label for="exampleFormControlTextarea1" class="form-label">Rentré votre descritpion</label> <span class="etoile">*</span><br>
+                            <label for="exampleFormControlTextarea1" class="form-label">Rentrez votre descritpion</label> <span class="etoile">*</span><br>
                             <textarea class="form-control" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255" rows="2"></textarea>
                         </div>
                         <!-- <label for="validationDefault01" class="form-label">Rentré votre descritpion</label> <span class="etoile">*</span><br>
                     <input type="text" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255"><br> -->
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Rentré vos centres d'interets</label> <span class="etoile">*</span><br>
+                            <label for="exampleFormControlTextarea1" class="form-label">Rentrez vos centres d'interets</label> <span class="etoile">*</span><br>
                             <textarea class="form-control" name="interet" id="interet" required placeholder="Vos centres d'interets:" minlength="25" maxlength="255" rows="2"></textarea>
                         </div>
                         <!-- <label for="validationDefault01" class="form-label">Rentré vos centres d'interets</label> <span class="etoile">*</span><br>
                     <input type="text" name="interet" id="interet" required placeholder="Vos centres d'interets" minlength="25" maxlength="255"><br> -->
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Chargé votre photo de profil</label> <span class="etoile">*</span>
+                            <label for="formFile" class="form-label">Chargez votre photo de profil</label> <span class="etoile">*</span>
                             <input class="form-control" type="file" id="pp" name="pp">
                         </div>
                         <br>
                     </div>
-                    <!-- <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="document.getElementById('insc2-tab').classList.remove('active'); document.getElementById('insc3-tab').classList.add('active'); document.getElementById('insc2-tab-pane').classList.remove('show', 'active'); document.getElementById('insc3-tab-pane').classList.add('show', 'active');"> -->
-
-                    <button class="btn btn-primary mb-3" type="submit" value='suivant' name="valide">Valider l'inscription</button>
+                    <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageSuivante3()">
+                    <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="pageSuivante2()">
+                    <!-- <button class="btn btn-primary mb-3   " type="submit" value='suivant' name="valide">Valider l'inscription</button> -->
                 </div>
 
                 <!-- page 3 -->
