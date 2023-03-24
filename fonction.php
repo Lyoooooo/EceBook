@@ -100,15 +100,20 @@ function mainHeader()
 ?>
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
 
-  <!-- Navbar-->
-  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
-    <div class="container-fluid justify-content-between">
-      <!-- Left elements -->
-      <div class="d-flex">
-        <!-- Brand -->
-        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
-          LOGO
-        </a>
+<!-- Navbar-->
+<nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
+  <div class="container-fluid justify-content-between">
+    <!-- Left elements -->
+    <div class="d-flex">
+      <!-- Brand -->
+      <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+        <img
+            src="./images/e_now_logo.png"
+            height="65"
+            alt="logo"
+            loading="lazy"
+        />
+      </a>
 
         <!-- Search form -->
 
@@ -140,11 +145,29 @@ function mainHeader()
           <li class="nav-item">
             <!-- Avatar -->
             <div class="dropdown">
-              <?php if (isset($uid)) : ?>
-                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                  <img src="<?php if ($infoUser["avatar"] == null) {
-                              echo "./images/avatarbasique.png";
-                            } else { ?>../<?= $infoUser["avatar"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" />
+                <?php 
+                if(isset($_SESSION["idu"])){ 
+                  $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
+                  $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
+                  $infoUser->execute(array($idu));
+                  $infoUser = $infoUser->fetch();
+                }
+                if(isset($idu)): ?>
+                <a
+                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuAvatar"
+                role="button"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+                >
+                <img
+                    src="<?php if($infoUser["pp"] == null){ echo "./images/avatarbasique.png";}else{ ?>../<?= $infoUser["pp"] ?><?php } ?>"
+                    class="rounded-circle"
+                    height="25"
+                    alt="image"
+                    loading="lazy"
+                />
                 </a>
               <?php else : ?>
                 <a class="nav-link text-center " href="connexion.php">
@@ -157,7 +180,7 @@ function mainHeader()
               <?php endif; ?>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                 <li>
-                  <a class="dropdown-item" href="#">My profile</a>
+                  <p class="dropdown-item"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
                 </li>
                 <li>
                   <a class="dropdown-item" href="#">Settings</a>
@@ -250,62 +273,56 @@ function AfficherPost()
 
   <?php
 }
-  ?>
 
-
-  <?php
-
-
-  function post($post)
-  {
-    $pdo = connexion();
-    $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
-    $stmt->execute([$post["idu"]]);
-    $user = $stmt->fetch();
-  ?>
-    <div class="card p-0 mb-4">
-      <!-- HEADER -->
-      <div class="header d-flex ps-2">
-        <div class="pt-2"><a href="profil.php?<?= $user["idu"] ?>">
-            <?php if ($user["pp"] == 'vide') { ?>
-              <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
-            <?php } else { ?>
-              <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
-            <?php } ?></a></div>
-        <div class="grid">
-          <a href="profil.php?<?= $user["idu"] ?>">
-            <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
-          </a>
-          <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
-        </div>
-        <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
-        <div class="position-absolute end-0" style="top: 50px;">
-          <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
-            <img src="images/boutonPosts.png" alt="" style="height: 40px;">
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Modifier le post</a></li>
-            <li><a class="dropdown-item" href="#">Autre chose</a></li>
-            <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- MAIN -->
-      <div class="card-body">
-        <p class="ms-5 px-3"><?= $post["texte"] ?></p>
-        <?php if ($post["photo"] != "vide") { ?>
-          <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:60rem;height: auto;">
+function post($post) {
+  $pdo = connexion();
+  $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
+  $stmt->execute([$post["idu"]]);
+  $user = $stmt->fetch();
+?>
+  <div class="card p-0 mb-4">
+    <!-- HEADER -->
+    <div class="header d-flex ps-2">
+      <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
+        <?php if ($user["pp"] == 'vide') { ?>
+          <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
+        <?php } else { ?>
+          <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
         <?php } ?>
-      </div>
-      <!-- FOOTER -->
-      <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
-        <span class="ps-3"><?= $post["likes"] ?> Likes</span>
-        <span class=""><?= $post["dislike"] ?> Dislikes</span>
-        <span class=""><?= $post["vu"] ?> Vus</span>
-        <span class=""><?= $post["date"] ?></span>
+      </a></div>
+      <div class="grid">
+        <a href="profil.php?u=<?= $user["idu"] ?>">
+          <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
+        </a>
+        <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
+      <div class="position-absolute end-0" style="top: 50px;">
+        <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
+          <img src="images/boutonPosts.png" alt="" style="height: 40px;">
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Modifier le post</a></li>
+          <li><a class="dropdown-item" href="#">Autre chose</a></li>
+          <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
+        </ul>
+      </div>
     </div>
+    <!-- MAIN -->
+    <div class="card-body">
+      <p class="ms-5 px-3"><?= $post["texte"] ?></p>
+      <?php if ($post["photo"] != "vide") { ?>
+        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:60rem;height: auto;">
+      <?php } ?>
+    </div>
+    <!-- FOOTER -->
+    <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
+      <span class="ps-3"><?= $post["likes"] ?> Likes</span>
+      <span class=""><?= $post["dislike"] ?> Dislikes</span>
+      <span class=""><?= $post["vu"] ?> Vus</span>
+      <span class=""><?= $post["date"] ?></span>
+    </div>
+    <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
   </div>
 <?php
   }
