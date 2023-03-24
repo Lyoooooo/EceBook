@@ -210,7 +210,6 @@ function recherche()
     }
 }
 ?>
-?>
 
   <?php
   function AfficherPost()
