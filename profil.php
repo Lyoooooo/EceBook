@@ -1,12 +1,23 @@
 <?php
 include "fonction.php";
-session_start();
-// if (connecte() == False) {
-//   header("location:index.php");
-// }
+include "fonctionRequete.php";
 $pdo = connexion();
-// $idu = $_SESSION["idu"];
-$idu = 2;
+session_start();
+if (connecte() == False) {
+  header("location:index.php");
+}
+
+if ($_GET==null) {
+  $idu = $_SESSION["idu"];
+  $profil = "moi";
+} else if ($_SESSION["idu"] == $_GET["u"]) {
+  $idu = $_SESSION["idu"];
+  $profil = "moi";
+} else {
+  $idu = $_GET["u"];
+  $profil = "autre";
+}
+
 $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
 $stmt->execute([$idu]);
 $user = $stmt->fetch();
@@ -41,18 +52,20 @@ $ami = $res->fetchAll();
   <header class="col-7 mx-auto">
     <div class="bg-white shadow overflow-hidden rounded-top">
       <div class="px-5 pt-0 pb-4">
-
         <div class="profile-head border border-light">
+
           <?php if ($user["pp"] == 'vide') { ?>
             <img src="images/pp/pp.jpg" alt="..." width="130" class="rounded img-thumbnail me-5 ms-2 mb-2 mt-2">
           <?php } else { ?>
             <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" width="130" class="rounded img-thumbnail me-5 ms-2 mb-2 mt-2">
           <?php } ?>
+
           <div class="grid">
             <h4 class="mt-2 mb-2"><?= $user["pnom"] ?> <?= $user["nom"] ?></h4>
             <p class="small align-bottom mb-2"><?= $user["ville"] ?></p>
             <p class="small align-bottom"><?= $user["promo"] ?></p>
           </div>
+
           <div class="grid">
             <div class="ms-3 mt-2" style="color:royalblue; font-weight: 600;">@<?= $user["mail"] ?></div>
             <?php if ($user["grade"] == 1) { ?>
@@ -63,10 +76,17 @@ $ami = $res->fetchAll();
               <div class="ms-3 mt-2 text-center" style="font-weight: 600;">Administrateur</div>
             <?php } ?>
           </div>
+
           <div class="grid">
-            <div class="ms-5 mt-2 mb-4"><a href="modifuser.php" class="btn btn-outline-dark btn-sm btn-block">Modifier profil</a></div>
-            <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
+            <?php if ($profil == "moi") { ?>
+              <div class="ms-5 mt-2 mb-4"><a href="modifuser.php" class="btn btn-outline-dark btn-sm btn-block">Modifier profil</a></div>
+              <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
+            <?php } else { ?>
+              <div class="ms-5 mt-2 mb-4"><a href="" class="btn btn-outline-dark btn-sm btn-block"></a></div>
+              <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
+            <?php } ?>
           </div>
+
           <div class="grid ms-5 mt-2 d-flex justify-content-end text-center">
             <ul class="list-inline mb-0">
               <li class="list-inline-item">
@@ -79,8 +99,8 @@ $ami = $res->fetchAll();
               </li>
             </ul>
           </div>
-        </div>
 
+        </div>
         <div class="p-5 m-2"></div>
 
         <h5 class="mb-4" style="color:#FF621F">A propos de moi</h5>
@@ -95,16 +115,17 @@ $ami = $res->fetchAll();
   <main class="col-7 mx-auto">
     <div class="bg-white shadow overflow-hidden rounded-top pb-4">
       <h4 class="px-5 p-3 bg-white border-top border-warning" style="color:#FF621F">Posts</h4>
+      <div class="container px-5 p-3">
+      
       <?php
-        if (count($tab) > 0) { ?>
-          <div class="container px-5 p-3">
-            <div class="row"> <?php 
-              foreach ($tab as $post) {
-                post($post);
-              } ?> 
-            </div>
-          </div> <?php
+        if (count($tab) > 0) {
+          foreach ($tab as $post) { ?>
+            <div class="row"> 
+            <?= post($post); ?>
+            </div> <?php
+          }
         } else { ?>
+      </div>
       <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous n'avez pas de post !!</p>
       <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-grid gap-2 col-4 mx-auto" style="color:#FF621F;border-radius:5px;padding:2px;font-weight: 500;font-size: 20px;padding:auto">
         Créez votre premier post ici
