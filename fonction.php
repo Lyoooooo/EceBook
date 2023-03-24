@@ -108,7 +108,12 @@ function mainHeader()
     <div class="d-flex">
       <!-- Brand -->
       <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
-        LOGO
+        <img
+            src="./images/e_now_logo.png"
+            height="65"
+            alt="logo"
+            loading="lazy"
+        />
       </a>
 
       <!-- Search form -->
@@ -147,7 +152,14 @@ function mainHeader()
             <li class="nav-item">
             <!-- Avatar -->
             <div class="dropdown">
-                <?php if(isset($uid)): ?>
+                <?php 
+                if(isset($_SESSION["idu"])){ 
+                  $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
+                  $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
+                  $infoUser->execute(array($idu));
+                  $infoUser = $infoUser->fetch();
+                }
+                if(isset($idu)): ?>
                 <a
                 class="dropdown-toggle d-flex align-items-center hidden-arrow"
                 href="#"
@@ -157,7 +169,7 @@ function mainHeader()
                 aria-expanded="false"
                 >
                 <img
-                    src="<?php if($infoUser["avatar"] == null){ echo "./images/avatarbasique.png";}else{ ?>../<?= $infoUser["avatar"] ?><?php } ?>"
+                    src="<?php if($infoUser["pp"] == null){ echo "./images/avatarbasique.png";}else{ ?>../<?= $infoUser["pp"] ?><?php } ?>"
                     class="rounded-circle"
                     height="25"
                     alt="image"
@@ -176,7 +188,7 @@ function mainHeader()
                 aria-labelledby="navbarDropdownMenuAvatar"
                 >
                 <li>
-                    <a class="dropdown-item" href="#">My profile</a>
+                  <p class="dropdown-item"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
                 </li>
                 <li>
                     <a class="dropdown-item" href="#">Settings</a>
@@ -209,7 +221,6 @@ function recherche()
         header("Location: recherche.php");
     }
 }
-?>
 ?>
 
 <?php
