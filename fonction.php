@@ -332,23 +332,7 @@ function recherche()
         </div>
         <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
       </div>
-    <!-- MAIN -->
-      <div class="card-body">
-        <p class="ms-5 px-2"><?= $post["texte"] ?></p>
-        <?php if ($post["photo"] != "vide") { ?>
-          <img src="<?= $post["photo"] ?>" class="d-block object-fit-cover border rounded" height="75%" style="margin:auto">
-        <?php } ?>
-
-      </div>
-    <!-- FOOTER -->
-      <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
-        <span class="ps-3"><?= $post["like"] ?> Likes</span>
-        <span class=""><?= $post["dislike"] ?> Dislikes</span>
-        <span class=""><?= $post["vu"] ?> Vus</span>
-        <span class=""><?= $post["date"] ?></span>
-        
-       
-      </div>
+   
 
     </div>
   <?php

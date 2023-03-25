@@ -41,28 +41,36 @@ mainHeader();
                         </div>
                     </div>
                 </nav>
+                
                 <div class="colonneAdmin">
                 <table class="table table-striped">
                     <tr>
-                        <th>Photo</th><th>ID</th><th>Nom</th><th>Action</th>
+                    <th>Photo</th><th>ID</th><th>Nom</th><th>Action</th>
                     </tr>
                 <?php
-                //     connexion();
-                //     $req="select * from user";
-                //     $resultat = $pdo->prepare($req);
-                //     $resultat->execute();
-                //     while($ligne=$resultat->fetchAll())
-                // {
-                    
-                //     echo "<tr>
-                //     <td class='align-middle'><img src='". $ligne["photo"]."' width='60'></td>
-                //     <td class='align-middle'>". $ligne["idu"]."</td>
-                //     <td class='align-middle'>". $ligne["nom"]."</td>
-                //     <a class='btn btn-danger' href='#>Supprimer</a></td>
-                //     </tr>";
-                // }
-                ?>
+                    $pdo=connexion();
+                    $req="select * from user";
+                    $resultat = $pdo->prepare($req);
+                    $resultat->execute();
 
+                    while($ligne=$resultat->fetch())
+                {
+                    $pp=$ligne["pp"];
+                    if(empty($pp)){
+                        $pp= 'images/avatarbasique.png';
+                        //sur ma page web, l'image par default ne s'affiche pas, j'ai chercher j'ai pas trouvé pourquoi a voir plus tard
+                        //var_dump($pp);
+                    }
+                    echo "<tr>
+                    <td class='align-middle'><img src='".$pp."' width='60'></td> 
+                    <td class='align-middle'>". $ligne["idu"]."</td>
+                    <td class='align-middle'>". $ligne["nom"]."</td>
+                    <td class='align-middle'> &nbsp;&nbsp;&nbsp;<a href='supprimer.php?idu=".$ligne["idu"]."'<i class='fas fa-trash'></i></a></td>
+                    
+                    </tr>";
+                }
+
+                ?>
                 </table>
                             </ul>
 
