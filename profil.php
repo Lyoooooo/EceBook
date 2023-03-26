@@ -18,17 +18,29 @@ if ($_GET==null) {
   $profil = "autre";
 }
 
-$stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
+$stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?"); //récupère les informations du profil
 $stmt->execute([$idu]);
 $user = $stmt->fetch();
 
-$res = $pdo->prepare("SELECT * FROM post WHERE idu=?");
+$res = $pdo->prepare("SELECT * FROM post WHERE idu=?"); //récupère les posts du profil
 $res->execute([$idu]);
 $tab = $res->fetchAll();
 
-$res = $pdo->prepare("SELECT * FROM ami WHERE idu1=? AND valide=1");
+$res = $pdo->prepare("SELECT * FROM ami WHERE idu1=? AND valide=1"); //compte le nombre d'ami du profil
 $res->execute([$idu]);
 $ami = $res->fetchAll();
+
+if ($profil = "autre") {
+  $query = $pdo->prepare("SELECT * FROM ami WHERE idu1 = :idu AND idu2 = :ida");
+  $query->bindParam(':idu', $_SESSION["idu"]);
+  $query->bindParam(':ida', $idu);
+  $query->execute();
+  if ($query->rowCount() > 0) {
+    $demande = TRUE;
+  } else {
+    $demande = FALSE;
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -81,8 +93,21 @@ $ami = $res->fetchAll();
             <?php if ($profil == "moi") { ?>
               <div class="ms-5 mt-2 mb-4"><a href="modifuser.php" class="btn btn-outline-dark btn-sm btn-block">Modifier profil</a></div>
               <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
+            <?php } else if ($profil == "autre" && $demande == FALSE) { ?>
+              <form method="POST" action="fonctionRequete.php">
+                <input type="hidden" name="idu" value="<?=$_SESSION['idu']?>">
+                <input type="hidden" name="ida" value="<?=$idu?>">
+                <input type="hidden" name="page" value="profil.php">
+                <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Ajouter en ami</button>
+              </form>
+              <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
             <?php } else { ?>
-              <div class="ms-5 mt-2 mb-4"><a href="" class="btn btn-outline-dark btn-sm btn-block"></a></div>
+              <form method="POST" action="fonctionRequete.php">
+                <input type="hidden" name="idu" value="<?=$_SESSION['idu']?>">
+                <input type="hidden" name="ida" value="<?=$idu?>">
+                <input type="hidden" name="page" value="profil.php">
+                <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Retirer des amis</button>
+              </form>
               <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
             <?php } ?>
           </div>
