@@ -43,12 +43,12 @@ CREATE TABLE IF NOT EXISTS `ami` (
 -- Structure de la table `message`
 --
 
-DROP TABLE IF EXISTS `message`;
-CREATE TABLE IF NOT EXISTS `message` (
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
   `idm` int(10) NOT NULL AUTO_INCREMENT,
   `idenvoyeur` int(4) NOT NULL,
   `idreceveur` int(4) NOT NULL,
-  `date` datetime NOT NULL,
+  `dates` datetime NOT NULL,
   `texte` varchar(500) NOT NULL,
   PRIMARY KEY (`idm`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `titre` varchar(50) NOT NULL,
   `texte` varchar(500) NOT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `type` varchar(20) NOT NULL,
+  `typep` varchar(20) NOT NULL,
   `like` int(4) NOT NULL,
   `dislike` int(4) NOT NULL,
   `vu` int(4) NOT NULL,
@@ -98,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `mail` varchar(50) NOT NULL,
   `mdp` varchar(255) NOT NULL,
   `naissance` date NOT NULL,
+  `statut` varchar(15) DEFAULT NULL,
   `promo` varchar(30) DEFAULT NULL,
   `pp` varchar(255) DEFAULT NULL,
   `ville` varchar(30) DEFAULT NULL,
