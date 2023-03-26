@@ -400,6 +400,10 @@ $pdo = connexion();
                         <input type="text" class="form-control" name="ville" id="ville" required placeholder="Ville de résidence"><br>
                         <label for="validationDefault02" class="form-label">Vous etes un :</label><span class="etoile"> *</span><br>
 
+
+
+                        <!-- ne pas prendre en compte eleve si prof est tchecké  -->
+
                     </div>
                     <input class="form-check-input" type="radio" name="Poste" id="eleve" value="Elève" checked>
                     <label class="form-check-label" for="flexRadioDefault1">

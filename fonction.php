@@ -100,20 +100,15 @@ function mainHeader()
 ?>
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
 
-<!-- Navbar-->
-<nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
-  <div class="container-fluid justify-content-between">
-    <!-- Left elements -->
-    <div class="d-flex">
-      <!-- Brand -->
-      <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
-        <img
-            src="./images/e_now_logo.png"
-            height="65"
-            alt="logo"
-            loading="lazy"
-        />
-      </a>
+  <!-- Navbar-->
+  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
+    <div class="container-fluid justify-content-between">
+      <!-- Left elements -->
+      <div class="d-flex">
+        <!-- Brand -->
+        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+          <img src="./images/e_now_logo2.png" height="65" alt="logo" loading="lazy" />
+        </a>
 
         <!-- Search form -->
 
@@ -145,29 +140,18 @@ function mainHeader()
           <li class="nav-item">
             <!-- Avatar -->
             <div class="dropdown">
-                <?php 
-                if(isset($_SESSION["idu"])){ 
-                  $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
-                  $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
-                  $infoUser->execute(array($idu));
-                  $infoUser = $infoUser->fetch();
-                }
-                if(isset($idu)): ?>
-                <a
-                class="dropdown-toggle d-flex align-items-center hidden-arrow"
-                href="#"
-                id="navbarDropdownMenuAvatar"
-                role="button"
-                data-mdb-toggle="dropdown"
-                aria-expanded="false"
-                >
-                <img
-                    src="<?php if($infoUser["pp"] == null){ echo "./images/avatarbasique.png";}else{ ?>../<?= $infoUser["pp"] ?><?php } ?>"
-                    class="rounded-circle"
-                    height="25"
-                    alt="image"
-                    loading="lazy"
-                />
+              <?php
+              if (isset($_SESSION["idu"])) {
+                $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
+                $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
+                $infoUser->execute(array($idu));
+                $infoUser = $infoUser->fetch();
+              }
+              if (isset($idu)) : ?>
+                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                  <img src="<?php if ($infoUser["pp"] == null) {
+                              echo "./images/avatarbasique.png";
+                            } else { ?>../<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" />
                 </a>
               <?php else : ?>
                 <a class="nav-link text-center " href="connexion.php">
@@ -274,120 +258,121 @@ function AfficherPost()
   <?php
 }
 
-function post($post) {
+function post($post)
+{
   $pdo = connexion();
   $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
   $stmt->execute([$post["idu"]]);
   $user = $stmt->fetch();
-?>
-  <div class="card p-0 mb-4">
-    <!-- HEADER -->
-    <div class="header d-flex ps-2">
-      <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
-        <?php if ($user["pp"] == 'vide') { ?>
-          <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
-        <?php } else { ?>
-          <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
+  ?>
+    <div class="card p-0 mb-4">
+      <!-- HEADER -->
+      <div class="header d-flex ps-2">
+        <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
+            <?php if ($user["pp"] == 'vide') { ?>
+              <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
+            <?php } else { ?>
+              <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
+            <?php } ?>
+          </a></div>
+        <div class="grid">
+          <a href="profil.php?u=<?= $user["idu"] ?>">
+            <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
+          </a>
+          <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
+        </div>
+        <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
+        <div class="position-absolute end-0" style="top: 50px;">
+          <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
+            <img src="images/boutonPosts.png" alt="" style="height: 40px;">
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Modifier le post</a></li>
+            <li><a class="dropdown-item" href="#">Autre chose</a></li>
+            <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- MAIN -->
+      <div class="card-body">
+        <p class="ms-5 px-3"><?= $post["texte"] ?></p>
+        <?php if ($post["photo"] != "vide") { ?>
+          <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:60rem;height: auto;">
         <?php } ?>
-      </a></div>
-      <div class="grid">
-        <a href="profil.php?u=<?= $user["idu"] ?>">
-          <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
-        </a>
-        <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
+      </div>
+      <!-- FOOTER -->
+      <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
+        <span class="ps-3"><?= $post["likes"] ?> Likes</span>
+        <span class=""><?= $post["dislike"] ?> Dislikes</span>
+        <span class=""><?= $post["vu"] ?> Vus</span>
+        <span class=""><?= $post["date"] ?></span>
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
-      <div class="position-absolute end-0" style="top: 50px;">
-        <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
-          <img src="images/boutonPosts.png" alt="" style="height: 40px;">
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Modifier le post</a></li>
-          <li><a class="dropdown-item" href="#">Autre chose</a></li>
-          <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
-        </ul>
-      </div>
     </div>
-    <!-- MAIN -->
-    <div class="card-body">
-      <p class="ms-5 px-3"><?= $post["texte"] ?></p>
-      <?php if ($post["photo"] != "vide") { ?>
-        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:60rem;height: auto;">
-      <?php } ?>
-    </div>
-    <!-- FOOTER -->
-    <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
-      <span class="ps-3"><?= $post["likes"] ?> Likes</span>
-      <span class=""><?= $post["dislike"] ?> Dislikes</span>
-      <span class=""><?= $post["vu"] ?> Vus</span>
-      <span class=""><?= $post["date"] ?></span>
-    </div>
-    <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
-  </div>
-<?php
-  }
+  <?php
+}
 
-  function ajoutpost()
-  { ?>
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau post</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+function ajoutpost()
+{ ?>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau post</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="" method="post" enctype="multipart/form-data">
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="titre" required>
+                <label for="floatingInput">Titre<span class="etoile">*</span> </label>
+              </div>
+
+              <div class="form-floating">
+                <textarea class="form-control" id="floatingTextarea2" name="texte" style="height: 100px" required></textarea>
+                <label for="floatingTextarea2">Texte<span class="etoile">*</span></label>
+              </div><br>
+
+              <h8>Type de post</h8><span class="etoile">*</span>
+              <select class="form-select" aria-label="Default select example" name="type" required>
+                <option value="Général">Général</option>
+                <option value="Actualité">Actualité</option>
+                <option value="Evènement">Evènement</option>
+              </select><br>
+
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile01">Photo</label>
+                <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg .webp" required><br>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-primary" name="bouton">Poster</button>
+            </div>
+          </form>
         </div>
-        <form action="" method="post" enctype="multipart/form-data">
-          <div class="modal-body">
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="floatingInput" name="titre" required>
-              <label for="floatingInput">Titre<span class="etoile">*</span> </label>
-            </div>
-
-            <div class="form-floating">
-              <textarea class="form-control" id="floatingTextarea2" name="texte" style="height: 100px" required></textarea>
-              <label for="floatingTextarea2">Texte<span class="etoile">*</span></label>
-            </div><br>
-
-            <h8>Type de post</h8><span class="etoile">*</span>
-            <select class="form-select" aria-label="Default select example" name="type" required>
-              <option value="Général">Général</option>
-              <option value="Actualité">Actualité</option>
-              <option value="Evènement">Evènement</option>
-            </select><br>
-
-            <div class="input-group mb-3">
-              <label class="input-group-text" for="inputGroupFile01">Photo</label>
-              <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg .webp" required><br>
-            </div>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-            <button type="submit" class="btn btn-primary" name="bouton">Poster</button>
-          </div>
-        </form>
       </div>
     </div>
-  </div>
-<?php }
+  <?php }
 
-  function ajoutphoto($idu, $photo)
-  {
-    $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
-    $ext = strtolower(substr(strrchr($_FILES['photo']['name'], '.'), 1)); //extrait l'extension de l'image et la rend en minuscule
-    if (($_FILES['photo']['size'] < 20971520) && (in_array($ext, $extensions))) { //limite la taille et compare l'extension
-      $photo = 'images/post/' . $idu . '-' . $_FILES['photo']['name']; //renome avec l'idu devant
-      move_uploaded_file($_FILES['photo']['tmp_name'], $photo); //place l'image dans le dossier
-    }
-    return $photo;
+function ajoutphoto($idu, $photo)
+{
+  $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
+  $ext = strtolower(substr(strrchr($_FILES['photo']['name'], '.'), 1)); //extrait l'extension de l'image et la rend en minuscule
+  if (($_FILES['photo']['size'] < 20971520) && (in_array($ext, $extensions))) { //limite la taille et compare l'extension
+    $photo = 'images/post/' . $idu . '-' . $_FILES['photo']['name']; //renome avec l'idu devant
+    move_uploaded_file($_FILES['photo']['tmp_name'], $photo); //place l'image dans le dossier
   }
-  function ajoutpp($idu, $pp)
-  {
-    $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
-    $ext = strtolower(substr(strrchr($_FILES['pp']['name'], '.'), 1)); //extrait l'extension de l'image et la rend en minuscule
-    if (($_FILES['pp']['size'] < 20971520) && (in_array($ext, $extensions))) { //limite la taille et compare l'extension
-      $pp = 'images/pp/' . $idu . '-' . $_FILES['pp']['name']; //renome avec l'idu devant
-      move_uploaded_file($_FILES['pp']['tmp_name'], $pp); //place l'image dans le dossier
-    }
-    return $pp;
+  return $photo;
+}
+function ajoutpp($idu, $pp)
+{
+  $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
+  $ext = strtolower(substr(strrchr($_FILES['pp']['name'], '.'), 1)); //extrait l'extension de l'image et la rend en minuscule
+  if (($_FILES['pp']['size'] < 20971520) && (in_array($ext, $extensions))) { //limite la taille et compare l'extension
+    $pp = 'images/pp/' . $idu . '-' . $_FILES['pp']['name']; //renome avec l'idu devant
+    move_uploaded_file($_FILES['pp']['tmp_name'], $pp); //place l'image dans le dossier
   }
+  return $pp;
+}
