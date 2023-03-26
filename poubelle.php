@@ -19,7 +19,7 @@ $pdo = connexion();
 <body id="second">
     <form action="" method="post" onsubmit="convertToLowercase()">
 
-        <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
+        <div class=" row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center" id="primal">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true"></button>
@@ -78,15 +78,15 @@ $pdo = connexion();
                         // }
 
                         function pageSuivante2() {
-                            if (document.getElementById('mail').value == "" || document.getElementById('mdp').value == "") {
+                            // if (document.getElementById('mail').value == "" || document.getElementById('mdp').value == "") {
 
-                            } else {
-                                document.getElementById('insc2-tab').classList.remove('active');
-                                document.getElementById('insc3-tab').classList.add('active');
-                                document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
-                                document.getElementById('insc3-tab-pane').classList.add('show', 'active');
-                            }
+                            // } else {
+                            document.getElementById('insc2-tab').classList.remove('active');
+                            document.getElementById('insc3-tab').classList.add('active');
+                            document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
+                            document.getElementById('insc3-tab-pane').classList.add('show', 'active');
                         }
+                        // }
 
                         function pageSuivante3() {
 
