@@ -127,11 +127,11 @@ $pdo = connexion();
                         <label for="validationDefault02" class="form-label">Vous etes un :</label><span class="etoile"> *</span><br>
 
                     </div>
-                    <input class="form-check-input" type="radio" name="Poste" id="eleve" value="Elève" checked>
+                    <input class="form-check-input" type="radio" name="statut" id="eleve" value="Elève" checked>
                     <label class="form-check-label" for="flexRadioDefault1">
                         Elève
                     </label>&nbsp;
-                    <input class="form-check-input" type="radio" name="Poste" id="professeur" value="Professeur">
+                    <input class="form-check-input" type="radio" name="statut" id="professeur" value="Professeur">
                     <label class="form-check-label" for="flexRadioDefault1">
                         Professeur
                     </label> <br><br>
@@ -190,7 +190,7 @@ $pdo = connexion();
                     <input type="text" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255"><br> -->
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Rentrez vos centres d'interets</label> <span class="etoile">*</span><br>
-                            <textarea class="form-control" name="interet" id="interet" required placeholder="Vos centres d'interets:" minlength="25" maxlength="255" rows="2"></textarea>
+                            <textarea class="form-control" name="interet" id="interet" required placeholder="Vos centres d'interets:" minlength="1" maxlength="255" rows="2"></textarea>
                         </div>
                         <!-- <label for="validationDefault01" class="form-label">Rentré vos centres d'interets</label> <span class="etoile">*</span><br>
                     <input type="text" name="interet" id="interet" required placeholder="Vos centres d'interets" minlength="25" maxlength="255"><br> -->
@@ -232,8 +232,8 @@ $pdo = connexion();
             if ($user) {
                 // echo "Cette adresse mail est déjà utilisée";
             } else {
-                $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-                $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $promo, $pp, $ville, $descrip, $interet]);
+                $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
             }
             exit();
         } else echo "Le mot de passe est incorect ";
