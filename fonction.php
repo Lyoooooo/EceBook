@@ -42,7 +42,7 @@ function footer()
       <!-- Section: CTA -->
       <section class="">
         <p class="d-flex justify-content-center align-items-center">
-          <a href="./docs/CGU.pdf" class="btn btn-outline-light btn-rounded text-dark" role="button" aria-pressed="true">CGU</a>
+          <a href="./docs/CGU.pdf" class="btn btn-outline-light btn-rounded text-dark" target="blank" role="button" aria-pressed="true">CGU</a>
           <button type="button" class="btn btn-outline-light btn-rounded text-dark" data-toggle="modal" data-target="#cookieConsent">
             Police des Cookies
           </button>
@@ -144,16 +144,17 @@ function mainHeader()
               <?php
               if (isset($_SESSION["idu"])) {
                 $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
-                $pdo = connexion();
+                $pdo=connexion();
                 $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
                 $infoUser->execute(array($idu));
                 $infoUser = $infoUser->fetch();
               }
               if (isset($idu)) : ?>
-                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-toggle="dropdown" aria-expanded="false">
                   <img src="<?php if ($infoUser["pp"] == null) {
                               echo "./images/avatarbasique.png";
-                            } else { ?>../<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" />
+                            } else { ?>../<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" />&nbsp
+                            <p class="text-black"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
                 </a>
               <?php else : ?>
                 <a class="nav-link text-center " href="connexion.php">
@@ -164,20 +165,16 @@ function mainHeader()
                 </a>
 
               <?php endif; ?>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                <li>
-                  <p class="dropdown-item"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Settings</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Logout</a>
-                </li>
+                    </a>
+                    <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="profil.php">
+                            <i class="fa-solid fa-user"></i> Profil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="deconnexion.php">
+                            <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
+                    </div>
               </ul>
-            </div>
-          </li>
-        </ul>
+              
 
 
       </div>
@@ -272,7 +269,7 @@ function post($post)
       <!-- HEADER -->
       <div class="header d-flex ps-2">
         <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
-            <?php if ($user["pp"] == 'vide') { ?>
+            <?php if ($user["pp"] == NULL) { ?>
               <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
             <?php } else { ?>
               <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
@@ -311,7 +308,7 @@ function post($post)
       <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
         <span class="ps-3"><?= $post["likes"] ?> Likes</span>
         <span class=""><?= $post["dislike"] ?> Dislikes</span>
-        <span class=""><?= $post["vu"] ?> Vus</span>
+        <span class=""><?= $post["vu"] ?> Vues</span>
         <span class=""><?= $post["date"] ?></span>
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
@@ -365,7 +362,22 @@ function ajoutpost()
         </div>
       </div>
     </div>
-  <?php }
+  <?php 
+  ajoutpost();
+  if (isset($_POST["bouton"])) {
+    extract($_POST);
+    extract($_FILES);
+    if ($photo == "") {
+      $photo = NULL;
+    } else {
+      $photo = ajoutphoto($idu, $photo);
+    }
+  $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
+  $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
+?>
+  <meta http-equiv="refresh" content="1">
+<?php   }
+}
 
 function ajoutphoto($idu, $photo)
 {
@@ -388,6 +400,10 @@ function ajoutpp($idu, $pp)
   return $pp;
 }
 
+function jaime()
+{
+
+}
 function modifpost($idu, $idp)
   {
     $pdo = connexion();
