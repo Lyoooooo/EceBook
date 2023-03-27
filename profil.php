@@ -18,6 +18,8 @@ if ($_GET == null) {
   $profil = "autre";
 }
 
+$idu=1;
+
 $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?"); //récupère les informations du profil
 $stmt->execute([$idu]);
 $user = $stmt->fetch();
@@ -57,7 +59,7 @@ if ($profil = "autre") {
 </head>
 
 <?php
-// mainHeader()
+//mainHeader()
 ?>
 
 <body style="background-color: #f0dfd8;">
@@ -100,7 +102,7 @@ if ($profil = "autre") {
                 <input type="hidden" name="page" value="profil.php">
                 <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Ajouter en ami</button>
               </form>
-              <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
+              <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Messagerie</a></div>
             <?php } else { ?>
               <form method="POST" action="fonctionRequete.php">
                 <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">
@@ -156,17 +158,17 @@ if ($profil = "autre") {
         Créez votre premier post ici
       </button>
       <?php
-                  ajoutpost();
-                  if (isset($_POST["bouton"])) {
-                    extract($_POST);
-                    extract($_FILES);
-                    if ($photo == "") {
-                      $photo = "vide";
-                    } else {
-                      $photo = ajoutphoto($idu, $photo);
-                    }
-                    $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
-                    $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
+        ajoutpost();
+        if (isset($_POST["bouton"])) {
+          extract($_POST);
+          extract($_FILES);
+          if ($photo == "") {
+            $photo = NULL;
+          } else {
+            $photo = ajoutphoto($idu, $photo);
+          }
+        $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
+        $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
       ?>
         <meta http-equiv="refresh" content="1">
     <?php   }

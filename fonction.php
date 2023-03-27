@@ -97,6 +97,7 @@ function footer()
 
 function mainHeader()
 {
+  $pdo = connexion();
 ?>
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
 
@@ -298,7 +299,7 @@ function post($post)
       <div class="card-body">
         <p class="ms-5 px-3"><?= $post["texte"] ?></p>
         <?php if ($post["photo"] != "vide") { ?>
-          <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:60rem;height: auto;">
+          <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
         <?php } ?>
       </div>
       <!-- FOOTER -->
