@@ -183,7 +183,7 @@ $pdo = connexion();
                     <div class="text-start">
                         <div class="mb-3"><br>
                             <label for="exampleFormControlTextarea1" class="form-label">Rentrez votre descritpion</label> <span class="etoile">*</span><br>
-                            <textarea class="form-control" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255" rows="2"></textarea>
+                            <textarea class="form-control" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="1" maxlength="255" rows="2"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Rentrez vos centres d'interets</label> <span class="etoile">*</span><br>
