@@ -14,11 +14,11 @@ $pdo = connexion();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="securite.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Incription</title>
+    <title>Inscription</title>
 </head>
 
 <body id="second">
-    <form action="" method="post" onsubmit="convertToLowercase()">
+    <form action="" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
 
         <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -110,7 +110,6 @@ $pdo = connexion();
                         }
                     </script>
                 </div>
-                <!-- supprimer sinon pas de tab2  -->
 
                 <!-- page 2 -->
 
@@ -186,32 +185,27 @@ $pdo = connexion();
                             <label for="exampleFormControlTextarea1" class="form-label">Rentrez votre descritpion</label> <span class="etoile">*</span><br>
                             <textarea class="form-control" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255" rows="2"></textarea>
                         </div>
-                        <!-- <label for="validationDefault01" class="form-label">Rentré votre descritpion</label> <span class="etoile">*</span><br>
-                    <input type="text" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255"><br> -->
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Rentrez vos centres d'interets</label> <span class="etoile">*</span><br>
                             <textarea class="form-control" name="interet" id="interet" required placeholder="Vos centres d'interets:" minlength="1" maxlength="255" rows="2"></textarea>
                         </div>
-                        <!-- <label for="validationDefault01" class="form-label">Rentré vos centres d'interets</label> <span class="etoile">*</span><br>
-                    <input type="text" name="interet" id="interet" required placeholder="Vos centres d'interets" minlength="25" maxlength="255"><br> -->
-                        <div class="mb-3">
+                        < <div class="mb-3">
                             <label for="formFile" class="form-label">Chargez votre photo de profil</label> <span class="etoile">*</span>
                             <input class="form-control" type="file" id="pp" name="pp">
-                        </div>
-                        <br>
                     </div>
-                    <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageSuivante3()">
-                    <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="pageSuivante2()">
-                    <!-- <button class="btn btn-primary mb-3   " type="submit" value='suivant' name="valide">Valider l'inscription</button> -->
+                    <br>
                 </div>
-
-                <!-- page 3 -->
-
-                <div class="tab-pane fade" id="insc3-tab-pane" role="tabpanel" aria-labelledby="insc3-tab" tabindex="0">
-                    <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
-                    <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: white;text-decoration: none;">Connexion</a></button>
-                </div>
+                <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageSuivante3()">
+                <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="pageSuivante2()">
             </div>
+
+            <!-- page 3 -->
+
+            <div class="tab-pane fade" id="insc3-tab-pane" role="tabpanel" aria-labelledby="insc3-tab" tabindex="0">
+                <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
+                <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: white;text-decoration: none;">Connexion</a></button>
+            </div>
+        </div>
         </div>
     </form>
     <?php
@@ -223,6 +217,13 @@ $pdo = connexion();
         //     $pp = 'produit/' . $_SESSION["idu"] . '-' . $nomp . '.' . $ext;
         //     move_uploaded_file($_FILES['pp']['tmp_name'], $pp);
         // }
+        extract($_FILES);
+        if ($pp == "") {
+            $pp = "vide";
+        } else {
+            $pp = ajoutpp($nom, $pp);
+        }
+        var_dump($_FILES);
         $mdp2 = encode($mdp, $mail);
         // echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
         if ($mdp == $mdp) {
