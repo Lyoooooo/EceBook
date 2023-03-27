@@ -74,6 +74,7 @@ if (isset($_POST["bouton"])) {
     extract($_POST);
     extract($_FILES);
     $idu = $_SESSION["idu"];
+    $pdo = connexion();
     if ($photo == "") {
         $photo = "vide";
     } else {
