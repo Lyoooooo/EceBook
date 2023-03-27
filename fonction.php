@@ -97,6 +97,7 @@ function footer()
 
 function mainHeader()
 {
+  $pdo = connexion();
 ?>
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
 
@@ -282,7 +283,7 @@ function post($post)
           </a>
           <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
         </div>
-        <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
+        <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
         <div class="position-absolute end-0" style="top: 50px;">
           <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
             <img src="images/boutonPosts.png" alt="" style="height: 40px;">
@@ -298,7 +299,7 @@ function post($post)
       <div class="card-body">
         <p class="ms-5 px-3"><?= $post["texte"] ?></p>
         <?php if ($post["photo"] != "vide") { ?>
-          <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:60rem;height: auto;">
+          <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
         <?php } ?>
       </div>
       <!-- FOOTER -->
@@ -308,7 +309,7 @@ function post($post)
         <span class=""><?= $post["vu"] ?> Vus</span>
         <span class=""><?= $post["date"] ?></span>
       </div>
-      <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
+      <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
     </div>
   <?php
 }
