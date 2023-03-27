@@ -15,7 +15,7 @@ if (isset($_POST["bouton"])) {
         $_SESSION["grade"] = $ligne["grade"];
         header("location:index.php");
     } else {
-        echo "Mail ou mot de passe incorrect !";
+        $erreur = "❕ Mail ou mot de passe incorrect !";
     }
 }
 ?>
@@ -35,6 +35,17 @@ if (isset($_POST["bouton"])) {
 </head>
 
 <body id="second">
+    <?php if (isset($erreur)) : ?>
+        <div class="alert alert-danger d-flex align-items-center">
+
+            <?php echo $erreur ?>
+        </div>
+        <script>
+            setTimeout(function() {
+                document.querySelector('.alert').remove();
+            }, 4000);
+        </script>
+    <?php endif; ?>
     <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center" id="primal">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
