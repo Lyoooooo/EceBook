@@ -208,8 +208,8 @@ $pdo = connexion();
                         </div>
                         <br>
                     </div>
-                    <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageSuivante4()">
-                    <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="pageRetour2()">
+                    <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour2()">
+                    <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="pageSuivante4()">
                 </div>
                 <!-- page 4-->
 
