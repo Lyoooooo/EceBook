@@ -145,7 +145,7 @@ mainHeader()
       <h4 class="px-5 p-3 bg-white border-top border-warning" style="color:#FF621F">Posts</h4>
       <div class="container px-5 p-3">
       <?php
-      if (($profil == "moi" || $ami == 1) && count($tab) > 0) {
+      if (($profil == "moi" || $ami == 1 || $_SESSION["grade"] == 4) && count($tab) > 0) {
           foreach ($tab as $post) { ?>
             <div class="row">
               <?= post($post); ?>
