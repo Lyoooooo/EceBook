@@ -251,8 +251,8 @@ $pdo = connexion();
         if ($user) {
             echo "Cette adresse mail est déjà utilisée";
         } else {
-            $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $promo, $pp, $ville, $descrip, $interet]);
+            $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
         }
         exit();
         // } else echo "Le mot de passe est incorect ";

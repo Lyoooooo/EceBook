@@ -23,15 +23,17 @@ $pdo = connexion();
         <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true"></button>
+                    <button class="nav-link disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true">Etape1</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link disabled" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false"></button>
+                    <button class="nav-link disabled" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false">Etape2</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link disabled" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false"></button>
+                    <button class="nav-link disabled" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false">Etape3</button>
                 </li>
-
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link disabled" id="insc4-tab" data-bs-toggle="tab" data-bs-target="#insc4-tab-pane" type="button" role="tab" aria-controls="insc4-tab-pane" aria-selected="false">Etape finale</button>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
 
@@ -86,27 +88,49 @@ $pdo = connexion();
                     <input type="submit" class="btn btn-primary mb-3" value="Suivant" id="bouton-suivant" onclick="pageSuivante()">
                     <script>
                         function pageSuivante() {
+                            // if (document.getElementById('mail').value == "" || document.getElementById('mdp').value == "") {
+
+                            // } else {
                             document.getElementById('insc1-tab').classList.remove('active');
                             document.getElementById('insc2-tab').classList.add('active');
                             document.getElementById('insc1-tab-pane').classList.remove('show', 'active');
                             document.getElementById('insc2-tab-pane').classList.add('show', 'active');
-
                         }
+                        // }
 
                         function pageSuivante2() {
+                            // if (document.getElementById('mail').value == "" || document.getElementById('mdp').value == "") {
+
+                            // } else {
                             document.getElementById('insc2-tab').classList.remove('active');
                             document.getElementById('insc3-tab').classList.add('active');
                             document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
                             document.getElementById('insc3-tab-pane').classList.add('show', 'active');
-
                         }
+                        // }
 
-                        function pageSuivante3() {
+                        function pageRetour1() {
+
                             document.getElementById('insc2-tab').classList.remove('active');
                             document.getElementById('insc1-tab').classList.add('active');
                             document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
                             document.getElementById('insc1-tab-pane').classList.add('show', 'active');
+                        }
 
+                        function pageSuivante4() {
+
+                            document.getElementById('insc3-tab').classList.remove('active');
+                            document.getElementById('insc4-tab').classList.add('active');
+                            document.getElementById('insc3-tab-pane').classList.remove('show', 'active');
+                            document.getElementById('insc4-tab-pane').classList.add('show', 'active');
+                        }
+
+                        function pageRetour2() {
+
+                            document.getElementById('insc3-tab').classList.remove('active');
+                            document.getElementById('insc2-tab').classList.add('active');
+                            document.getElementById('insc3-tab-pane').classList.remove('show', 'active');
+                            document.getElementById('insc2-tab-pane').classList.add('show', 'active');
                         }
                     </script>
                 </div>
@@ -161,6 +185,8 @@ $pdo = connexion();
                         <input type="checkbox" name="promo[]" value="B3" id="B3">B3 &nbsp;
                         <br><br>
                     </div>
+                    <br> <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour1()">
+                    <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="suivant" onclick="pageSuivante2()">
 
                     <script>
                         // Récupération des éléments DOM
@@ -180,6 +206,9 @@ $pdo = connexion();
                             matieresSelection.style.display = 'block';
                         });
                     </script>
+                </div>
+                <!-- page 3 -->
+                <div class="tab-pane fade " id="insc3-tab-pane" role="tabpanel" aria-labelledby="insc3-tab" tabindex="0">
                     <div class="text-start">
                         <div class="mb-3"><br>
                             <label for="exampleFormControlTextarea1" class="form-label">Rentrez votre descritpion</label> <span class="etoile">*</span><br>
@@ -189,23 +218,25 @@ $pdo = connexion();
                             <label for="exampleFormControlTextarea1" class="form-label">Rentrez vos centres d'interets</label> <span class="etoile">*</span><br>
                             <textarea class="form-control" name="interet" id="interet" required placeholder="Vos centres d'interets:" minlength="1" maxlength="255" rows="2"></textarea>
                         </div>
-                        < <div class="mb-3">
+                        <div class="mb-3">
                             <label for="formFile" class="form-label">Chargez votre photo de profil</label> <span class="etoile">*</span>
                             <input class="form-control" type="file" id="pp" name="pp">
+                        </div>
+                        <br>
                     </div>
-                    <br>
+                    <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour2()">
+                    <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="pageSuivante4()">
                 </div>
-                <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageSuivante3()">
-                <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="pageSuivante2()">
-            </div>
 
-            <!-- page 3 -->
+                <!-- page 4-->
 
-            <div class="tab-pane fade" id="insc3-tab-pane" role="tabpanel" aria-labelledby="insc3-tab" tabindex="0">
-                <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
-                <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: white;text-decoration: none;">Connexion</a></button>
+
+
+                <div class="tab-pane fade" id="insc4-tab-pane" role="tabpanel" aria-labelledby="insc4-tab" tabindex="0">
+                    <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
+                    <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: white;text-decoration: none;">Connexion</a></button>
+                </div>
             </div>
-        </div>
         </div>
     </form>
     <?php
