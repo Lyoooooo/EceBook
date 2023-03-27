@@ -1,6 +1,5 @@
 <?php
 include "fonction.php";
-mainHeader();
 session_start();
 
 if(isset($_GET['txt']) AND !empty($_GET['txt'])){
@@ -12,6 +11,7 @@ $resultat2 = $stmt->fetchAll();
 
 
 }
+mainHeader();
 
 ?>
 <!DOCTYPE html>
