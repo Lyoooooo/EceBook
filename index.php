@@ -57,53 +57,13 @@ $tab = $res->fetchAll();
             </div>
         </div>
     </div>
-
+    <?php if(connecte() == True){?>
     <!-- Button trigger modal -->
     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: fixed; bottom: 10%; right: 5%; border: 0px; background-color:rgba(0,0,0,0); z-index: 1;">
         <img src="images/boutonAddPost.webp" alt="" style="height: 60px;">
     </button>
-
+    <?php ajoutpost(); }?>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau post</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" name="titre" required>
-                            <label for="floatingInput">Titre<span class="etoile">*</span> </label>
-                        </div>
-
-                        <div class="form-floating">
-                            <textarea class="form-control" id="floatingTextarea2" name="texte" style="height: 100px" required></textarea>
-                            <label for="floatingTextarea2">Texte<span class="etoile">*</span></label>
-                        </div><br>
-
-                        <h8>Type de post</h8><span class="etoile">*</span>
-                        <select class="form-select" aria-label="Default select example" name="type" required>
-                            <option value="Général">Général</option>
-                            <option value="Actualité">Actualité</option>
-                            <option value="Evènement">Evènement</option>
-                        </select><br>
-
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="inputGroupFile01">Photo</label>
-                            <input type="file" class="form-control" id="inputGroupFile01" name="photo">
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-primary" name="bouton">Poster</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <?php
     footer();
     ?>
@@ -113,6 +73,7 @@ $tab = $res->fetchAll();
 if (isset($_POST["bouton"])) {
     extract($_POST);
     extract($_FILES);
+    $idu = $_SESSION["idu"];
     $pdo = connexion();
     if ($photo == "") {
         $photo = "vide";
@@ -123,9 +84,7 @@ if (isset($_POST["bouton"])) {
     $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
 ?>
     <meta http-equiv="refresh" content="1">
-<?php
-    die();
-}
+<?php   }
 ?>
 
 </html>

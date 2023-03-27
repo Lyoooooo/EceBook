@@ -1,7 +1,18 @@
 <?php
 include "fonction.php";
-mainHeader();
 session_start();
+
+if(isset($_GET['txt']) AND !empty($_GET['txt'])){
+$pdo=connexion();
+$stmt = $pdo->prepare('SELECT nom FROM user WHERE nom LIKE :nom ORDER BY nom ASC');
+$stmt->bindValue(':nom', '%'.$_GET['txt'].'%');
+$stmt->execute();
+$resultat2 = $stmt->fetchAll();
+
+
+}
+mainHeader();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,51 +37,75 @@ session_start();
                     <div class="container-fluid">
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                <form class="d-flex" role="search" method="GET">
+                                    <input class="form-control me-2" type="search" placeholder="Search" name="txt" aria-label="Search">
+                                    <button class="btn btn-outline-success" type="submit" value="Valider">Search</button>
                                 </form>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Trier
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Plus liké</a></li>
-                                        <li><a class="dropdown-item" href="#">Plus récent</a></li>
+                                        <li><a class="dropdown-item" href="#">//</a></li>
+                                        <li><a class="dropdown-item" href="#">//</a></li>
                                     </ul>
                                 </li>
                         </div>
                     </div>
                 </nav>
                 
-                <div class="colonneAdmin">
+                <div class="colonneAdmin" style="width: 90%; margin-left: 5%; " >
                 <table class="table table-striped">
                     <tr>
                     <th>Photo</th><th>ID</th><th>Nom</th><th>Action</th>
                     </tr>
                 <?php
-                    $pdo=connexion();
-                    $req="select * from user";
+                
+                if(isset($_GET['txt']) && !empty($_GET['txt'])){
+                    $pdo = connexion();
+                    $stmt = $pdo->prepare('SELECT * FROM user WHERE nom LIKE :nom ORDER BY nom ASC');
+                    $stmt->bindValue(':nom', '%'.$_GET['txt'].'%');
+                    $stmt->execute();
+                    $resultat2 = $stmt->fetchAll();
+                
+                    if(count($resultat2) > 0){
+                        foreach($resultat2 as $ligne2){
+                            $pp = $ligne2["pp"];
+                            if(empty($pp)){
+                                $pp = 'images/avatarbasique.png';
+                            }
+                            echo "<tr>
+                                  <td class='align-middle'><img src='".$pp."' width='60'></td> 
+                                  <td class='align-middle'>". $ligne2["idu"]."</td>
+                                  <td class='align-middle'>". $ligne2["nom"]."</td>
+                                  <td class='align-middle'> &nbsp;&nbsp;&nbsp;<a href='supprimer.php?idu=".$ligne2["idu"]."'<i class='fas fa-trash'></i></a></td>
+                                  </tr>";
+                        }
+                    }else{
+                        ?>
+                        <p>Aucun résultat pour <?=$txt?></p>
+                        <?php
+                    }
+                }else{
+                    $pdo = connexion();
+                    $req = "SELECT * FROM user";
                     $resultat = $pdo->prepare($req);
                     $resultat->execute();
-
-                    while($ligne=$resultat->fetch())
-                {
-                    $pp=$ligne["pp"];
-                    if(empty($pp)){
-                        $pp= 'images/avatarbasique.png';
-                        //sur ma page web, l'image par default ne s'affiche pas, j'ai chercher j'ai pas trouvé pourquoi a voir plus tard
-                        //var_dump($pp);
+                
+                    while($ligne = $resultat->fetch()){
+                        $pp = $ligne["pp"];
+                        if(empty($pp)){
+                            $pp = 'images/avatarbasique.png';
+                        }
+                        echo "<tr>
+                              <td class='align-middle'><img src='".$pp."' width='60'></td> 
+                              <td class='align-middle'>". $ligne["idu"]."</td>
+                              <td class='align-middle'>". $ligne["nom"]."</td>
+                              <td class='align-middle'> &nbsp;&nbsp;&nbsp;<a href='supprimer.php?idu=".$ligne["idu"]."'<i class='fas fa-trash'></i></a></td>
+                              </tr>";
                     }
-                    echo "<tr>
-                    <td class='align-middle'><img src='".$pp."' width='60'></td> 
-                    <td class='align-middle'>". $ligne["idu"]."</td>
-                    <td class='align-middle'>". $ligne["nom"]."</td>
-                    <td class='align-middle'> &nbsp;&nbsp;&nbsp;<a href='supprimer.php?idu=".$ligne["idu"]."'<i class='fas fa-trash'></i></a></td>
-                    
-                    </tr>";
                 }
-
+                
                 ?>
                 </table>
                             </ul>

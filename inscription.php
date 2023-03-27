@@ -254,19 +254,19 @@ $pdo = connexion();
 
 
         $mdp2 = encode($mdp, $mail);
-        // echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
-        if ($mdp == $mdp) {
+        echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo," ", $statut, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
+        // if ($mdp == $mdp) {
             $stmt = $pdo->prepare("SELECT mail FROM user WHERE mail=?");
             $stmt->execute([$mail]);
             $user = $stmt->fetch();
-            if ($user) {
-                // echo "Cette adresse mail est déjà utilisée";
-            } else {
+        //     if ($user) {
+        //         // echo "Cette adresse mail est déjà utilisée";
+        //     } else {
                 $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
-            }
-            exit();
-        } else echo "Le mot de passe est incorect ";
+        //     }
+        //     exit();
+        // } else echo "Le mot de passe est incorect ";
     }
 
     ?>
