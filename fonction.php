@@ -311,7 +311,7 @@ function post($post)
       <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
         <span class="ps-3"><?= $post["likes"] ?> Likes</span>
         <span class=""><?= $post["dislike"] ?> Dislikes</span>
-        <span class=""><?= $post["vu"] ?> Vus</span>
+        <span class=""><?= $post["vu"] ?> Vues</span>
         <span class=""><?= $post["date"] ?></span>
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
