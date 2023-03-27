@@ -14,7 +14,7 @@ $pdo = connexion();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="securite.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Incription</title>
+    <title>Inscription</title>
 </head>
 
 <body id="second">
@@ -224,19 +224,19 @@ $pdo = connexion();
         //     move_uploaded_file($_FILES['pp']['tmp_name'], $pp);
         // }
         $mdp2 = encode($mdp, $mail);
-        // echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
-        if ($mdp == $mdp) {
+        echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo," ", $statut, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
+        // if ($mdp == $mdp) {
             $stmt = $pdo->prepare("SELECT mail FROM user WHERE mail=?");
             $stmt->execute([$mail]);
             $user = $stmt->fetch();
-            if ($user) {
-                // echo "Cette adresse mail est déjà utilisée";
-            } else {
+        //     if ($user) {
+        //         // echo "Cette adresse mail est déjà utilisée";
+        //     } else {
                 $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
-            }
-            exit();
-        } else echo "Le mot de passe est incorect ";
+        //     }
+        //     exit();
+        // } else echo "Le mot de passe est incorect ";
     }
 
     ?>

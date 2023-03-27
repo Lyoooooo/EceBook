@@ -42,7 +42,7 @@ function footer()
       <!-- Section: CTA -->
       <section class="">
         <p class="d-flex justify-content-center align-items-center">
-          <a href="./docs/CGU.pdf" class="btn btn-outline-light btn-rounded text-dark" role="button" aria-pressed="true">CGU</a>
+          <a href="./docs/CGU.pdf" class="btn btn-outline-light btn-rounded text-dark" target="blank" role="button" aria-pressed="true">CGU</a>
           <button type="button" class="btn btn-outline-light btn-rounded text-dark" data-toggle="modal" data-target="#cookieConsent">
             Police des Cookies
           </button>
@@ -143,15 +143,17 @@ function mainHeader()
               <?php
               if (isset($_SESSION["idu"])) {
                 $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
+                $pdo=connexion();
                 $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
                 $infoUser->execute(array($idu));
                 $infoUser = $infoUser->fetch();
               }
               if (isset($idu)) : ?>
-                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-toggle="dropdown" aria-expanded="false">
                   <img src="<?php if ($infoUser["pp"] == null) {
                               echo "./images/avatarbasique.png";
-                            } else { ?>../<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" />
+                            } else { ?>../<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" />&nbsp
+                            <p class="text-black"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
                 </a>
               <?php else : ?>
                 <a class="nav-link text-center " href="connexion.php">
@@ -162,20 +164,16 @@ function mainHeader()
                 </a>
 
               <?php endif; ?>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                <li>
-                  <p class="dropdown-item"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Settings</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Logout</a>
-                </li>
+                    </a>
+                    <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="profil.php">
+                            <i class="fa-solid fa-user"></i> Profil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="deconnexion.php">
+                            <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
+                    </div>
               </ul>
-            </div>
-          </li>
-        </ul>
+              
 
 
       </div>
@@ -375,4 +373,9 @@ function ajoutpp($idu, $pp)
     move_uploaded_file($_FILES['pp']['tmp_name'], $pp); //place l'image dans le dossier
   }
   return $pp;
+}
+
+function jaime()
+{
+
 }
