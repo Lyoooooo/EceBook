@@ -287,9 +287,9 @@ function post($post)
             <img src="images/boutonPosts.png" alt="" style="height: 40px;">
           </button>
           <ul class="dropdown-menu">
-          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"]?>" class="dropdown-item"> Modifier le post </button></li>
-            <li><a class="dropdown-item" href="#">Autre chose</a></li>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"]?>" class="dropdown-item"> Modifier le post </button></li>
             <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
+            <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;" >SUPPRIMER LE POST</a></li>
           </ul>
           <?php
           $idp = $post["idp"];
@@ -313,7 +313,11 @@ function post($post)
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
     </div>
-  <?php
+<?php
+}
+
+function supprimerPost($idp){
+  ?><script>alert("hello")</script> <?php
 }
 
 function ajoutpost()
@@ -454,4 +458,4 @@ function modifpost($idu, $idp)
     ?>
       <meta http-equiv="refresh" content="1">
   <?php   }
-  }
+  } 
