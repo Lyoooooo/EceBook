@@ -7,7 +7,7 @@ if (connecte() == False) {
   header("location:index.php");
 }
 
-if ($_GET==null) {
+if ($_GET == null) {
   $idu = $_SESSION["idu"];
   $profil = "moi";
 } else if ($_SESSION["idu"] == $_GET["u"]) {
@@ -17,6 +17,8 @@ if ($_GET==null) {
   $idu = $_GET["u"];
   $profil = "autre";
 }
+
+$idu=1;
 
 $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?"); //récupère les informations du profil
 $stmt->execute([$idu]);
@@ -57,7 +59,7 @@ if ($profil = "autre") {
 </head>
 
 <?php
-// mainHeader()
+//mainHeader()
 ?>
 
 <body style="background-color: #f0dfd8;">
@@ -95,16 +97,16 @@ if ($profil = "autre") {
               <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
             <?php } else if ($profil == "autre" && $demande == FALSE) { ?>
               <form method="POST" action="fonctionRequete.php">
-                <input type="hidden" name="idu" value="<?=$_SESSION['idu']?>">
-                <input type="hidden" name="ida" value="<?=$idu?>">
+                <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">
+                <input type="hidden" name="ida" value="<?= $idu ?>">
                 <input type="hidden" name="page" value="profil.php">
                 <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Ajouter en ami</button>
               </form>
-              <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
+              <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Messagerie</a></div>
             <?php } else { ?>
               <form method="POST" action="fonctionRequete.php">
-                <input type="hidden" name="idu" value="<?=$_SESSION['idu']?>">
-                <input type="hidden" name="ida" value="<?=$idu?>">
+                <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">
+                <input type="hidden" name="ida" value="<?= $idu ?>">
                 <input type="hidden" name="page" value="profil.php">
                 <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Retirer des amis</button>
               </form>
@@ -141,15 +143,15 @@ if ($profil = "autre") {
     <div class="bg-white shadow overflow-hidden rounded-top pb-4">
       <h4 class="px-5 p-3 bg-white border-top border-warning" style="color:#FF621F">Posts</h4>
       <div class="container px-5 p-3">
-      
-      <?php
+
+        <?php
         if (count($tab) > 0) {
           foreach ($tab as $post) { ?>
-            <div class="row"> 
-            <?= post($post); ?>
+            <div class="row">
+              <?= post($post); ?>
             </div> <?php
-          }
-        } else { ?>
+                  }
+                } else { ?>
       </div>
       <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous n'avez pas de post !!</p>
       <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-grid gap-2 col-4 mx-auto" style="color:#FF621F;border-radius:5px;padding:2px;font-weight: 500;font-size: 20px;padding:auto">
@@ -161,16 +163,16 @@ if ($profil = "autre") {
           extract($_POST);
           extract($_FILES);
           if ($photo == "") {
-            $photo = "vide";
+            $photo = NULL;
           } else {
             $photo = ajoutphoto($idu, $photo);
           }
         $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
         $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
       ?>
-      <meta http-equiv="refresh" content="1">
-<?php   }
-      } ?>
+        <meta http-equiv="refresh" content="1">
+    <?php   }
+                } ?>
     </div>
   </main>
 </body>
