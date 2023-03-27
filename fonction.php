@@ -144,6 +144,7 @@ function mainHeader()
               <?php
               if (isset($_SESSION["idu"])) {
                 $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
+                $pdo = connexion();
                 $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
                 $infoUser->execute(array($idu));
                 $infoUser = $infoUser->fetch();
