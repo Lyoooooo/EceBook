@@ -143,6 +143,7 @@ function mainHeader()
               <?php
               if (isset($_SESSION["idu"])) {
                 $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
+                $pdo = connexion();
                 $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
                 $infoUser->execute(array($idu));
                 $infoUser = $infoUser->fetch();
@@ -281,7 +282,7 @@ function post($post)
           </a>
           <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
         </div>
-        <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
+        <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
         <div class="position-absolute end-0" style="top: 50px;">
           <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
             <img src="images/boutonPosts.png" alt="" style="height: 40px;">
@@ -307,7 +308,7 @@ function post($post)
         <span class=""><?= $post["vu"] ?> Vus</span>
         <span class=""><?= $post["date"] ?></span>
       </div>
-      <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["type"] ?></div>
+      <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
     </div>
   <?php
 }

@@ -1,7 +1,8 @@
 <?php
 include "fonction.php";
-mainHeader();
 session_start();
+mainHeader();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
