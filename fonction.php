@@ -266,6 +266,7 @@ function post($post)
   $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
   $stmt->execute([$post["idu"]]);
   $user = $stmt->fetch();
+  $idu = $_SESSION["idu"];
   ?>
     <div class="card p-0 mb-4">
       <!-- HEADER -->
@@ -289,9 +290,13 @@ function post($post)
             <img src="images/boutonPosts.png" alt="" style="height: 40px;">
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Modifier le post</a></li>
+          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"]?>" class="dropdown-item"> Modifier le post </button></li>
             <li><a class="dropdown-item" href="#">Autre chose</a></li>
             <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
+          </ul>
+          <?php
+          $idp = $post["idp"];
+          modifpost($idu, $idp); ?>
           </ul>
         </div>
       </div>
@@ -378,3 +383,59 @@ function ajoutpp($idu, $pp)
   }
   return $pp;
 }
+
+function modifpost($idu, $idp)
+  {
+    $pdo = connexion();
+    $stmt = $pdo->prepare("SELECT * FROM post WHERE idp=?");
+    $stmt->execute([$idp]);
+    $post = $stmt->fetch();
+    ?>
+    <div class="modal fade" id="exampleModal<?php echo $idp?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier le post</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="" method="post" enctype="multipart/form-data">
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="titre" value="<?php echo $post["titre"]?>" required>
+                <label for="floatingInput">Titre<span class="etoile">*</span> </label>
+              </div>
+
+              <div class="form-floating">
+                <textarea class="form-control" id="floatingTextarea2" name="texte" style="height: 100px" required><?php echo $post["texte"]?></textarea>
+                <label for="floatingTextarea2">Texte<span class="etoile">*</span></label>
+              </div><br>
+
+              <h8>Type de post</h8><span class="etoile">*</span>
+              <select class="form-select" aria-label="Default select example" name="type" required>
+                <option value="Général">Général</option>
+                <option value="Actualité">Actualité</option>
+                <option value="Evènement">Evènement</option>
+              </select><br>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-primary" name="boutonEdit" value="<?php echo $post["idp"]?>">Poster</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <?php
+    if (isset($_POST["boutonEdit"])) {
+      $pdo = connexion();
+      extract($_POST);
+      extract($_FILES);
+      if($idp = $_POST["boutonEdit"]){
+        $stmt = $pdo->prepare("UPDATE post SET titre = ?, texte = ?, typep = ? WHERE idp = $idp");
+        $stmt->execute([$titre, $texte, $type]);
+      }
+    ?>
+      <meta http-equiv="refresh" content="1">
+  <?php   }
+  }
