@@ -184,7 +184,7 @@ $pdo = connexion();
                     <div class="text-start">
                         <div class="mb-3"><br>
                             <label for="exampleFormControlTextarea1" class="form-label">Rentrez votre descritpion</label> <span class="etoile">*</span><br>
-                            <textarea class="form-control" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255" rows="2"></textarea>
+                            <textarea class="form-control" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="1" maxlength="255" rows="2"></textarea>
                         </div>
                         <!-- <label for="validationDefault01" class="form-label">Rentré votre descritpion</label> <span class="etoile">*</span><br>
                     <input type="text" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="25" maxlength="255"><br> -->
@@ -224,19 +224,19 @@ $pdo = connexion();
         //     move_uploaded_file($_FILES['pp']['tmp_name'], $pp);
         // }
         $mdp2 = encode($mdp, $mail);
-        // echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
-        if ($mdp == $mdp) {
+        // echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $statut, " ", $promo, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
+        // if ($mdp == $mdp) {
             $stmt = $pdo->prepare("SELECT mail FROM user WHERE mail=?");
             $stmt->execute([$mail]);
             $user = $stmt->fetch();
-            if ($user) {
-                // echo "Cette adresse mail est déjà utilisée";
-            } else {
+            // if ($user) {
+            //     // echo "Cette adresse mail est déjà utilisée";
+            // } else {
                 $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
-            }
-            exit();
-        } else echo "Le mot de passe est incorect ";
+            // }
+            // exit();
+        // } else echo "Le mot de passe est incorect ";
     }
 
     ?>
