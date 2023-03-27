@@ -18,8 +18,6 @@ if ($_GET == null) {
   $profil = "autre";
 }
 
-$idu=1;
-
 $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?"); //récupère les informations du profil
 $stmt->execute([$idu]);
 $user = $stmt->fetch();
@@ -32,7 +30,7 @@ $res = $pdo->prepare("SELECT * FROM ami WHERE idu1=? AND valide=1"); //compte le
 $res->execute([$idu]);
 $ami = $res->fetchAll();
 
-if ($profil = "autre") {
+if ($profil == "autre") {
   $query = $pdo->prepare("SELECT * FROM ami WHERE idu1 = :idu AND idu2 = :ida");
   $query->bindParam(':idu', $_SESSION["idu"]);
   $query->bindParam(':ida', $idu);
@@ -43,6 +41,7 @@ if ($profil = "autre") {
     $demande = FALSE;
   }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +58,7 @@ if ($profil = "autre") {
 </head>
 
 <?php
-//mainHeader()
+mainHeader()
 ?>
 
 <body style="background-color: #f0dfd8;">
@@ -68,7 +67,7 @@ if ($profil = "autre") {
       <div class="px-5 pt-0 pb-4">
         <div class="profile-head border border-light">
 
-          <?php if ($user["pp"] == 'vide') { ?>
+          <?php if ($user["pp"] == NULL) { ?>
             <img src="images/pp/pp.jpg" alt="..." width="130" class="rounded img-thumbnail me-5 ms-2 mb-2 mt-2">
           <?php } else { ?>
             <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" width="130" class="rounded img-thumbnail me-5 ms-2 mb-2 mt-2">
