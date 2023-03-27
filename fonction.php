@@ -269,7 +269,7 @@ function post($post)
       <!-- HEADER -->
       <div class="header d-flex ps-2">
         <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
-            <?php if ($user["pp"] == 'vide') { ?>
+            <?php if ($user["pp"] == NULL) { ?>
               <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
             <?php } else { ?>
               <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
@@ -358,7 +358,22 @@ function ajoutpost()
         </div>
       </div>
     </div>
-  <?php }
+  <?php 
+  ajoutpost();
+  if (isset($_POST["bouton"])) {
+    extract($_POST);
+    extract($_FILES);
+    if ($photo == "") {
+      $photo = NULL;
+    } else {
+      $photo = ajoutphoto($idu, $photo);
+    }
+  $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
+  $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
+?>
+  <meta http-equiv="refresh" content="1">
+<?php   }
+}
 
 function ajoutphoto($idu, $photo)
 {

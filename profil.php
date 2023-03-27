@@ -26,7 +26,7 @@ $res = $pdo->prepare("SELECT * FROM post WHERE idu=?"); //récupère les posts d
 $res->execute([$idu]);
 $tab = $res->fetchAll();
 
-$res = $pdo->prepare("SELECT * FROM ami WHERE idu1=? AND valide=1"); //compte le nombre d'ami du profil
+$res = $pdo->prepare("SELECT * FROM ami WHERE idu2=? AND valide=1"); //compte le nombre d'ami du profil
 $res->execute([$idu]);
 $ami = $res->fetchAll();
 
@@ -37,6 +37,8 @@ if ($profil == "autre") {
   $query->execute();
   if ($query->rowCount() > 0) {
     $demande = TRUE;
+    $amii = $query->fetch();
+    $ami = $amii["valide"];
   } else {
     $demande = FALSE;
   }
@@ -107,7 +109,7 @@ mainHeader()
                 <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">
                 <input type="hidden" name="ida" value="<?= $idu ?>">
                 <input type="hidden" name="page" value="profil.php">
-                <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Retirer des amis</button>
+                <button type="submit" name="pami" value="retireami" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Retirer des amis</button>
               </form>
               <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block">Messagerie</a></div>
             <?php } ?>
@@ -142,36 +144,25 @@ mainHeader()
     <div class="bg-white shadow overflow-hidden rounded-top pb-4">
       <h4 class="px-5 p-3 bg-white border-top border-warning" style="color:#FF621F">Posts</h4>
       <div class="container px-5 p-3">
-
-        <?php
-        if (count($tab) > 0) {
+      <?php
+      if (($profil == "moi" || $ami == 1) && count($tab) > 0) {
           foreach ($tab as $post) { ?>
             <div class="row">
               <?= post($post); ?>
             </div> <?php
-                  }
-                } else { ?>
+          }
+        } else if ($profil == "moi") { ?>
       </div>
       <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous n'avez pas de post !!</p>
       <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-grid gap-2 col-4 mx-auto" style="color:#FF621F;border-radius:5px;padding:2px;font-weight: 500;font-size: 20px;padding:auto">
         Créez votre premier post ici
-      </button>
-      <?php
-        ajoutpost();
-        if (isset($_POST["bouton"])) {
-          extract($_POST);
-          extract($_FILES);
-          if ($photo == "") {
-            $photo = NULL;
-          } else {
-            $photo = ajoutphoto($idu, $photo);
-          }
-        $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
-        $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
-      ?>
-        <meta http-equiv="refresh" content="1">
-    <?php   }
-                } ?>
+      </button> <?php
+        } else if ($ami == 1) { ?>
+          <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F"><?= $user["pnom"] ?> <?= $user["nom"] ?> a 0 post...</p> <?php
+        } else { ?>
+          <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous ne pouvez pas voir les posts de <?= $user["pnom"] ?> <?= $user["nom"] ?> car vous n'êtes pas encore ami</p> <?php
+        }
+        ?>
     </div>
   </main>
 </body>
