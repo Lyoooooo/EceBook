@@ -11,8 +11,9 @@ if (isset($_POST["bouton"])) {
         session_start();
         $_SESSION["idu"] = $ligne["idu"];
         $_SESSION["nom"] = $ligne["nom"];
-        $_SESSION["prenom"] = $ligne["prenom"];
+        $_SESSION["prenom"] = $ligne["pnom"];
         $_SESSION["grade"] = $ligne["grade"];
+        $_SESSION["statut"] = $ligne["statut"];
         header("location:index.php");
     } else {
         $erreur = "❕ Mail ou mot de passe incorrect !";

@@ -1,11 +1,9 @@
 <?php
 include "fonction.php";
 include "fonctionRequete.php";
+
+connecte();
 $pdo = connexion();
-session_start();
-if (connecte() == False) {
-  header("location:index.php");
-}
 
 if ($_GET == null) {
   $idu = $_SESSION["idu"];

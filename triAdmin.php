@@ -1,10 +1,6 @@
 <?php
 include "fonction.php";
-session_start();
-// if (connecte() == False) {
-//   header("location:index.php");
-// }
-// $idu = $_SESSION["idu"];
+connecte();
 
 if (!empty($_POST["idd"])) {
     $pdo = connexion();
