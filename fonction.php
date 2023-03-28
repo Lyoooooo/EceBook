@@ -132,7 +132,7 @@ function mainHeader()
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <!-- Messages -->
           <li class="nav-item">
-            <a class="nav-link text-center" href="#">
+            <a class="nav-link text-center" href="message.php">
               <i class="fa-regular fa-comments">
                 <p style="font-family: 'Courier New', Courier, monospace" class="d-lg-flex d-none note-icon">Messages</p>
               </i>

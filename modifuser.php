@@ -33,7 +33,7 @@ if (isset($_POST["modif"])) {
   <title>Modification de mon profil</title>
 </head>
 
-<body>
+<body style="background-color:#FFE2D6">
 <br><br><br>
     <div class="container">
         <div class="row">
@@ -41,6 +41,9 @@ if (isset($_POST["modif"])) {
             </div>
 
             <div class="col-xl-8 col-lg-8 col-md-10 col-sm-10">
+                <div class="modif">
+
+                
                 <div id="mid"><br>
                 <h3>Modifier Profil</h3><br>
 
@@ -229,6 +232,7 @@ if (isset($_POST["modif"])) {
                     <input class="btn btn-success text-center" type="submit" value="Modifier" name="modif"><br><br>
                 </div>
 
+                </div>
                 </div>
             </div><!-- col-8 etc...-->
             <div class="col-xl-2 col-lg-2 col-md-1 col-sm-1">
