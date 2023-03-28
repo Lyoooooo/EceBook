@@ -208,15 +208,16 @@ function post($post)
   $idu = $_SESSION["idu"];
 ?>
   <div class="card p-0 mb-4">
+
     <!-- HEADER -->
     <div class="header d-flex ps-2">
       <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
-          <?php if ($user["pp"] == NULL) { ?>
-            <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
-          <?php } else { ?>
-            <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
-          <?php } ?>
-        </a></div>
+        <?php if ($user["pp"] == NULL) { ?>
+          <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
+        <?php } else { ?>
+          <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
+        <?php } ?>
+      </a></div>
       <div class="grid">
         <a href="profil.php?u=<?= $user["idu"] ?>">
           <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
@@ -233,20 +234,21 @@ function post($post)
           <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
           <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
         </ul>
-        <?php
-        $idp = $post["idp"];
-        modifpost($idu, $idp); ?>
+          <?php $idp = $post["idp"];
+          modifpost($idu, $idp); ?>
         </ul>
       </div>
     </div>
+
     <!-- MAIN -->
     <div class="card-body">
       <p class="ms-5 px-3"><?= $post["texte"] ?></p>
       <?php if ($post["photo"] != "vide") { ?>
-        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
+        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:40rem;height:auto;">
       <?php } ?>
       <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
     </div>
+
     <!-- FOOTER -->
     <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
       <span class="ps-3"><?= $post["likes"] ?> Likes</span>
@@ -254,6 +256,7 @@ function post($post)
       <span class=""><?= $post["vu"] ?> Vues</span>
       <span class=""><?= $post["date"] ?></span>
     </div>
+  </div>
 <?php
 }
 
@@ -295,7 +298,7 @@ function ajoutpost()
 
             <div class="input-group mb-3">
               <label class="input-group-text" for="inputGroupFile01">Photo</label>
-              <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg .webp" required><br>
+              <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg .webp"><br>
             </div>
 
           </div>
@@ -308,7 +311,6 @@ function ajoutpost()
     </div>
   </div>
   <?php
-  //ajoutpost();
   if (isset($_POST["bouton"])) {
     extract($_POST);
     extract($_FILES);
