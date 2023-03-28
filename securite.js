@@ -1,6 +1,8 @@
 function envoyerMail() {
+  var mail = document.getElementById("mail").value;
+  alert(mail);
   Email.send({
-    Host: "smtp.elasticemail.com",
+    Host: "smtp.gmail.com",
     Username: "confirmation.noreply.enow@gmail.com",
     Password: "ArLtMpNnAkJk4Project",
     To: "pereira.matteo93@gmail.com",
@@ -8,7 +10,6 @@ function envoyerMail() {
     Subject: "This is the subject",
     Body: "And this is the body",
   }).then((message) => alert(message));
-  alert(Email);
 }
 
 function convertToLowercase() {
