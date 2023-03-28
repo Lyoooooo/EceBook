@@ -5,7 +5,7 @@ include "fonctionRequete.php";
 connecte();
 $pdo = connexion();
 
-$res = $pdo->prepare("SELECT * FROM post");
+$res = $pdo->prepare("SELECT * FROM post ORDER BY date DESC");
 $res->execute();
 $tab = $res->fetchAll();
 mainHeader();

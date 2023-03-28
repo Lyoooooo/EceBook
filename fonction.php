@@ -308,6 +308,13 @@ function ajoutpost()
               <option value="Général">Général</option>
               <option value="Actualité">Actualité</option>
               <option value="Evènement">Evènement</option>
+              <?php 
+                if ($_SESSION["grade"] == 4) { //Pour les admins ?>
+                  <option value="Tous">Tous</option>
+                  <option value="Etudiant">Etudiant</option>
+                  <option value="Enseignant">Enseignant</option> <?php
+                }
+              ?>
             </select><br>
 
             <div class="input-group mb-3">
@@ -330,7 +337,7 @@ function ajoutpost()
     extract($_FILES);
     $idu = $_SESSION["idu"];
     $pdo = connexion();
-    if ($photo == "") {
+    if ($_FILES['photo']['name'] == "" || $_FILES['photo']['error'] == 4 || $_FILES['photo']['error'] == 1) {
       $photo = NULL;
     } else {
       $photo = ajoutphoto($idu, $photo);
