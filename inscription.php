@@ -13,17 +13,19 @@ $pdo = connexion();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="securite.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Inscription</title>
 </head>
 
 <body id="second">
-    <form action="" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
+    <form action="#insc4-tab-pane" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
 
         <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true">Etape1</button>
+
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link disabled" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false">Etape2</button>
@@ -243,29 +245,26 @@ $pdo = connexion();
     if (isset($_POST["valide"])) {
         extract($_POST);
         $promo = implode(',', $promo);
-        // $ext = strtolower(substr(strrchr($_FILES['pp']['name'], '.'), 1));
-        // if (($_FILES['pp']['size'] < 20971520) && (in_array($ext, $extensions))) {
-        //     $pp = 'produit/' . $_SESSION["idu"] . '-' . $nomp . '.' . $ext;
-        //     move_uploaded_file($_FILES['pp']['tmp_name'], $pp);
+
+        // extract($_FILES);
+        // if ($pp == "") {
+        //     $pp = "vide";
+        // } else {
+        //     $pp = ajoutpp($nom, $pp);
         // }
-        extract($_FILES);
-        if ($pp == "") {
-            $pp = "vide";
-        } else {
-            $pp = ajoutpp($nom, $pp);
-        }
-        var_dump($_FILES);
+
+
         $mdp2 = encode($mdp, $mail);
-        echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo," ", $statut, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
+        echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $statut, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
         // if ($mdp == $mdp) {
-            $stmt = $pdo->prepare("SELECT mail FROM user WHERE mail=?");
-            $stmt->execute([$mail]);
-            $user = $stmt->fetch();
+        $stmt = $pdo->prepare("SELECT mail FROM user WHERE mail=?");
+        $stmt->execute([$mail]);
+        $user = $stmt->fetch();
         //     if ($user) {
         //         // echo "Cette adresse mail est déjà utilisée";
         //     } else {
-                $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
+        $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
         //     }
         //     exit();
         // } else echo "Le mot de passe est incorect ";

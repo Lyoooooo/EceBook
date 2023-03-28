@@ -197,65 +197,7 @@ function recherche()
     header("Location: recherche.php");
   }
 }
-?>
-<?php
-function AfficherPost()
-{
 
-  $idu = 1;
-  $pdo = connexion();
-  $statement = $pdo->prepare("SELECT * from post");
-  //le 'prepare' prepare la requete 
-
-  //bindValue donne la valeur *
-  $statement->execute();
-  $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-
-  $statement2 = $pdo->prepare("SELECT * from user where idu=:idu");
-  $statement2->bindValue(':idu', $idu, PDO::PARAM_INT);
-  $statement2->execute();
-  $result2 = $statement2->fetch(PDO::FETCH_ASSOC);
-
-
-?>
-  <div class="card-body">
-    <?php foreach ($result as $ligne) {
-      foreach ($result2 as $ligne2) {
-    ?>
-        <div class='p-5 text-center' style='background-color:#F3F781'>
-          <div class='card'>
-            <div class='row'>
-              <div class="card-body product-img-outer text-center">
-                <h1>
-                  <p>Bonjour!</p>
-                </h1>
-                <p><?= $ligne['titre'] ?></p>
-                <img class="product_image rounded" style="height: 300px; width: 300px" src="<?= $ligne['photo'] ?>" alt="...">
-                <p class=''><?= $ligne['texte'] ?></p> <br>
-
-              </div>
-
-              <div class='card-body col-7 text-start'>
-                <h2>
-                  <p>Mymy</p>
-                </h2>
-                <h2>
-                  <p class="float-end h3"><?= $ligne2['nom'] ?></p>
-                </h2>
-                <a class="btn btn-success float-end" href="profil.php?idu=<?= $ligne['ida'] ?>">Voir profil</a>
-                <!-- on affiche un bouton voir plus, accedant à un lien vers la page profil, à voir si on garde ça  -->
-              </div>
-
-            </div>
-          </div>
-        </div>
-    <?php }
-    } ?>
-
-
-  <?php
-}
 
 function post($post)
 {
@@ -269,7 +211,7 @@ function post($post)
       <!-- HEADER -->
       <div class="header d-flex ps-2">
         <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
-            <?php if ($user["pp"] == 'vide') { ?>
+            <?php if ($user["pp"] == NULL) { ?>
               <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
             <?php } else { ?>
               <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
@@ -287,9 +229,9 @@ function post($post)
             <img src="images/boutonPosts.png" alt="" style="height: 40px;">
           </button>
           <ul class="dropdown-menu">
-          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"]?>" class="dropdown-item"> Modifier le post </button></li>
-            <li><a class="dropdown-item" href="#">Autre chose</a></li>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"]?>" class="dropdown-item"> Modifier le post </button></li>
             <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
+            <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;" >SUPPRIMER LE POST</a></li>
           </ul>
           <?php
           $idp = $post["idp"];
@@ -314,7 +256,11 @@ function post($post)
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
     </div>
-  <?php
+<?php
+}
+
+function supprimerPost($idp){
+  ?><script>alert("hello")</script> <?php
 }
 
 function ajoutpost()
@@ -359,7 +305,22 @@ function ajoutpost()
         </div>
       </div>
     </div>
-  <?php }
+  <?php 
+  ajoutpost();
+  if (isset($_POST["bouton"])) {
+    extract($_POST);
+    extract($_FILES);
+    if ($photo == "") {
+      $photo = NULL;
+    } else {
+      $photo = ajoutphoto($idu, $photo);
+    }
+  $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
+  $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
+?>
+  <meta http-equiv="refresh" content="1">
+<?php   }
+}
 
 function ajoutphoto($idu, $photo)
 {
@@ -437,4 +398,4 @@ function modifpost($idu, $idp)
     ?>
       <meta http-equiv="refresh" content="1">
   <?php   }
-  }
+  } 
