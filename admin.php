@@ -46,8 +46,8 @@ mainHeader();
                                         Trier
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">//</a></li>
-                                        <li><a class="dropdown-item" href="#">//</a></li>
+                                    <li><button class="dropdown-item" id="tri" value="ami" onclick="">//</button></li>
+                                    <li><a class="dropdown-item" href="#">//</a></li>
                                     </ul>
                                 </li>
                         </div>
@@ -80,10 +80,12 @@ mainHeader();
                                   <td class='align-middle'>". $ligne2["nom"]."</td>
                                   <td class='align-middle'> &nbsp;&nbsp;&nbsp;<a href='supprimer.php?idu=".$ligne2["idu"]."'<i class='fas fa-trash'></i></a></td>
                                   </tr>";
+
+                                  
                         }
                     }else{
                         ?>
-                        <p>Aucun résultat pour <?=$txt?></p>
+                        <td style="background-color: red; height: 40px;">Erreur, aucun user trouvé</td>
                         <?php
                     }
                 }else{

@@ -21,21 +21,3 @@ function trierPosts(val)
 }
 
 
-function trierUser(val)
-{
-    $.ajax({
-        type:"POST",
-        url:"triUser.php",
-        data:{idd:val},
-        success: function(data){
-            $("#afficherUser").html(data);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-            alert("Une erreur s'est produite lors de la requête AJAX.");
-        }
-    });
-
-
-
-}

@@ -245,6 +245,7 @@ function post($post)
       <?php if ($post["photo"] != "vide") { ?>
         <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
       <?php } ?>
+      <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
     </div>
     <!-- FOOTER -->
     <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
@@ -254,6 +255,36 @@ function post($post)
       <span class=""><?= $post["date"] ?></span>
     </div>
     <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
+    <div class="position-absolute end-0" style="top: 50px;">
+      <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
+        <img src="images/boutonPosts.png" alt="" style="height: 40px;">
+      </button>
+      <ul class="dropdown-menu">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
+        <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
+        <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
+      </ul>
+      <?php
+      $idp = $post["idp"];
+      modifpost($idu, $idp); ?>
+      </ul>
+    </div>
+  </div>
+  <!-- MAIN -->
+  <div class="card-body">
+    <p class="ms-5 px-3"><?= $post["texte"] ?></p>
+    <?php if ($post["photo"] != "vide") { ?>
+      <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
+    <?php } ?>
+  </div>
+  <!-- FOOTER -->
+  <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
+    <span class="ps-3"><?= $post["likes"] ?> Likes</span>
+    <span class=""><?= $post["dislike"] ?> Dislikes</span>
+    <span class=""><?= $post["vu"] ?> Vues</span>
+    <span class=""><?= $post["date"] ?></span>
+  </div>
+  <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
   </div>
 <?php
 }
@@ -345,9 +376,7 @@ function supprimerPost($idp)
             return $pp;
           }
 
-          function jaime()
-          {
-          }
+
           function modifpost($idu, $idp)
           {
             $pdo = connexion();
@@ -403,3 +432,4 @@ function supprimerPost($idp)
     <meta http-equiv="refresh" content="1">
 <?php   }
           }
+?>
