@@ -107,7 +107,7 @@ function mainHeader()
       <!-- Left elements -->
       <div class="d-flex">
         <!-- Brand -->
-        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="index.php">
           <img src="./images/e_now_logo2.png" height="65" alt="logo" loading="lazy" />
         </a>
 
