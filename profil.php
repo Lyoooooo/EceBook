@@ -103,7 +103,7 @@ mainHeader()
                 <input type="hidden" name="page" value="profil.php">
                 <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Ajouter en ami</button>
               </form>
-              <div class="ms-5 mt-2 text-center"><a href="message.php" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Messagerie</a></div>
+              <div class="ms-5 mt-2 text-center"><a href="message.php?idenvoyeur=<?= $_SESSION['idu'] ?>" class="btn btn-outline-dark btn-sm btn-block ms-5 mt-2 mb-4">Messagerie</a></div>
             <?php } else { ?>
               <form method="POST" action="fonctionRequete.php">
                 <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">

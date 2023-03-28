@@ -24,7 +24,7 @@ body {
 }
 
 span.etoile {
-    color: red;
+    color: #FF621F;
 }
 
 h3 {
@@ -83,7 +83,11 @@ h3 {
 }
 
 
-
+.modif {
+  background-color: white;
+  z-index: 1;
+  width: 100%;
+}
 
 
 
@@ -96,7 +100,7 @@ h3 {
   --msger-bg: #fff;
   --border: 2px solid #ddd;
   --left-msg-bg: #ececec;
-  --right-msg-bg: #579ffb;
+  --right-msg-bg: #FF621F;
 }
 
 html {
@@ -118,6 +122,12 @@ html {
   height: 100vh;
 
   font-family: Helvetica, sans-serif;
+}
+
+.boxe {
+  background-color: white;
+  z-index: 1;
+  width: 100%;
 }
 
 .msger {
@@ -244,3 +254,28 @@ html {
 }
 
 /* fin css chat */
+
+
+/*css inscription/connexion */ 
+.btn-primary {
+  background-color: #ffffff;
+  border-color: #FF621F;
+  color: #FF621F;
+}
+.btn-primary:hover {
+  background-color: #FF621F;
+  border-color: #FF621F;
+  color: #ffffff;
+}
+.nav-link.active {
+  background-color: #FF621F;
+  color: #ffffff;
+}
+input[type="radio"]:checked {
+  background-color: #FF621F;
+  box-shadow: 0 0 2px 2px #ff621f;
+}
+
+.dropdown-item:hover {
+  background-color: #ffe2d6;
+}

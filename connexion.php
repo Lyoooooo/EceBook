@@ -34,7 +34,7 @@ if (isset($_POST["bouton"])) {
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body id="second">
+<body style="background-color: white;">
     <?php if (isset($erreur)) : ?>
         <div class="alert alert-danger d-flex align-items-center">
 
@@ -83,8 +83,8 @@ if (isset($_POST["bouton"])) {
                     <input type="submit" class="btn btn-primary" value="ENVOYER" name="bouton"> <br>
                 </form>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="inscription.php">Pas de compte? Inscrivez vous</a>
-                <a class="dropdown-item" href="#">Mot de passe oublié?</a>
+                <a class="dropdown-item" style="color: #ff621f;" href="inscription.php">Pas de compte? Inscrivez vous</a>
+                <a class="dropdown-item" style="color: #ff621f;" href="#">Mot de passe oublié?</a>
             </div>
             <!-- <div class='text-start'>
                 Pas de compte?<a href="inscription.php" class="btn btn-primary p-2 m-2" style="text-decoration:none">S'INSCRIRE</a>
