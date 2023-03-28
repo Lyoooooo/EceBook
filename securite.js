@@ -1,6 +1,17 @@
 function envoyerMail() {
-  alert("ratio");
+  var mail = document.getElementById("mail").value;
+  alert(mail);
+  // Email.send({
+  //   Host: "smtp.elasticemail.com",
+  //   Username: "confirmation.noreply.enow@gmail.com",
+  //   Password: "0518A897A5FBA4391DD7FCDE5334D54EBAB4",
+  //   To: "pereira.matteo93@gmail.com",
+  //   From: "confirmation.noreply.enow@gmail.com",
+  //   Subject: "test",
+  //   Body: "And this is the body",
+  // }).then((message) => alert(message));
 }
+
 function convertToLowercase() {
   var emailField = document.getElementById("mail");
   emailField.value = emailField.value.toLowerCase();
