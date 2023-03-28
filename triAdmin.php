@@ -15,10 +15,10 @@ if (!empty($_POST["idd"])) {
         $stmt = $pdo->prepare("SELECT * FROM post ORDER BY likes desc LIMIT 10");
         $stmt->execute();
     }else if($_POST["idd"] == "actu"){
-        $stmt = $pdo->prepare("SELECT * FROM post WHERE type=? ORDER BY likes desc LIMIT 10");
+        $stmt = $pdo->prepare("SELECT * FROM post WHERE typep=? ORDER BY likes desc LIMIT 10");
         $stmt->execute(["Actualité"]);
     }else if($_POST["idd"] == "event"){
-        $stmt = $pdo->prepare("SELECT * FROM post WHERE type=? ORDER BY likes desc LIMIT 10");
+        $stmt = $pdo->prepare("SELECT * FROM post WHERE typep=? ORDER BY likes desc LIMIT 10");
         $stmt->execute(["Evènement"]);
     }else{
         $txt = $_POST["idd"];

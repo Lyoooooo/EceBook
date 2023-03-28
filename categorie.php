@@ -1,15 +1,8 @@
 <?php
 include "fonction.php";
-include "fonctionRequete.php";
 session_start();
 mainHeader();
-$pdo = connexion();
-$res = $pdo->prepare("SELECT * FROM post");
-$res->execute();
-$tab = $res->fetchAll();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,11 +15,33 @@ $tab = $res->fetchAll();
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+<?php
+$idcategorie = $_GET["idcategorie"];
+$pdo=connexion();
+if($idcategorie == 1){
+    $req = "SELECT * FROM post WHERE typep = 'general' ";
+    $stmt = $pdo->prepare($req);
+    $stmt->execute();
+    $typep = 'Général';
+}elseif($idcategorie == 2){
+    $req = "SELECT * FROM post WHERE typep = 'actualite' ";
+    $stmt = $pdo->prepare($req);
+    $stmt->execute();
+    $typep='Actualité';
+}elseif($idcategorie == 3){
+    $req = "SELECT * FROM post WHERE typep = 'evenement' ";
+    $stmt = $pdo->prepare($req);
+    $stmt->execute();
+    $typep='Evénement';
+}else{
+    $req = "SELECT * FROM post ";
+    $stmt = $pdo->prepare($req);
+    $stmt->execute();
+}
 
-
-<body>
-<?=recherche();?>
-    <div class="central">
+$cat = $stmt->fetchAll();
+?>
+<div class="central">
         <!-- post feed actualité -->
         <div class="container-fluid page-body-wrapper">
             <div class="main-panel">
@@ -34,57 +49,36 @@ $tab = $res->fetchAll();
                     <div class="row">
                         <div class="grid-margin stretch-card">
                             <div class="card-body">
-                                <h4 class="px-5 p-3 bg-white border-warning text-center" style="color:#FF621F; "> POSTS </h4>
+                                <h4 class="px-5 p-3 bg-white border-warning" style="color:#FF621F"> <?=$typep?> </h4>
                                 <div class="container px-5 p-3">
                                     <div class="row">
-                                       
                                         <?php
-                                         
-                                        if (count($tab) > 0) {
-                                            foreach ($tab as $post) {
+                                        
+                                            foreach ($cat as $post) {
                                                 post($post);
                                             }
-                                        }
+                                        
 
                                         ?>
 
                                     </div>
+
                                 </div>
+
                             </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php if(connecte() == True){?>
-    <!-- Button trigger modal -->
-    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: fixed; bottom: 10%; right: 5%; border: 0px; background-color:rgba(0,0,0,0); z-index: 1;">
-        <img src="images/boutonAddPost.webp" alt="" style="height: 60px;">
-    </button>
-    <?php ajoutpost(); }?>
-    <!-- Modal -->
-    <?php
-    footer();
-    ?>
-</body>
+   
 
 <?php
-if (isset($_POST["bouton"])) {
-    extract($_POST);
-    extract($_FILES);
-    $idu = $_SESSION["idu"];
-    $pdo = connexion();
-    if ($photo == "") {
-        $photo = "vide";
-    } else {
-        $photo = ajoutphoto($idu, $photo);
-    }
-    $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
-    $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
+    footer();
 ?>
-    <meta http-equiv="refresh" content="1">
-<?php   }
-?>
+
 
 </html>

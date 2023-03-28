@@ -97,6 +97,7 @@ function footer()
 
 function mainHeader()
 {
+  ob_start();
   $pdo = connexion();
 ?>
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
@@ -107,24 +108,24 @@ function mainHeader()
       <!-- Left elements -->
       <div class="d-flex">
         <!-- Brand -->
-        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="index.php">
           <img src="./images/e_now_logo2.png" height="65" alt="logo" loading="lazy" />
         </a>
 
-        <!-- Search form -->
+        
 
       </div>
       <!-- Left elements -->
 
       <!-- Center elements -->
       <!--Recherche-->
-      <form class="input-group w-auto my-auto d-none d-sm-flex">
-        <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Search" style="min-width: 125px;" />
+      
+      <form class="input-group w-auto my-auto d-none d-sm-flex" method="get">
+        <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" style="min-width: 125px;" />
         <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span>
+       
       </form>
-      <?php
-      recherche();
-      ?>
+      
       <!--Center elements-->
 
       <!-- Right elements -->
@@ -132,7 +133,7 @@ function mainHeader()
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <!-- Messages -->
           <li class="nav-item">
-            <a class="nav-link text-center" href="#">
+            <a class="nav-link text-center" href="message.php">
               <i class="fa-regular fa-comments">
                 <p style="font-family: 'Courier New', Courier, monospace" class="d-lg-flex d-none note-icon">Messages</p>
               </i>
@@ -150,7 +151,7 @@ function mainHeader()
                 $infoUser = $infoUser->fetch();
               }
               if (isset($idu)) : ?>
-                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-toggle="dropdown" aria-expanded="false">
+                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="profil.php" id="navbarDropdownMenuAvatar" role="button" data-toggle="dropdown" aria-expanded="false">
                   <img src="<?php if ($infoUser["pp"] == null) {
                               echo "./images/avatarbasique.png";
                             } else { ?>../<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" />&nbsp
@@ -173,30 +174,58 @@ function mainHeader()
                         <a class="dropdown-item" href="deconnexion.php">
                             <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
                     </div>
-              </ul>
-              
-
-
+            </ul>
       </div>
       <!-- Right elements -->
-    </div>
+    
   </nav>
+  <div >
+  <nav class="bottom-navbar sticky-top text-center" style=" background-color: white; box-shadow: 2px 2px 3px #FFE2D6;">
+        <div class="container col-8 mx-auto" style="text-align:center;">
+          <div class="container px-5 p-3 ">
+              <div class="row ">
+            <ul class="nav page-navigation  ">
+                <li class="nav-item  ">
+                    <a class="nav-link" href="categorie.php?idcategorie=1">
+                      <i class="fas fa-circle-notch" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Général</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="categorie.php?idcategorie=2">
+                        <i class="fas fa-globe" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F"> Actualités</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="categorie.php?idcategorie=3">
+                        <i class="fas fa-calendar" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F"> Evénements </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+  </div>
+  </div>
 <?php
+ob_end_flush();
 }
 
-function recherche()
-{
-  $pdo = connexion();
-  if (isset($_POST["search"])) {
-    $search = $_POST["search"];
-    $statement = $pdo->prepare("SELECT * from post where titre like :search inner join user on post.idu = user.idu");
-    $statement->bindValue(':search', "%$search%", PDO::PARAM_STR);
-    $statement->execute();
-    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-    $_SESSION["search"] = $result;
-    header("Location: recherche.php");
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function post($post)
@@ -304,6 +333,7 @@ function ajoutpost()
         </div>
       </div>
     </div>
+
   <?php 
   ajoutpost();
   if (isset($_POST["bouton"])) {
