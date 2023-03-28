@@ -241,3 +241,14 @@ html {
 }
 
 /* fin css chat */
+
+.btn-primary {
+  background-color: #ffffff;
+  border-color: #FF621F;
+  color: #FF621F;
+}
+.btn-primary:hover {
+  background-color: #FF621F;
+  border-color: #FF621F;
+  color: #ffffff;
+}

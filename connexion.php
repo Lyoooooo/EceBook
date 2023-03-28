@@ -34,7 +34,7 @@ if (isset($_POST["bouton"])) {
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body id="second">
+<body style="background-color: white;">
     <?php if (isset($erreur)) : ?>
         <div class="alert alert-danger d-flex align-items-center">
 
