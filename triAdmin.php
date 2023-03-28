@@ -26,7 +26,6 @@ if (!empty($_POST["idd"])) {
         
         //$stmt->bindParam(1, $txt);
         //$stmt->bindParam(2, $_POST["idd"]);
-        
         $stmt->execute();
     }
     $posts = $stmt->fetchAll();
@@ -40,5 +39,6 @@ if (!empty($_POST["idd"])) {
         <div style="background-color: red; height: 40px;">Erreur, aucun post trouvé</div>
 <?php
     }
+
 }
 ?>
