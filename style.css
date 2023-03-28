@@ -80,7 +80,11 @@ h3 {
 }
 
 
-
+.modif {
+  background-color: white;
+  z-index: 1;
+  width: 100%;
+}
 
 
 
@@ -93,7 +97,7 @@ h3 {
   --msger-bg: #fff;
   --border: 2px solid #ddd;
   --left-msg-bg: #ececec;
-  --right-msg-bg: #579ffb;
+  --right-msg-bg: #FF621F;
 }
 
 html {
@@ -115,6 +119,12 @@ html {
   height: 100vh;
 
   font-family: Helvetica, sans-serif;
+}
+
+.boxe {
+  background-color: white;
+  z-index: 1;
+  width: 100%;
 }
 
 .msger {

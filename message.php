@@ -8,29 +8,7 @@ if (connecte() == False) {
 $pdo = connexion();
 
 
-// $idu = $_SESSION["idu"];
-// $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
-// $stmt->execute([$idu]);
-// $user = $stmt->fetch();
-
-// $ami = $pdo->prepare("SELECT idu2 FROM ami WHERE idu1=[] AND valide=1");
-
-// $ida = $_GET["ida"];
-// if($ida == 0){
-//     $idrec = $_GET["idenvoyeur"];
-// }else{
-//     $stmt = $pdo->prepare("SELECT * FROM produit WHERE idp=?");
-//     $stmt->execute([$idp]);
-//     $ligne = $stmt->fetch();
-//     $idrec = $ligne["idu"];    
-// }
-
-
-
-
-
 // PHP de chat
-
 $idu = $_SESSION["idu"];
 if (isset($_GET["idenvoyeur"])) {
     $idreceveur = $_GET["idenvoyeur"];
@@ -63,20 +41,29 @@ $listAmi = $ami->fetchAll();
     <title>Messagerie</title>
 </head>
 
-<body>
 
-    <br><br><br>
+<body style="background-color:#FFE2D6"><br>
+
+<h3>Messagerie</h3><br>
+
+    
     <div class="container">
         <div class="row">
             <div class="col-1">
             </div>
 
             <div class="col-10">
+            <div class="boxe">
+
+            
                 <div id="mid">
                     <div class="row">
 
                         <!-- Colonne des amis -->
-                        <div id="separation" class="col-3" style="overflow-y: scroll;scrollbar-width: thin;">
+                        <div id="separation" class="col-3" style="overflow-y: scroll;scrollbar-width: thin; text-align: center"><br>
+                            <div style="font-weight:bold; font-size: x-large">Vos amis :</div>
+                        <br>
+                        <hr>
                             <?php
                             $pdo = connexion();
                             if (count($listAmi) > 0) {
@@ -104,7 +91,7 @@ $listAmi = $ami->fetchAll();
                                 <?php }
                             } else {
                                 ?> <div>
-                                    Vous n'avez pas encore d'amis. N'hésitez pas à en ajouter et à revenir ici !
+                                    Vous n'avez pas encore d'amis. N'hésitez pas à en ajouter pour discuter !
                                 </div><?php
                                     } ?>
                         </div>
@@ -175,7 +162,11 @@ $listAmi = $ami->fetchAll();
                                 </section>
                                 <?php }else{
                                     ?>
-                                    <div>SELECTIONNE UNE DISCUSSION MON CON</div>
+                                    <div style="text-align:center; font-weight:bold; font-size: large">
+                                        <img src="images/mess.png" alt="" width='150'>
+                                        <br>
+                                        Sélectionnez un ami pour commencer à discuter !
+                                    </div>
                                 <?php } ?>
                             </div>
 
@@ -186,6 +177,7 @@ $listAmi = $ami->fetchAll();
 
                     </div>
                 </div>
+                </div> <!-- div central -->
             </div>
 
             <div class="col-1">

@@ -107,7 +107,7 @@ function mainHeader()
       <!-- Left elements -->
       <div class="d-flex">
         <!-- Brand -->
-        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="index.php">
           <img src="./images/e_now_logo2.png" height="65" alt="logo" loading="lazy" />
         </a>
 
@@ -132,7 +132,7 @@ function mainHeader()
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <!-- Messages -->
           <li class="nav-item">
-            <a class="nav-link text-center" href="#">
+            <a class="nav-link text-center" href="message.php">
               <i class="fa-regular fa-comments">
                 <p style="font-family: 'Courier New', Courier, monospace" class="d-lg-flex d-none note-icon">Messages</p>
               </i>
