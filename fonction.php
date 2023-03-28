@@ -154,7 +154,7 @@ function mainHeader()
                   <img src="<?php if ($infoUser["pp"] == NULL) {
                               echo "./images/avatarbasique.png";
                             } else { ?>../<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" /> &nbsp;
-                            <p class="text-black"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
+                  <p class="text-black"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
                 </a>
               <?php else : ?>
                 <a class="nav-link text-center " href="connexion.php">
@@ -198,7 +198,6 @@ function recherche()
   }
 }
 
-
 function post($post)
 {
   $pdo = connexion();
@@ -208,15 +207,16 @@ function post($post)
   $idu = $_SESSION["idu"];
 ?>
   <div class="card p-0 mb-4">
+
     <!-- HEADER -->
     <div class="header d-flex ps-2">
       <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
-          <?php if ($user["pp"] == NULL) { ?>
-            <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
-          <?php } else { ?>
-            <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
-          <?php } ?>
-        </a></div>
+        <?php if ($user["pp"] == NULL) { ?>
+          <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
+        <?php } else { ?>
+          <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
+        <?php } ?>
+      </a></div>
       <div class="grid">
         <a href="profil.php?u=<?= $user["idu"] ?>">
           <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
@@ -233,20 +233,21 @@ function post($post)
           <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
           <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
         </ul>
-        <?php
-        $idp = $post["idp"];
-        modifpost($idu, $idp); ?>
+          <?php $idp = $post["idp"];
+          modifpost($idu, $idp); ?>
         </ul>
       </div>
     </div>
+
     <!-- MAIN -->
     <div class="card-body">
       <p class="ms-5 px-3"><?= $post["texte"] ?></p>
       <?php if ($post["photo"] != "vide") { ?>
-        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
+        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:40rem;height:auto;">
       <?php } ?>
       <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
     </div>
+
     <!-- FOOTER -->
     <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
       <span class="ps-3"><?= $post["likes"] ?> Likes</span>
@@ -254,37 +255,6 @@ function post($post)
       <span class=""><?= $post["vu"] ?> Vues</span>
       <span class=""><?= $post["date"] ?></span>
     </div>
-    <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
-    <div class="position-absolute end-0" style="top: 50px;">
-      <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
-        <img src="images/boutonPosts.png" alt="" style="height: 40px;">
-      </button>
-      <ul class="dropdown-menu">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
-        <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
-        <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
-      </ul>
-      <?php
-      $idp = $post["idp"];
-      modifpost($idu, $idp); ?>
-      </ul>
-    </div>
-  </div>
-  <!-- MAIN -->
-  <div class="card-body">
-    <p class="ms-5 px-3"><?= $post["texte"] ?></p>
-    <?php if ($post["photo"] != "vide") { ?>
-      <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
-    <?php } ?>
-  </div>
-  <!-- FOOTER -->
-  <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
-    <span class="ps-3"><?= $post["likes"] ?> Likes</span>
-    <span class=""><?= $post["dislike"] ?> Dislikes</span>
-    <span class=""><?= $post["vu"] ?> Vues</span>
-    <span class=""><?= $post["date"] ?></span>
-  </div>
-  <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
   </div>
 <?php
 }
@@ -293,11 +263,12 @@ function supprimerPost($idp)
 {
 ?><script>
     alert("hello")
-  </script> <?php
-          }
+  </script>
+<?php
+}
 
-          function ajoutpost()
-          { ?>
+function ajoutpost()
+{ ?>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -326,7 +297,7 @@ function supprimerPost($idp)
 
             <div class="input-group mb-3">
               <label class="input-group-text" for="inputGroupFile01">Photo</label>
-              <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg .webp" required><br>
+              <input class="form-control" name="photo" type="file" id="formFile" accept=".png, .jpg, .jpeg .webp"><br>
             </div>
 
           </div>
@@ -339,50 +310,51 @@ function supprimerPost($idp)
     </div>
   </div>
   <?php
-            ajoutpost();
-            if (isset($_POST["bouton"])) {
-              extract($_POST);
-              extract($_FILES);
-              if ($photo == "") {
-                $photo = NULL;
-              } else {
-                $photo = ajoutphoto($idu, $photo);
-              }
-              $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
-              $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
+  if (isset($_POST["bouton"])) {
+    extract($_POST);
+    extract($_FILES);
+    $idu = $_SESSION["idu"];
+    $pdo = connexion();
+    if ($photo == "") {
+      $photo = NULL;
+    } else {
+      $photo = ajoutphoto($idu, $photo);
+    }
+    $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
+    $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
   ?>
     <meta http-equiv="refresh" content="1">
   <?php   }
-          }
+}
 
-          function ajoutphoto($idu, $photo)
-          {
-            $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
-            $ext = strtolower(substr(strrchr($_FILES['photo']['name'], '.'), 1)); //extrait l'extension de l'image et la rend en minuscule
-            if (($_FILES['photo']['size'] < 20971520) && (in_array($ext, $extensions))) { //limite la taille et compare l'extension
-              $photo = 'images/post/' . $idu . '-' . $_FILES['photo']['name']; //renome avec l'idu devant
-              move_uploaded_file($_FILES['photo']['tmp_name'], $photo); //place l'image dans le dossier
-            }
-            return $photo;
-          }
-          function ajoutpp($nom, $pp)
-          {
-            $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
-            $ext = strtolower(substr(strrchr($_FILES['pp']['name'], '.'), 1)); //extrait l'extension de l'image et la rend en minuscule
-            if (($_FILES['pp']['size'] < 20971520) && (in_array($ext, $extensions))) { //limite la taille et compare l'extension
-              $pp = 'images/pp/' . $nom . '-' . $_FILES['pp']['name']; //renome avec l'idu devant
-              move_uploaded_file($_FILES['pp']['tmp_name'], $pp); //place l'image dans le dossier
-            }
-            return $pp;
-          }
+function ajoutphoto($idu, $photo)
+{
+  $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
+  $ext = strtolower(substr(strrchr($_FILES['photo']['name'], '.'), 1)); //extrait l'extension de l'image et la rend en minuscule
+  if (($_FILES['photo']['size'] < 20971520) && (in_array($ext, $extensions))) { //limite la taille et compare l'extension
+    $photo = 'images/post/' . $idu . '-' . $_FILES['photo']['name']; //renome avec l'idu devant
+    move_uploaded_file($_FILES['photo']['tmp_name'], $photo); //place l'image dans le dossier
+  }
+  return $photo;
+}
+function ajoutpp($nom, $pp)
+{
+  $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
+  $ext = strtolower(substr(strrchr($_FILES['pp']['name'], '.'), 1)); //extrait l'extension de l'image et la rend en minuscule
+  if (($_FILES['pp']['size'] < 20971520) && (in_array($ext, $extensions))) { //limite la taille et compare l'extension
+    $pp = 'images/pp/' . $nom . '-' . $_FILES['pp']['name']; //renome avec l'idu devant
+    move_uploaded_file($_FILES['pp']['tmp_name'], $pp); //place l'image dans le dossier
+  }
+  return $pp;
+}
 
 
-          function modifpost($idu, $idp)
-          {
-            $pdo = connexion();
-            $stmt = $pdo->prepare("SELECT * FROM post WHERE idp=?");
-            $stmt->execute([$idp]);
-            $post = $stmt->fetch();
+function modifpost($idu, $idp)
+{
+  $pdo = connexion();
+  $stmt = $pdo->prepare("SELECT * FROM post WHERE idp=?");
+  $stmt->execute([$idp]);
+  $post = $stmt->fetch();
   ?>
   <div class="modal fade" id="exampleModal<?php echo $idp ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -420,16 +392,16 @@ function supprimerPost($idp)
     </div>
   </div>
   <?php
-            if (isset($_POST["boutonEdit"])) {
-              $pdo = connexion();
-              extract($_POST);
-              extract($_FILES);
-              if ($idp = $_POST["boutonEdit"]) {
-                $stmt = $pdo->prepare("UPDATE post SET titre = ?, texte = ?, typep = ? WHERE idp = $idp");
-                $stmt->execute([$titre, $texte, $type]);
-              }
+  if (isset($_POST["boutonEdit"])) {
+    $pdo = connexion();
+    extract($_POST);
+    extract($_FILES);
+    if ($idp = $_POST["boutonEdit"]) {
+      $stmt = $pdo->prepare("UPDATE post SET titre = ?, texte = ?, typep = ? WHERE idp = $idp");
+      $stmt->execute([$titre, $texte, $type]);
+    }
   ?>
     <meta http-equiv="refresh" content="1">
 <?php   }
-          }
+}
 ?>

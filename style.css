@@ -24,7 +24,7 @@ body {
 }
 
 span.etoile {
-    color: red;
+    color: #FF621F;
 }
 
 h3 {
@@ -252,6 +252,8 @@ html {
 
 /* fin css chat */
 
+
+/*css inscription/connexion */ 
 .btn-primary {
   background-color: #ffffff;
   border-color: #FF621F;
@@ -261,4 +263,16 @@ html {
   background-color: #FF621F;
   border-color: #FF621F;
   color: #ffffff;
+}
+.nav-link.active {
+  background-color: #FF621F;
+  color: #ffffff;
+}
+input[type="radio"]:checked {
+  background-color: #FF621F;
+  box-shadow: 0 0 2px 2px #ff621f;
+}
+
+.dropdown-item:hover {
+  background-color: #ffe2d6;
 }

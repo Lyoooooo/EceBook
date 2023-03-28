@@ -24,7 +24,7 @@ $pdo = connexion();
             <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true">Etape1</button>
+                        <button class="nav-link active disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true">Etape1</button>
 
                     </li>
                     <li class="nav-item" role="presentation">
@@ -43,7 +43,7 @@ $pdo = connexion();
 
                     <div class="tab-pane fade show active" id="insc1-tab-pane" role="tabpanel" aria-labelledby="insc1-tab" tabindex="0">
                         <div class="text-end">
-                            <a href="connexion.php" class="text-end" style="text-decoration: none;">Retour</a>
+                            <a href="connexion.php" class="text-end" style="text-decoration: none; color: #ff621f;">Retour</a>
                         </div>
                         <h1>Inscription</h1>
                         <label for="validationDefault01" class="form-label">Entrez votre adresse mail</label> <span class="etoile">*</span><br>
@@ -89,42 +89,101 @@ $pdo = connexion();
                         <!-- <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="val"> -->
                         <input type="submit" class="btn btn-primary mb-3" value="Suivant" id="bouton-suivant" onclick="pageSuivante()">
                         <script>
-                            function pageSuivante() {
-                                // if (document.getElementById('mail').value == "" || document.getElementById('mdp').value == "") {
+                            var ongletActif = document.querySelector('.nav-link.active');
+                            if (ongletActif) {
+                                ongletActif.style.backgroundColor = "#ff621f";
+                                ongletActif.style.color = "#fff";
+                            }
 
-                                // } else {
+                            // Changer la couleur de fond et le texte des autres onglets
+                            var onglets = document.querySelectorAll('.nav-link:not(.active)');
+                            onglets.forEach(function(onglet) {
+                                onglet.style.backgroundColor = "#fff";
+                                onglet.style.color = "#000";
+                            });
+
+                            function pageSuivante() {
                                 document.getElementById('insc1-tab').classList.remove('active');
                                 document.getElementById('insc2-tab').classList.add('active');
                                 document.getElementById('insc1-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc2-tab-pane').classList.add('show', 'active');
+
+                                // Changer la couleur de fond de l'onglet actif
+                                var ongletActif = document.querySelector('.nav-link.active');
+                                if (ongletActif) {
+                                    ongletActif.style.backgroundColor = "#ff621f";
+                                    ongletActif.style.color = "#fff";
+                                }
+
+                                // Changer la couleur de fond et le texte des autres onglets
+                                var onglets = document.querySelectorAll('.nav-link:not(.active)');
+                                onglets.forEach(function(onglet) {
+                                    onglet.style.backgroundColor = "#fff";
+                                    onglet.style.color = "#000";
+                                });
                             }
-                            // }
 
                             function pageSuivante2() {
-                                // if (document.getElementById('mail').value == "" || document.getElementById('mdp').value == "") {
-
-                                // } else {
                                 document.getElementById('insc2-tab').classList.remove('active');
                                 document.getElementById('insc3-tab').classList.add('active');
                                 document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc3-tab-pane').classList.add('show', 'active');
+
+                                // Changer la couleur de fond de l'onglet actif
+                                var ongletActif = document.querySelector('.nav-link.active');
+                                if (ongletActif) {
+                                    ongletActif.style.backgroundColor = "#ff621f";
+                                    ongletActif.style.color = "#fff";
+                                }
+
+                                // Changer la couleur de fond et le texte des autres onglets
+                                var onglets = document.querySelectorAll('.nav-link:not(.active)');
+                                onglets.forEach(function(onglet) {
+                                    onglet.style.backgroundColor = "#fff";
+                                    onglet.style.color = "#000";
+                                });
                             }
-                            // }
 
                             function pageRetour1() {
-
                                 document.getElementById('insc2-tab').classList.remove('active');
                                 document.getElementById('insc1-tab').classList.add('active');
                                 document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc1-tab-pane').classList.add('show', 'active');
+
+                                // Changer la couleur de fond de l'onglet actif
+                                var ongletActif = document.querySelector('.nav-link.active');
+                                if (ongletActif) {
+                                    ongletActif.style.backgroundColor = "#ff621f";
+                                    ongletActif.style.color = "#fff";
+                                }
+
+                                // Changer la couleur de fond et le texte des autres onglets
+                                var onglets = document.querySelectorAll('.nav-link:not(.active)');
+                                onglets.forEach(function(onglet) {
+                                    onglet.style.backgroundColor = "#fff";
+                                    onglet.style.color = "#000";
+                                });
                             }
 
                             function pageSuivante4() {
-
                                 document.getElementById('insc3-tab').classList.remove('active');
                                 document.getElementById('insc4-tab').classList.add('active');
                                 document.getElementById('insc3-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc4-tab-pane').classList.add('show', 'active');
+
+                                // Changer la couleur de fond de l'onglet actif
+                                var ongletActif = document.querySelector('.nav-link.active');
+                                if (ongletActif) {
+                                    ongletActif.style.backgroundColor = "#ff621f";
+                                    ongletActif.style.color = "#fff";
+                                }
+
+                                // Changer la couleur de fond et le texte des autres onglets
+                                var onglets = document.querySelectorAll('.nav-link:not(.active)');
+                                onglets.forEach(function(onglet) {
+                                    onglet.style.backgroundColor = "#fff";
+                                    onglet.style.color = "#000";
+                                });
                             }
 
                             function pageRetour2() {
@@ -133,6 +192,19 @@ $pdo = connexion();
                                 document.getElementById('insc2-tab').classList.add('active');
                                 document.getElementById('insc3-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc2-tab-pane').classList.add('show', 'active');
+                                // Changer la couleur de fond de l'onglet actif
+                                var ongletActif = document.querySelector('.nav-link.active');
+                                if (ongletActif) {
+                                    ongletActif.style.backgroundColor = "#ff621f";
+                                    ongletActif.style.color = "#fff";
+                                }
+
+                                // Changer la couleur de fond et le texte des autres onglets
+                                var onglets = document.querySelectorAll('.nav-link:not(.active)');
+                                onglets.forEach(function(onglet) {
+                                    onglet.style.backgroundColor = "#fff";
+                                    onglet.style.color = "#000";
+                                });
                             }
                         </script>
                     </div>
@@ -147,8 +219,8 @@ $pdo = connexion();
                             <input type="text" class="form-control" id="prenom" name="prenom" required placeholder="Prenom"><br>
                             <label for="validationDefault01" class="form-label">Selectionnez votre date de naissance</label> <span class="etoile">*</span><br>
                             <input type="date" class="form-control" name="naissance" id="naissance" required><br>
-                            <label for="validationDefault01" class="form-label">Rentrez votre ville de residence</label> <span class="etoile">*</span><br>
-                            <input type="text" class="form-control" name="ville" id="ville" required placeholder="Ville de résidence"><br>
+                            <label for="validationDefault01" class="form-label">Rentrez votre ville de residence</label><br>
+                            <input type="text" class="form-control" name="ville" id="ville" placeholder="Ville de résidence"><br>
                             <label for="validationDefault02" class="form-label">Vous etes un :</label><span class="etoile"> *</span><br>
 
                         </div>
@@ -213,15 +285,15 @@ $pdo = connexion();
                     <div class="tab-pane fade " id="insc3-tab-pane" role="tabpanel" aria-labelledby="insc3-tab" tabindex="0">
                         <div class="text-start">
                             <div class="mb-3"><br>
-                                <label for="exampleFormControlTextarea1" class="form-label">Rentrez votre descritpion</label> <span class="etoile">*</span><br>
-                                <textarea class="form-control" name="descrip" id="descrip" required placeholder="Entré une descritpion de vous:" minlength="1" maxlength="255" rows="2"></textarea>
+                                <label for="exampleFormControlTextarea1" class="form-label">Rentrez votre descritpion</label> <br>
+                                <textarea class="form-control" name="descrip" id="descrip" placeholder="Entré une descritpion de vous:" maxlength="255" rows="2"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Rentrez vos centres d'interets</label> <span class="etoile">*</span><br>
-                                <textarea class="form-control" name="interet" id="interet" required placeholder="Vos centres d'interets:" minlength="1" maxlength="255" rows="2"></textarea>
+                                <label for="exampleFormControlTextarea1" class="form-label">Rentrez vos centres d'interets</label> <br>
+                                <textarea class="form-control" name="interet" id="interet" placeholder="Vos centres d'interets:" maxlength="255" rows="2"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Chargez votre photo de profil</label> <span class="etoile">*</span>
+                                <label for="formFile" class="form-label">Chargez votre photo de profil</label>
                                 <input class="form-control" type="file" id="pp" name="pp" accept=".png, .jpg, .jpeg .webp">
                             </div>
                             <br>
@@ -236,7 +308,7 @@ $pdo = connexion();
 
                     <div class="tab-pane fade" id="insc4-tab-pane" role="tabpanel" aria-labelledby="insc4-tab" tabindex="0">
                         <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
-                        <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: white;text-decoration: none;">Connexion</a></button>
+                        <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: #ff621f ;text-decoration: none;">Connexion</a></button>
                     </div>
                 </div>
             </div>
