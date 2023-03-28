@@ -1,17 +1,6 @@
 function envoyerMail() {
-  var mail = document.getElementById("mail").value;
-  alert(mail);
-  Email.send({
-    Host: "smtp.gmail.com",
-    Username: "confirmation.noreply.enow@gmail.com",
-    Password: "ArLtMpNnAkJk4Project",
-    To: "pereira.matteo93@gmail.com",
-    From: "confirmation.noreply.enow@gmail.com",
-    Subject: "This is the subject",
-    Body: "And this is the body",
-  }).then((message) => alert(message));
+  alert("ratio");
 }
-
 function convertToLowercase() {
   var emailField = document.getElementById("mail");
   emailField.value = emailField.value.toLowerCase();
