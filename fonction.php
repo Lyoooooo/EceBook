@@ -198,7 +198,6 @@ function recherche()
   }
 }
 
-
 function post($post)
 {
   $pdo = connexion();
