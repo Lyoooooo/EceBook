@@ -303,6 +303,7 @@ function post($post)
         <?php if ($post["photo"] != "vide") { ?>
           <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
         <?php } ?>
+        <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
       </div>
       <!-- FOOTER -->
       <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
@@ -381,10 +382,7 @@ function ajoutpp($idu, $pp)
   return $pp;
 }
 
-function jaime()
-{
 
-}
 function modifpost($idu, $idp)
   {
     $pdo = connexion();
