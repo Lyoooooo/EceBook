@@ -51,10 +51,13 @@ if ($profil == "autre") {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/e_now_logo2.png" />
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <script src="securite.js"></script>
   <title>Profil</title>
+
 </head>
 
 <?php
@@ -64,8 +67,8 @@ mainHeader()
 <body style="background-color: #f0dfd8;"><br>
   <header class="col-7 mx-auto">
     <div class="bg-white shadow overflow-hidden rounded-top">
-    <br><br>
-    <h3>Votre Profil</h3>
+      <br><br>
+      <h3>Votre Profil</h3>
       <div class="px-5 pt-0 pb-4">
         <div class="profile-head border border-light">
 
@@ -144,25 +147,25 @@ mainHeader()
     <div class="bg-white shadow overflow-hidden rounded-top pb-4">
       <h4 class="px-5 p-3 bg-white border-top border-warning" style="color:#FF621F">Posts</h4>
       <div class="container px-5 p-3">
-      <?php
-      if (($profil == "moi" || $ami == 1 || $_SESSION["grade"] == 4) && count($tab) > 0) {
+        <?php
+        if (($profil == "moi" || $ami == 1 || $_SESSION["grade"] == 4) && count($tab) > 0) {
           foreach ($tab as $post) { ?>
             <div class="row">
               <?= post($post); ?>
             </div> <?php
-          }
-        } else if ($profil == "moi") { ?>
+                  }
+                } else if ($profil == "moi") { ?>
       </div>
       <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous n'avez pas de post !!</p>
       <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-grid gap-2 col-4 mx-auto" style="color:#FF621F;border-radius:5px;padding:2px;font-weight: 500;font-size: 20px;padding:auto">
         Créez votre premier post ici
       </button> <?php ajoutpost();
-        } else if ($ami == 1) { ?>
-          <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F"><?= $user["pnom"] ?> <?= $user["nom"] ?> a 0 post...</p> <?php
-        } else { ?>
-          <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous ne pouvez pas voir les posts de <?= $user["pnom"] ?> <?= $user["nom"] ?> car vous n'êtes pas encore ami</p> <?php
-        }
-        ?>
+                } else if ($ami == 1) { ?>
+      <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F"><?= $user["pnom"] ?> <?= $user["nom"] ?> a 0 post...</p> <?php
+                                                                                                                                          } else { ?>
+      <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous ne pouvez pas voir les posts de <?= $user["pnom"] ?> <?= $user["nom"] ?> car vous n'êtes pas encore ami</p> <?php
+                                                                                                                                                                                                  }
+                                                                                                                                                                                                    ?>
     </div>
   </main>
 </body><br>
