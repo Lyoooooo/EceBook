@@ -19,53 +19,50 @@ $pdo = connexion();
 </head>
 
 <body style="background-color: white;">
-    <form action="inscription2.php" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
-        <div class="tab">
-            <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link  disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="false">Etape 1</button>
+    <div class="tab">
+        <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link  disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="false">Etape 1</button>
 
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link disabled" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false">Etape 2</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link disabled" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false">Etape 3</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active disabled" id="insc4-tab" data-bs-toggle="tab" data-bs-target="#insc4-tab-pane" type="button" role="tab" aria-controls="insc4-tab-pane" aria-selected="true">Etape finale</button>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <script>
-                        var ongletActif = document.querySelector('.nav-link.active');
-                        if (ongletActif) {
-                            ongletActif.style.backgroundColor = "#ff621f";
-                            ongletActif.style.color = "#fff";
-                        }
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link disabled" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false">Etape 2</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link disabled" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false">Etape 3</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active disabled" id="insc4-tab" data-bs-toggle="tab" data-bs-target="#insc4-tab-pane" type="button" role="tab" aria-controls="insc4-tab-pane" aria-selected="true">Etape finale</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <script>
+                    var ongletActif = document.querySelector('.nav-link.active');
+                    if (ongletActif) {
+                        ongletActif.style.backgroundColor = "#ff621f";
+                        ongletActif.style.color = "#fff";
+                    }
 
-                        // Changer la couleur de fond et le texte des autres onglets
-                        var onglets = document.querySelectorAll('.nav-link:not(.active)');
-                        onglets.forEach(function(onglet) {
-                            onglet.style.backgroundColor = "#fff";
-                            onglet.style.color = "#000";
-                        });
-                    </script>
+                    // Changer la couleur de fond et le texte des autres onglets
+                    var onglets = document.querySelectorAll('.nav-link:not(.active)');
+                    onglets.forEach(function(onglet) {
+                        onglet.style.backgroundColor = "#fff";
+                        onglet.style.color = "#000";
+                    });
+                </script>
 
-                    <!-- page 4-->
-
+                <!-- page 4-->
 
 
-                    <div class="tab-pane fade show active" id="insc4-tab-pane" role="tabpanel" aria-labelledby="insc4-tab" tabindex="0">
-                        <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
-                        <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: #ff621f ;text-decoration: none;">Connexion</a></button>
-                    </div>
+
+                <div class="tab-pane fade show active" id="insc4-tab-pane" role="tabpanel" aria-labelledby="insc4-tab" tabindex="0">
+                    <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
+                    <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: #ff621f ;text-decoration: none;">Connexion</a></button>
                 </div>
             </div>
         </div>
-    </form>
-
+    </div>
 
 </body>
 

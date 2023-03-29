@@ -19,7 +19,7 @@ $pdo = connexion();
 </head>
 
 <body style="background-color: white;">
-    <form action="" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
+    <form action="inscription2.php" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
         <div class="tab">
             <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -86,8 +86,8 @@ $pdo = connexion();
                             </div>
                         </div>
 
-                        <!-- <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="val"> -->
-                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" id="bouton-suivant" onclick="pageSuivante()">
+                        <input type="button" class="btn btn-primary mb-3" value="Suivant" onclick="pageSuivante()">
+
                         <script>
                             var ongletActif = document.querySelector('.nav-link.active');
                             if (ongletActif) {
@@ -299,7 +299,7 @@ $pdo = connexion();
                             </div>
                             <br>
                         </div>
-                        <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour2()">
+                        <input type="button" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour2()">
                         <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide">
                     </div>
 
@@ -321,7 +321,6 @@ $pdo = connexion();
         extract($_POST);
         extract($_FILES);
         $promo = implode(',', $promo);
-        var_dump($pp);
 
         if ($_FILES['pp']['name'] == "" || $_FILES['pp']['error'] == 4 || $_FILES['pp']['error'] == 1) {
             $pp = NULL;
@@ -340,7 +339,7 @@ $pdo = connexion();
         }
 
         $mdp2 = encode($mdp, $mail);
-        echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $statut, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
+        // echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $statut, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
         // if ($mdp == $mdp) {
         $stmt = $pdo->prepare("SELECT mail FROM user WHERE mail=?");
         $stmt->execute([$mail]);
