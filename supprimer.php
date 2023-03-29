@@ -10,7 +10,7 @@ try {
     die('Erreur : ' . $e->getMessage());
 }
 
-$idu = $_GET["idu"];
+$idu = $_SESSION["idu"];
 
 
 // Supprimer l'utilisateur
