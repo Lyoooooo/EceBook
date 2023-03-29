@@ -102,7 +102,7 @@ mainHeader();
                                         <label id="pn" for="validationDefault02" class="form-label">Date de naissance</label><span class="etoile">*</span>
                                     </div>
                                     <div class="col-6">
-                                        <input type="text" name="naissance" class="form-control" value="<?= $user["naissance"] ?>" required>
+                                        <input type="date" name="naissance" class="form-control" value="<?= $user["naissance"] ?>" required>
                                     </div>
                                     <div class="col-2">
                                     </div>
