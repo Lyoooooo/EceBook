@@ -1,15 +1,16 @@
 function envoyerMail() {
   var mail = document.getElementById("mail").value;
   alert(mail);
-  // Email.send({
-  //   Host: "smtp.elasticemail.com",
-  //   Username: "confirmation.noreply.enow@gmail.com",
-  //   Password: "0518A897A5FBA4391DD7FCDE5334D54EBAB4",
-  //   To: "pereira.matteo93@gmail.com",
-  //   From: "confirmation.noreply.enow@gmail.com",
-  //   Subject: "test",
-  //   Body: "And this is the body",
-  // }).then((message) => alert(message));
+  alert("coucou");
+  Email.send({
+    Host: "smtp.elasticemail.com",
+    Username: "confirmation.noreply.enow@gmail.com",
+    Password: "D38945D21E3879609CAA7AA6523BBC945AF5",
+    To: "leo.triffault@gmail.com",
+    From: "confirmation.noreply.enow@gmail.com",
+    Subject: "yayyyyyyyy",
+    Body: "And this is the body",
+  }).then((message) => alert(message));
 }
 
 function convertToLowercase() {
