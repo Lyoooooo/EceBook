@@ -31,7 +31,7 @@ function encode($mdp, $mail)
 
 
 
-  
+
 function mainHeader()
 {
   $pdo = connexion();
@@ -39,7 +39,7 @@ function mainHeader()
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
 
   <!-- Navbar-->
-  
+
   <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
     <div class="container-fluid justify-content-between">
       <!-- Left elements -->
@@ -49,24 +49,21 @@ function mainHeader()
           <img src="./images/e_now_logo2.png" height="65" alt="logo" loading="lazy" />
         </a>
 
-        
+
 
       </div>
       <!-- Left elements -->
 
       <!-- Center elements -->
       <!--Recherche-->
-      
-      <form class="input-group w-auto my-auto d-none d-sm-flex" method="post" action="search.php">
-        <!-- <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" " />
-        <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span> -->
-        <input type="text" class="form-control" style="min-width: 125px;" placeholder="Chercher un utilisateur" name="search" aria-label="Text input with dropdown button">
-        <div class="input-group-append">
-        <input type="submit" class="btn btn-white" style="border: 1px solid; color:#FF621F" name="ok" value="Rechercher">
-        </div>
+
+      <form class="input-group w-auto my-auto d-none d-sm-flex" method="get">
+        <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" style="min-width: 125px;" />
+        <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span>
+
       </form>
-      
-      
+
+
       <!--Center elements-->
 
       <!-- Right elements -->
@@ -95,7 +92,7 @@ function mainHeader()
                 <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="profil.php" id="navbarDropdownMenuAvatar" role="button" data-toggle="dropdown" aria-expanded="false">
                   <img src="<?php if ($infoUser["pp"] == null) {
                               echo "./images/avatarbasique.png";
-                            } else { ?>../<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" /> &nbsp;
+                            } else { ?>./<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" /> &nbsp;
                   <p class="text-black"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
                 </a>
               <?php else : ?>
@@ -107,46 +104,54 @@ function mainHeader()
                 </a>
 
               <?php endif; ?>
-                    </a>
-                    <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item" href="profil.php">
-                            <i class="fa-solid fa-user"></i> Profil</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="deconnexion.php">
-                            <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
-                    </div>
-            </ul>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="profil.php">
+                  <i class="fa-solid fa-user"></i> Profil</a>
+                <?php if ($_SESSION["grade"] == 4) { ?>
+                  <a class="dropdown-item" href="admin.php">
+                    <i class="fa-solid fa-user"></i> Gestion admin</a>
+                <?php } ?>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="deconnexion.php">
+                  <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
       <!-- Right elements -->
-    
+
   </nav>
-  
+
   <nav class="bottom-navbar sticky-top text-center" style=" background-color: white; box-shadow: 2px 2px 3px #FFE2D6;">
-        <div class="container col-8 mx-auto" style="text-align:center;">
-          <div class="container px-5 p-3 ">
-              <div class="row ">
-            <ul class="nav page-navigation  ">
-                <li class="nav-item  ">
-                    <a class="nav-link" href="categorie.php?idcategorie=1">
-                      <i class="fas fa-circle-notch" style="color:FF621F"></i>
-                        <span class="menu-title" style="color:FF621F">Général</span>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="categorie.php?idcategorie=2">
-                        <i class="fas fa-globe" style="color:FF621F"></i>
-                        <span class="menu-title" style="color:FF621F"> Actualités</span>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="categorie.php?idcategorie=3">
-                        <i class="fas fa-calendar" style="color:FF621F"></i>
-                        <span class="menu-title" style="color:FF621F"> Evénements </span>
-                    </a>
-                </li>
-            </ul>
+    <div class="container col-8 mx-auto" style="text-align:center;">
+      <div class="container px-5 p-3 ">
+        <div class="row ">
+          <ul class="nav page-navigation  ">
+            <li class="nav-item  ">
+              <a class="nav-link" href="categorie.php?idcategorie=1">
+                <i class="fas fa-circle-notch" style="color:FF621F"></i>
+                <span class="menu-title" style="color:FF621F">Général</span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="categorie.php?idcategorie=2">
+                <i class="fas fa-globe" style="color:FF621F"></i>
+                <span class="menu-title" style="color:FF621F"> Actualités</span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="categorie.php?idcategorie=3">
+                <i class="fas fa-calendar" style="color:FF621F"></i>
+                <span class="menu-title" style="color:FF621F"> Evénements </span>
+              </a>
+            </li>
+          </ul>
         </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
   </div>
   </div>
 <?php
@@ -245,31 +250,85 @@ function post($post)
         <a href="profil.php?u=<?= $user["idu"] ?>">
           <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
         </a>
-        <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
+        <div class="ps-3 pt-0 fs-4 fw-bolder" style="width:90%;"><?= $post["titre"] ?></div>
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
-      <div class="position-absolute end-0" style="top: 50px;">
-        <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
-          <img src="images/boutonPosts.png" alt="" style="height: 40px;">
-        </button>
-        <ul class="dropdown-menu">
-          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
-          <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
-          <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
-        </ul>
-          <?php $idp = $post["idp"];
-          modifpost($idu, $idp); ?>
-        </ul>
-      </div>
+      <?php if ($_SESSION["idu"] == $post["idu"] || $_SESSION["grade"] == 4) { ?>
+        <div class="position-absolute end-0" style="top: 50px;">
+          <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
+            <img src="images/boutonPosts.png" alt="" style="height: 40px;">
+          </button>
+
+          <ul class="dropdown-menu">
+            <li><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
+            <?php $idp = $post["idp"];          
+            modifpost($idu, $idp); ?>
+            <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
+          </ul>
+        </div>
+      <?php } ?>
     </div>
 
     <!-- MAIN -->
     <div class="card-body">
       <p class="ms-5 px-3"><?= $post["texte"] ?></p>
       <?php if ($post["photo"] != "vide") { ?>
-        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:20rem;height:auto;weight:auto;">
+        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:100%;max-height:20rem;height:auto;">
       <?php } ?>
-      <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
+      <button id="like-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-up"></i></button>
+      <button id="dislike-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-down"></i></button>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+      <script>
+        const likeBtn = document.getElementById('like-btn');
+        const dislikeBtn = document.getElementById('dislike-btn');
+
+        likeBtn.addEventListener('click', function() {
+          likeBtn.classList.toggle('liked');
+          if (likeBtn.classList.contains('liked')) {
+            likeBtn.innerHTML = '<i class="fa fa-thumbs-up"></i>';
+            dislikeBtn.innerHTML = '<i class="fa fa-thumbs-o-down"></i>';
+          } else {
+            likeBtn.innerHTML = '<i class="fa fa-thumbs-o-up"></i>';
+          }
+        });
+        dislikeBtn.addEventListener('click', function() {
+          dislikeBtn.classList.toggle('disliked');
+          if (dislikeBtn.classList.contains('disliked')) {
+            dislikeBtn.innerHTML = '<i class="fa fa-thumbs-down"></i>';
+            likeBtn.innerHTML = '<i class="fa fa-thumbs-o-up"></i>';
+          } else {
+            dislikeBtn.innerHTML = '<i class="fa fa-thumbs-o-down"></i>';
+          }
+        });
+        $('#like-btn').on('click', function() {
+          var postId = $(this).data('post-id');
+          $.ajax({
+            url: 'like.php',
+            type: 'POST',
+            data: {postId: postId},
+            success: function(response) {
+            },
+            error: function(xhr, status, error) {
+              console.log("erreur")
+            }
+          });
+        });
+        
+        $('#dislike-btn').on('click', function() {
+          var postId = $(this).data('post-id');
+          $.ajax({
+            url: 'dislike.php',
+            type: 'POST',
+            data: {postId: postId},
+            success: function(response) {
+            },
+            error: function(xhr, status, error) {
+              console.log("erreur")
+            }
+          });
+        });
+      </script>
     </div>
 
     <!-- FOOTER -->
@@ -279,6 +338,7 @@ function post($post)
       <span class=""><?= $post["vu"] ?> Vues</span>
       <span class=""><?= $post["date"] ?></span>
     </div>
+    <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
   </div>
 <?php
 }
@@ -311,13 +371,14 @@ function ajoutpost()
               <option value="Général">Général</option>
               <option value="Actualité">Actualité</option>
               <option value="Evènement">Evènement</option>
-              <?php 
-                if ($_SESSION["grade"] == 4) { //Pour les admins ?>
-                  <option value="Tous">Tous</option>
-                  <option value="Etudiant">Etudiant</option>
-                  <option value="Enseignant">Enseignant</option> <?php
-                }
+              <?php
+              if ($_SESSION["grade"] == 4) { //Pour les admins 
               ?>
+                <option value="Tous">Tous</option>
+                <option value="Etudiant">Etudiant</option>
+                <option value="Enseignant">Enseignant</option> <?php
+                                                              }
+                                                                ?>
             </select><br>
 
             <div class="input-group mb-3">
@@ -415,18 +476,17 @@ function modifpost($idu, $idp)
         </form>
       </div>
     </div>
-  </div>
-  <?php
-  if (isset($_POST["boutonEdit"])) {
-    $pdo = connexion();
-    extract($_POST);
-    extract($_FILES);
-    if ($idp = $_POST["boutonEdit"]) {
-      $stmt = $pdo->prepare("UPDATE post SET titre = ?, texte = ?, typep = ? WHERE idp = $idp");
-      $stmt->execute([$titre, $texte, $type]);
-    }
+    <?php
+    if (isset($_POST["boutonEdit"])) {
+      $pdo = connexion();
+      extract($_POST);
+      extract($_FILES);
+      if($idp = $_POST["boutonEdit"]){
+        $stmt = $pdo->prepare("UPDATE post SET titre = ?, texte = ?, typep = ? WHERE idp = $idp");
+        $stmt->execute([$titre, $texte, $type]);
+      }
+    ?>
+      <meta http-equiv="refresh" content="1">
+  <?php   }
+  }
   ?>
-    <meta http-equiv="refresh" content="1">
-<?php   }
-}
-?>

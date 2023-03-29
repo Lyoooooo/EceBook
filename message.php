@@ -40,7 +40,7 @@ $listAmi = $ami->fetchAll();
 </head>
 
 
-<body style="background-color:#FFE2D6"><br>
+<body style="background-color:#f0dfd8"><br>
 
 <h3>Messagerie</h3><br>
 
@@ -103,8 +103,11 @@ $listAmi = $ami->fetchAll();
                                 <section class="msger">
                                     <header class="msger-header">
                                         <div class="msger-header-title">
-                                            <?php echo "$nomr" ?>
+                                            <a href="profil.php?u=<?php echo $_GET['idenvoyeur']; ?>" style="color: black;">
+                                                <?php echo "$nomr" ?>
+                                            </a>
                                         </div>
+
                                     </header>
 
                                     <main class="msger-chat" id="messageBody">
