@@ -250,7 +250,7 @@ function post($post)
         <a href="profil.php?u=<?= $user["idu"] ?>">
           <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
         </a>
-        <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
+        <div class="ps-3 pt-0 fs-4 fw-bolder" style="width:90%;"><?= $post["titre"] ?></div>
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
       <?php if ($_SESSION["idu"] == $post["idu"] || $_SESSION["grade"] == 4) { ?>
@@ -273,7 +273,7 @@ function post($post)
     <div class="card-body">
       <p class="ms-5 px-3"><?= $post["texte"] ?></p>
       <?php if ($post["photo"] != "vide") { ?>
-        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
+        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:100%;max-height:20rem;height:auto;">
       <?php } ?>
       <button id="like-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-up"></i></button>
       <button id="dislike-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-down"></i></button>
