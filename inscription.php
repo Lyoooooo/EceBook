@@ -287,7 +287,7 @@ $pdo = connexion();
                         <div class="text-start">
                             <div class="mb-3"><br>
                                 <label for="exampleFormControlTextarea1" class="form-label">Rentrez votre descritpion</label> <br>
-                                <textarea class="form-control" name="descrip" id="descrip" placeholder="Entré une descritpion de vous:" maxlength="255" rows="2"></textarea>
+                                <textarea class="form-control" name="descrip" id="descrip" placeholder="Votre description :" maxlength="255" rows="2"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Rentrez vos centres d'interets</label> <br>
