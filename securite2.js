@@ -22,7 +22,7 @@ function envoyerMail() {
     From: "confirmation.noreply.enow@gmail.com",
     Subject: "Lien de confirmation d'inscription",
     Body:
-      "Cliquez sur le lien suivant pour valider votre inscription et être redirigé vers notre page connexion \n " +
+      "Cliqué sur le lien suivant pour validé votre inscription et être redirigé vers notre page connexion \n " +
       lien,
   }).then((message) => alert(message));
 }
@@ -44,19 +44,31 @@ function mailAmi() {
   var mailu = document.getElementById("mailu").value;
   var nom = document.getElementById("nom").value;
   var prenom = document.getElementById("prenom").value;
-  // alert(mailu + " " + nom + " " + prenom);
+  alert(mailu + " " + nom + " " + prenom);
+  //   var lien =
+  //     "http://localhost/EceBook/valider_ami.php?idu=" + idu + "&ida=" + ida;
 
   Email.send({
     Host: "smtp.elasticemail.com",
     Username: "confirmation.noreply.enow@gmail.com",
     Password: "AF1D47BEB846BFFE94469E005DF652366C3",
-    To: mailu,
+    To: mail,
     From: "confirmation.noreply.enow@gmail.com",
     Subject: prenom + " " + nom + " souhaite devenir votre ami!",
     Body:
-      "Cliquez sur le lien suivant pour valider votre demande d'ami et être redirigé vers notre page d'acceuil \nhttp://localhost/EceBook/valider_ami.php?idu=" +
+      "Cliqué sur le lien suivant pour validé votre demande d'ami et être redirigé vers notre page d'acceuil \nhttp://localhost/EceBook/valider_ami.php?idu=" +
       idu +
       "&ida=" +
       ida,
   }).then((message) => alert(message));
 }
+
+// function test() {
+//   var idu = document.getElementById("idu").value;
+//   var ida = document.getElementById("ida").value;
+//   var mailu = document.getElementById("mailu").value;
+//   var nom = document.getElementById("nom").value;
+//   var prenom = document.getElementById("prenom").value;
+//   //   var user = ;
+//   alert(idu + " " + ida + " " + mailu + " " + nom + " " + prenom);
+// }
