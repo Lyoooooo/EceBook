@@ -46,7 +46,7 @@ $pdo = connexion();
                             <a href="connexion.php" class="text-end" style="text-decoration: none; color: #ff621f;">Retour</a>
                         </div>
                         <h1>Inscription</h1>
-                        <label for="validationDefault01" class="form-label">Entrez votre adresse mail</label> <span class="etoile">*</span><br>
+                        <label for="validationDefault01" class="form-label">Entrez votre adresse mail </label> <span class="etoile"> *</span><br>
                         <div class="input-group">
                             <span class="input-group-text" id="inputGroupPrepend2">@</span>
                             <input type="email" name="mail" class="form-control" id="mail" aria-describedby="inputGroupPrepend2" placeholder="Adresse mail" required>
@@ -75,7 +75,7 @@ $pdo = connexion();
                             });
                         </script>
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Entrez votre mot de passe</label><span class="etoile">*</span>
+                            <label for="exampleInputPassword1" class="form-label">Entrez votre mot de passe </label><span class="etoile"> *</span>
                             <div class="input-group">
                                 <span class="input-group-text" id="inputGroupPrepend2"> <svg fill="none" viewBox="0 0 24 24" height="20" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
                                         <path stroke-linecap="round" stroke-width="1.5" stroke="#141B34" d="M18 11.0041C17.4166 9.91704 16.273 9.15775 14.9519 9.0993C13.477 9.03404 11.9788 9 10.329 9C8.67911 9 7.18091 9.03404 5.70604 9.0993C3.95328 9.17685 2.51295 10.4881 2.27882 12.1618C2.12602 13.2541 2 14.3734 2 15.5134C2 16.6534 2.12602 17.7727 2.27882 18.865C2.51295 20.5387 3.95328 21.8499 5.70604 21.9275C6.42013 21.9591 7.26041 21.9834 8 22"></path>
@@ -328,16 +328,15 @@ $pdo = connexion();
             $pp = ajoutpp($nom, $pp);
         }
 
-        var_dump($_FILES, $pp);
 
         if ($ville == "") {
             $ville = "";
         }
-        extract($_FILES);
+
         if ($descrip == "") {
             $descrip = "";
         }
-        extract($_FILES);
+
         if ($interet == "") {
             $interet = "";
         }
