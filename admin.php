@@ -99,7 +99,7 @@ mainHeader();
                             $pp = 'images/avatarbasique.png';
                         }
                         echo "<tr>
-                              <td class='align-middle'><img src='".$pp."' width='60'></td> 
+                              <td class='align-middle'><a href='profil.php?u= ".$ligne["idu"]."'><img src='".$pp."' width='60'></a></td> 
                               <td class='align-middle'>". $ligne["idu"]."</td>
                               <td class='align-middle'>". $ligne["nom"]."</td>
                               <td class='align-middle'> &nbsp;&nbsp;&nbsp;<a href='supprimer.php?idu=".$ligne["idu"]."'<i class='fas fa-trash'></i></a></td>
