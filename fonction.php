@@ -229,7 +229,7 @@ function post($post)
             <img src="images/boutonPosts.png" alt="" style="height: 40px;">
           </button>
           <ul class="dropdown-menu">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"]?>" class="dropdown-item"> Modifier le post </button></li>
+          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"]?>" class="dropdown-item"> Modifier le post </button></li>
             <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
             <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;" >SUPPRIMER LE POST</a></li>
           </ul>
@@ -245,7 +245,61 @@ function post($post)
         <?php if ($post["photo"] != "vide") { ?>
           <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
         <?php } ?>
-        <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
+          <button id="like-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-up"></i></button>
+          <button id="dislike-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-down"></i></button>
+          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+        <script>
+          const likeBtn = document.getElementById('like-btn');
+          const dislikeBtn = document.getElementById('dislike-btn');
+
+        likeBtn.addEventListener('click', function() {
+          likeBtn.classList.toggle('liked');
+          if (likeBtn.classList.contains('liked')) {
+            likeBtn.innerHTML = '<i class="fa fa-thumbs-up"></i>';
+            dislikeBtn.innerHTML = '<i class="fa fa-thumbs-o-down"></i>';
+          } else {
+            likeBtn.innerHTML = '<i class="fa fa-thumbs-o-up"></i>';
+          }
+        });
+        dislikeBtn.addEventListener('click', function() {
+          dislikeBtn.classList.toggle('disliked');
+          if (dislikeBtn.classList.contains('disliked')) {
+            dislikeBtn.innerHTML = '<i class="fa fa-thumbs-down"></i>';
+            likeBtn.innerHTML = '<i class="fa fa-thumbs-o-up"></i>';
+          } else {
+            dislikeBtn.innerHTML = '<i class="fa fa-thumbs-o-down"></i>';
+          }
+        });
+        $('#like-btn').on('click', function() {
+          var postId = $(this).data('post-id');
+          $.ajax({
+            url: 'like.php',
+            type: 'POST',
+            data: {postId: postId},
+            success: function(response) {
+            },
+            error: function(xhr, status, error) {
+              console.log("erreur")
+            }
+          });
+        });
+        
+        $('#dislike-btn').on('click', function() {
+          var postId = $(this).data('post-id');
+          $.ajax({
+            url: 'dislike.php',
+            type: 'POST',
+            data: {postId: postId},
+            success: function(response) {
+            },
+            error: function(xhr, status, error) {
+              console.log("erreur")
+            }
+          });
+        });
+
+        </script>
       </div>
       <!-- FOOTER -->
       <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
@@ -256,7 +310,7 @@ function post($post)
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
     </div>
-<?php
+  <?php
 }
 
 function supprimerPost($idp){
@@ -398,4 +452,4 @@ function modifpost($idu, $idp)
     ?>
       <meta http-equiv="refresh" content="1">
   <?php   }
-  } 
+  }
