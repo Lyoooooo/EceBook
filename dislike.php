@@ -25,8 +25,7 @@ if ($verif == false) {
     $req = $pdo->prepare("INSERT INTO jaime (idp,idu,ld) VALUES (?,?,2)");
     $req->execute(array($postId, $idu));
 } else {
-    //si le post est disliké
-    $totalLikes = $recup["like"];
+    //si le post est disliké 
     if($verif["ld"] == 1){
         $totalDislikes = $recup["dislike"] + 1;
         $like = $recup["likes"];
