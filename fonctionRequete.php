@@ -14,6 +14,8 @@ function ajoutami($idu, $ida, $page)
   include 'fonction.php';
   $pdo = connexion();
 
+
+  
   $query = $pdo->prepare("SELECT * FROM ami WHERE (idu1 = :ida AND idu2 = :idu) OR (idu1 = :idu AND idu2 = :ida)"); //regarde si il existe déja une demande
   $query->bindParam(':ida', $ida);
   $query->bindParam(':idu', $idu);

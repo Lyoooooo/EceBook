@@ -116,6 +116,8 @@ function mainHeader()
                 <a class="dropdown-item" href="deconnexion.php">
                   <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
               </div>
+            </div>
+          </li>
         </ul>
       </div>
       <!-- Right elements -->
@@ -147,6 +149,8 @@ function mainHeader()
             </li>
           </ul>
         </div>
+      </div>
+    </div>
   </nav>
   </div>
   </div>
@@ -236,12 +240,12 @@ function post($post)
     <!-- HEADER -->
     <div class="header d-flex ps-2">
       <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
-          <?php if ($user["pp"] == NULL) { ?>
-            <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
-          <?php } else { ?>
-            <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
-          <?php } ?>
-        </a></div>
+        <?php if ($user["pp"] == NULL) { ?>
+          <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
+        <?php } else { ?>
+          <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
+        <?php } ?>
+      </a></div>
       <div class="grid">
         <a href="profil.php?u=<?= $user["idu"] ?>">
           <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
@@ -256,27 +260,28 @@ function post($post)
           </button>
 
           <ul class="dropdown-menu">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
+            <li><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
+            <?php $idp = $post["idp"];          
+            modifpost($idu, $idp); ?>
             <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
           </ul>
-          <?php $idp = $post["idp"];
-          modifpost($idu, $idp); ?>
-          </ul>
         </div>
-      </div>
-      <!-- MAIN -->
-      <div class="card-body">
-        <p class="ms-5 px-3"><?= $post["texte"] ?></p>
-        <?php if ($post["photo"] != "vide") { ?>
-          <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
-        <?php } ?>
-          <button id="like-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-up"></i></button>
-          <button id="dislike-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-down"></i></button>
-          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="https://use.fontawesome.com/fe459689b4.js"></script>
-        <script>
-          const likeBtn = document.getElementById('like-btn');
-          const dislikeBtn = document.getElementById('dislike-btn');
+      <?php } ?>
+    </div>
+
+    <!-- MAIN -->
+    <div class="card-body">
+      <p class="ms-5 px-3"><?= $post["texte"] ?></p>
+      <?php if ($post["photo"] != "vide") { ?>
+        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow: hidden;max-width:60rem;max-height:50rem;height: auto;">
+      <?php } ?>
+      <button id="like-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-up"></i></button>
+      <button id="dislike-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-down"></i></button>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+      <script>
+        const likeBtn = document.getElementById('like-btn');
+        const dislikeBtn = document.getElementById('dislike-btn');
 
         likeBtn.addEventListener('click', function() {
           likeBtn.classList.toggle('liked');
@@ -323,28 +328,7 @@ function post($post)
             }
           });
         });
-
-        </script>
-      </div>
-      <!-- FOOTER -->
-      <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
-        <span class="ps-3"><?= $post["likes"] ?> Likes</span>
-        <span class=""><?= $post["dislike"] ?> Dislikes</span>
-        <span class=""><?= $post["vu"] ?> Vues</span>
-        <span class=""><?= $post["date"] ?></span>
-      </div>
-      <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
-    </div>
-      <?php } ?>
-    </div>
-
-    <!-- MAIN -->
-    <div class="card-body">
-      <p class="ms-5 px-3"><?= $post["texte"] ?></p>
-      <?php if ($post["photo"] != "vide") { ?>
-        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:20rem;height:auto;weight:auto;">
-      <?php } ?>
-      <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
+      </script>
     </div>
 
     <!-- FOOTER -->
@@ -354,6 +338,7 @@ function post($post)
       <span class=""><?= $post["vu"] ?> Vues</span>
       <span class=""><?= $post["date"] ?></span>
     </div>
+    <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
   </div>
 <?php
 }
