@@ -56,11 +56,14 @@ function mainHeader()
 
       <!-- Center elements -->
       <!--Recherche-->
-
-      <form class="input-group w-auto my-auto d-none d-sm-flex" method="get">
-        <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" style="min-width: 125px;" />
-        <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span>
-
+      
+      <form class="input-group w-auto my-auto d-none d-sm-flex" method="post" action="search.php">
+        <!-- <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" " />
+        <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span> -->
+        <input type="text" class="form-control" style="min-width: 125px;" placeholder="Chercher un utilisateur" name="search" aria-label="Text input with dropdown button">
+        <div class="input-group-append">
+        <input type="submit" class="btn btn-white" style="border: 1px solid; color:#FF621F" name="ok" value="Rechercher">
+        </div>
       </form>
 
 
@@ -235,7 +238,7 @@ function post($post)
   $user = $stmt->fetch();
   $idu = $_SESSION["idu"];
 ?>
-  <div class="card p-0 mb-4" style="text-align: left;">
+  <div class="card p-0 mb-4">
 
     <!-- HEADER -->
     <div class="header d-flex ps-2">
