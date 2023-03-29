@@ -258,7 +258,7 @@ function post($post)
           <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
         <?php } ?>
       </a></div>
-      <div class="grid">
+      <div class="grid" style="width:95%;">
         <a href="profil.php?u=<?= $user["idu"] ?>">
           <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
         </a>
