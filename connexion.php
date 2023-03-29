@@ -20,6 +20,7 @@ if (isset($_POST["bouton"])) {
     }
 }
 
+echo encode("mdp", "louise.lambert@edu.ece.fr")
 ?>
 
 <!DOCTYPE html>

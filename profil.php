@@ -154,7 +154,7 @@ mainHeader()
       <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous n'avez pas de post !!</p>
       <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-grid gap-2 col-4 mx-auto" style="color:#FF621F;border-radius:5px;padding:2px;font-weight: 500;font-size: 20px;padding:auto">
         Créez votre premier post ici
-      </button> <?php
+      </button> <?php ajoutpost();
         } else if ($ami == 1) { ?>
           <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F"><?= $user["pnom"] ?> <?= $user["nom"] ?> a 0 post...</p> <?php
         } else { ?>
