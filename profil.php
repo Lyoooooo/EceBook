@@ -132,7 +132,7 @@ mainHeader()
                 <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">
                 <input type="hidden" name="ida" value="<?= $idu ?>">
                 <input type="hidden" name="page" value="profil.php">
-                <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Accepter la demande d'ami</button>
+                <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Demander en ami</button>
               </form>
               <a href="message.php?idenvoyeur=<?= $_SESSION['idu'] ?>" style="text-decoration:none;"><button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Messagerie</button></a>
 
