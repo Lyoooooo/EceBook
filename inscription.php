@@ -321,7 +321,6 @@ $pdo = connexion();
         extract($_POST);
         extract($_FILES);
         $promo = implode(',', $promo);
-        var_dump($pp);
 
         if ($_FILES['pp']['name'] == "" || $_FILES['pp']['error'] == 4 || $_FILES['pp']['error'] == 1) {
             $pp = NULL;

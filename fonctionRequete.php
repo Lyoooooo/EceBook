@@ -57,11 +57,6 @@ function retireami($idu, $ida, $page)
   header("Location: $page?u=$ida");
 }
 
-
-
-
-
-
 function recherche()
 {
 
