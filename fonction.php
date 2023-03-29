@@ -84,8 +84,9 @@ function mainHeader()
             <!-- Avatar -->
             <div class="dropdown">
               <?php
+              //récupère les informations de l'user pour pouvoir afficher ensuite son nom, son prénom et son avatar
               if (isset($_SESSION["idu"])) {
-                $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
+                $idu = $_SESSION["idu"]; 
                 $pdo = connexion();
                 $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
                 $infoUser->execute(array($idu));
@@ -94,11 +95,12 @@ function mainHeader()
               if (isset($idu)) : ?>
                 <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="profil.php" id="navbarDropdownMenuAvatar" role="button" data-toggle="dropdown" aria-expanded="false">
                   <img src="<?php if ($infoUser["pp"] == null) {
-                              echo "./images/avatarbasique.png";
+                              echo "./images/avatarbasique.png"; //affiche un avatar de base si l'user n'a pas mis de photo de profil
                             } else { ?>./<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" /> &nbsp;
                   <p class="text-black"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
-                </a>
+                          </a>
               <?php else : ?>
+                <!--si l'utilisateur n'est pas connecté -->
                 <a class="nav-link text-center " href="connexion.php">
                   <i class="fa-regular fa-user"><br>
                     <p style="font-family: 'Courier New', Courier, monospace" class="fw-bold d-none d-lg-flex note-icon">Connexion</p>
@@ -225,6 +227,8 @@ function footer()
 
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <p>Ce site est un projet scolaire réalisé par</p>
+    <p>leo.triffault@edu.ece.fr audran.reminiac@edu.ece.fr matteo.pereira@edu.ece.fr nathan.novier@edu.ece.fr julie.kouassi@edu.ece.fr astrid.krekounian@edu.ece.fr</p>
       © 2023 Tous droits réservés :
       <a class="text-white" href="https://e-now.fr/">E-now.fr</a>
     </div>
