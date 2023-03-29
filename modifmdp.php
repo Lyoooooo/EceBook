@@ -107,7 +107,7 @@ mainHeader();
                             <div class="container">
                                 <div class="row">
                                     <div class="col-4" id="legende">
-                                      <label for="validationDefault01" class="form-label">Confirmer votre nouveau mot de passe</label><span class="etoile">*</span>
+                                      <label for="validationDefault01" class="form-label">Confirmer nouveau mot de passe</label><span class="etoile">*</span>
                                     </div>
                                     <div class="col-6">
                                       <input type="password" name="newmdp2" class="form-control" id="second" required>
