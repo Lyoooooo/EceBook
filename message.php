@@ -1,12 +1,10 @@
 <?php
 include "fonction.php";
-session_start();
-mainHeader();
-if (connecte() == False) {
-    header("location:connexion.php");
-}
+
+connecte();
 $pdo = connexion();
 
+mainHeader();
 
 // PHP de chat
 $idu = $_SESSION["idu"];
