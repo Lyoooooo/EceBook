@@ -57,10 +57,7 @@ mainHeader();
                                 <h4 class="px-5 p-3 bg-white border-warning text-center" style="color:#FF621F; "> POSTS </h4>
                                 <div class="container px-5 p-3">
                                     <div class="row">
-
                                         <?php
-
-
                                         if (count($tab) > 0) {
                                             foreach ($tab as $post) {
                                                 $query = $pdo->prepare("SELECT * FROM ami WHERE ((idu1 = :idu AND idu2 = :ida) OR (idu1 = :ida AND idu2 = :idu)) AND valide=1"); //regarde si il y a une demande
@@ -78,11 +75,7 @@ mainHeader();
                                             echo '<a class="btn btn-inverse-warning" style="border: 1px solid; color:#FF621F" href="index.php?page=' . $i . '">' . $i . '</a> ';
                                         }
                                         echo '</div>';
-
-
                                         ?>
-
-
                                     </div>
                                 </div>
                             </div>
