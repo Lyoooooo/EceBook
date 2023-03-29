@@ -44,9 +44,7 @@ function mailAmi() {
   var mailu = document.getElementById("mailu").value;
   var nom = document.getElementById("nom").value;
   var prenom = document.getElementById("prenom").value;
-  alert(mailu + " " + nom + " " + prenom);
-  //   var lien =
-  //     "http://localhost/EceBook/valider_ami.php?idu=" + idu + "&ida=" + ida;
+  // alert(mailu + " " + nom + " " + prenom);
 
   Email.send({
     Host: "smtp.elasticemail.com",
