@@ -25,7 +25,7 @@ $res->execute([$idu]);
 $nbrpost = $res->fetchAll();
 
 $query = $pdo->prepare("SELECT * FROM ami WHERE (idu1=? OR idu2=?) AND valide=1"); //récupère les amis du profil
-$query->execute([$idu,$idu]);
+$query->execute([$idu, $idu]);
 $nbrami = $query->fetchAll();
 
 if ($profil == "autre") { //si on est sur le profil de quelqu'un d'autre
@@ -55,27 +55,37 @@ if ($profil == "autre") { //si on est sur le profil de quelqu'un d'autre
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/e_now_logo2.png" />
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <script src="securite.js"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
   <title>Profil</title>
+
 </head>
 
 <?php
 mainHeader()
 ?>
+<input type="hidden" id="mailu" value="<?= $user["mail"] ?>">
+<input type="hidden" id="nom" value="<?= $_SESSION["nom"] ?>">
+<input type="hidden" id="prenom" value="<?= $_SESSION["prenom"] ?>">
+
 
 <body style="background-color: #f0dfd8;">
   <header class="col-7 mx-auto">
     <div class="bg-white shadow overflow-hidden rounded-top">
-    <br><br>
-    <h3>Profil</h3>
+      <br><br>
+      <h3>Profil</h3>
       <div class="px-5 pt-0 pb-4">
         <div class="profile-head border border-light">
 
-          <?php if ($user["pp"] == NULL) { //si il n'y a pas de pp dans la bdd ?> 
+          <?php if ($user["pp"] == NULL) { //si il n'y a pas de pp dans la bdd 
+          ?>
             <img src="images/pp/pp.jpg" alt="..." width="130" class="rounded img-thumbnail me-5 ms-2 mb-2 mt-2">
-          <?php } else { //si il y a une pp dans la bdd ?>
+          <?php } else { //si il y a une pp dans la bdd 
+          ?>
             <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" width="130" class="rounded img-thumbnail me-5 ms-2 mb-2 mt-2">
           <?php } ?>
 
@@ -86,18 +96,22 @@ mainHeader()
           </div>
 
           <div class="grid">
-            <div class="ms-3 mt-2" style="color:royalblue; font-weight: 600;">@<?= $user["mail"] ?></div>
-            <?php if ($user["grade"] == 1) { //Etudiant ?>
+            <div class="ms-3 mt-2" style="color:royalblue; font-weight: 600;"><?= $user["mail"] ?></div>
+            <?php if ($user["grade"] == 1) { //Etudiant 
+            ?>
               <div class="ms-3 mt-2 text-center" style="font-weight: 600;">Etudiant</div>
-            <?php } else if ($user["grade"] == 2) { //Prof ?>
+            <?php } else if ($user["grade"] == 2) { //Prof 
+            ?>
               <div class="ms-3 mt-2 text-center" style="font-weight: 600;">Professeur</div>
-            <?php } else if ($user["grade"] == 4) { //Admin ?>
+            <?php } else if ($user["grade"] == 4) { //Admin 
+            ?>
               <div class="ms-3 mt-2 text-center" style="font-weight: 600;">Administrateur</div>
             <?php } ?>
           </div>
 
           <div class="grid">
-            <?php if ($profil == "moi") { //Affiche les boutons si c'est mon compte ?>
+            <?php if ($profil == "moi") { //Affiche les boutons si c'est mon compte 
+            ?>
 
               <button class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4"><a href="modifuser.php">Modifier profil</a></button>
               <a href="message.php?idenvoyeur=<?= $_SESSION['idu'] ?>" style="text-decoration:none;"><button class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Messagerie</button></a>
@@ -118,11 +132,23 @@ mainHeader()
                 <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">
                 <input type="hidden" name="ida" value="<?= $idu ?>">
                 <input type="hidden" name="page" value="profil.php">
-                <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Ajouter en ami</button>
+                <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Accepter la demande d'ami</button>
               </form>
-              <a href="message.php?idenvoyeur=<?= $_SESSION['idu'] ?>" style="text-decoration:none;"><button class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Messagerie</button></a>
-              
-              <?php } else if ($profil == "autre" && $demande == 1 && $valide == 0) { //Si j'ai envoyé une demande ?>
+              <a href="message.php?idenvoyeur=<?= $_SESSION['idu'] ?>" style="text-decoration:none;"><button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Messagerie</button></a>
+
+            <?php } else if ($profil == "autre" && $demande == 0) { //Si c'est le compte de quelqu'un que j'ai pas en ami 
+            ?>
+
+              <form method="POST" action="fonctionRequete.php">
+                <input type="hidden" name="idu" id="idu" value="<?= $_SESSION['idu'] ?>">
+                <input type="hidden" name="ida" id="ida" value="<?= $idu ?>">
+                <input type="hidden" name="page" value="profil.php">
+                <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4" onclick="mailAmi()">Ajouter en ami</button>
+              </form>
+              <a href="message.php?idenvoyeur=<?= $_SESSION['idu'] ?>" style="text-decoration:none;"><button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Messagerie</button></a>
+
+            <?php } else if ($profil == "autre" && $demande == 1 && $valide == 0) { //Si j'ai envoyé une demande 
+            ?>
 
               <form method="POST" action="fonctionRequete.php">
                 <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">
@@ -132,7 +158,8 @@ mainHeader()
               </form>
               <a href="message.php?idenvoyeur=<?= $_SESSION['idu'] ?>" style="text-decoration:none;"><button class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Messagerie</button></a>
 
-            <?php } else { //Si c'est le compte de quelqu'un que j'ai en ami  ?>
+            <?php } else { //Si c'est le compte de quelqu'un que j'ai en ami  
+            ?>
 
               <form method="POST" action="fonctionRequete.php">
                 <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">
@@ -174,25 +201,28 @@ mainHeader()
     <div class="bg-white shadow overflow-hidden rounded-top pb-4">
       <h4 class="px-5 p-3 bg-white border-top border-warning" style="color:#FF621F">Posts</h4>
       <div class="container px-5 p-3">
-      <?php
-      if (($profil == "moi" || $valide == 1 || $_SESSION["grade"] == 4) && count($nbrpost) > 0) { //Soit c'est mon profil, ou d'un ami ou je suis un admin donc je vois les posts
+        <?php
+        if (($profil == "moi" || $valide == 1 || $_SESSION["grade"] == 4) && count($nbrpost) > 0) { //Soit c'est mon profil, ou d'un ami ou je suis un admin donc je vois les posts
           foreach ($nbrpost as $post) { ?>
             <div class="row">
               <?= post($post); ?>
             </div> <?php
-          }
-        } else if ($profil == "moi") { //Si c'est mon profil pour créer un post ?>
+                  }
+                } else if ($profil == "moi") { //Si c'est mon profil pour créer un post 
+                    ?>
       </div>
       <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous n'avez pas de post !!</p>
       <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-grid gap-2 col-4 mx-auto" style="color:#FF621F;border-radius:5px;padding:2px;font-weight: 500;font-size: 20px;padding:auto">
         Créez votre premier post ici
       </button> <?php ajoutpost();
-        } else if ($valide == 1) { //Si c'est un ami qui n'as pas de post ?>
-          <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F"><?= $user["pnom"] ?> <?= $user["nom"] ?> a 0 post...</p> <?php
-        } else { //Si ce n'est pas un ami ?>
-          <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous ne pouvez pas voir les posts de <?= $user["pnom"] ?> <?= $user["nom"] ?> car vous n'êtes pas encore ami</p> <?php
-        }
-        ?>
+                } else if ($valide == 1) { //Si c'est un ami qui n'as pas de post 
+                ?>
+      <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F"><?= $user["pnom"] ?> <?= $user["nom"] ?> a 0 post...</p> <?php
+                                                                                                                                          } else { //Si ce n'est pas un ami 
+                                                                                                                                            ?>
+      <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous ne pouvez pas voir les posts de <?= $user["pnom"] ?> <?= $user["nom"] ?> car vous n'êtes pas encore ami</p> <?php
+                                                                                                                                                                                                  }
+                                                                                                                                                                                                    ?>
     </div>
   </main>
 </body><br>
