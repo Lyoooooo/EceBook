@@ -268,3 +268,19 @@ input[type="radio"]:checked {
 .dropdown-item:hover {
   background-color: #ffe2d6;
 }
+
+
+/* pagination index  */
+.pagination-link {
+  display: inline-block; /* afficher le lien en tant que bloc pour lui donner une largeur et une hauteur */
+  padding: 10px; /* ajouter de la marge intérieure pour l'espace autour du lien */
+  background-color: #eee; /* ajouter une couleur de fond */
+  color: #333; /* changer la couleur du texte */
+  text-decoration: none; /* enlever le soulignement par défaut */
+  border-radius: 5px; /* ajouter un rayon de bordure pour arrondir les coins */
+}
+
+.pagination-link:hover {
+  background-color: #ccc; /* changer la couleur de fond au survol */
+  color: #fff; /* changer la couleur du texte au survol */
+}
