@@ -1,6 +1,7 @@
 <?php
 include "fonction.php";
 session_start();
+connecte();
 $pdo = connexion();
 $idreceveur = $_GET["idenvoyeur"];
 $idu = $_SESSION["idu"];

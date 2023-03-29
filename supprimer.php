@@ -1,6 +1,7 @@
 <?php
 include "fonction.php";
 session_start();
+connecte();
 // Vérifie si le bouton "supprimer" a été cliqué  
 // Connexion à la base de données
 
@@ -10,7 +11,7 @@ try {
     die('Erreur : ' . $e->getMessage());
 }
 
-$idu = $_GET["idu"];
+$idu = $_SESSION["idu"];
 
 
 // Supprimer l'utilisateur

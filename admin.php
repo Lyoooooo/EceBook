@@ -2,6 +2,9 @@
 include "fonction.php";
 
 connecte();
+if($_SESSION["grade"] != 4){
+    header("location:connexion.php");
+}
 $pdo = connexion();
 
 if(isset($_GET['txt']) AND !empty($_GET['txt'])) {
@@ -40,15 +43,6 @@ mainHeader();
                                     <input class="form-control me-2" type="search" placeholder="Search" name="txt" aria-label="Search">
                                     <button class="btn btn-outline-success" type="submit" value="Valider">Search</button>
                                 </form>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Trier
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item" id="tri" value="ami" onclick="">//</button></li>
-                                    <li><a class="dropdown-item" href="#">//</a></li>
-                                    </ul>
-                                </li>
                         </div>
                     </div>
                 </nav>
