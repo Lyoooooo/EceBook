@@ -56,11 +56,14 @@ function mainHeader()
 
       <!-- Center elements -->
       <!--Recherche-->
-
-      <form class="input-group w-auto my-auto d-none d-sm-flex" method="get">
-        <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" style="min-width: 125px;" />
-        <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span>
-
+      
+      <form class="input-group w-auto my-auto d-none d-sm-flex" method="post" action="search.php">
+        <!-- <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" " />
+        <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span> -->
+        <input type="text" class="form-control" style="min-width: 125px;" placeholder="Chercher un utilisateur" name="search" aria-label="Text input with dropdown button">
+        <div class="input-group-append">
+        <input type="submit" class="btn btn-white" style="border: 1px solid; color:#FF621F" name="ok" value="Rechercher">
+        </div>
       </form>
 
 
@@ -238,7 +241,7 @@ function post($post)
   $stmt2 = $pdo->prepare("UPDATE post SET vu=vu + 1 WHERE idp=?");
   $stmt2->execute([$post["idp"]]);
 ?>
-  <div class="card p-0 mb-4" style="text-align: left;">
+  <div class="card p-0 mb-4">
 
     <!-- HEADER -->
     <div class="header d-flex ps-2">
@@ -277,7 +280,9 @@ function post($post)
       <p class="ms-5 px-3"><?= $post["texte"] ?></p>
       <?php if ($post["photo"] != "vide") { ?>
         <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:100%;max-height:20rem;height:auto;">
-      <?php } ?>
+      <?php } 
+        $idp = $post["idp"];
+      ?>
       <button id="like-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-up"></i></button>
       <button id="dislike-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-down"></i></button>
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -335,11 +340,11 @@ function post($post)
     </div>
 
     <!-- FOOTER -->
-    <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
+    <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;width: 100%;">
       <span class="ps-3"><?= $post["likes"] ?> Likes</span>
-      <span class=""><?= $post["dislike"] ?> Dislikes</span>
-      <span class=""><?= $post["vu"] ?> Vues</span>
-      <span class=""><?= $post["date"] ?></span>
+      <span class="ps-3"><?= $post["dislike"] ?> Dislikes</span>
+      <span class="ps-3"><?= $post["vu"] ?> Vues</span>
+      <span class="ps-3 text-end"><?= $post["date"] ?></span>
     </div>
     <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
   </div>

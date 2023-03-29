@@ -56,7 +56,7 @@ $cat = $stmt->fetchAll();
                                 <div class="container px-5 p-3">
                                     <div class="row">
                                         <?php
-                                       // recherche();
+                                      
                                         
                                             foreach ($cat as $post) {
                                                 post($post);
