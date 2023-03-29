@@ -3,14 +3,16 @@ function envoyerMail() {
   alert(mail);
   alert("coucou");
   Email.send({
-    Host: "smtp.elasticemail.com",
-    Username: "confirmation.noreply.enow@gmail.com",
-    Password: "D38945D21E3879609CAA7AA6523BBC945AF5",
-    To: "leo.triffault@gmail.com",
-    From: "confirmation.noreply.enow@gmail.com",
-    Subject: "yayyyyyyyy",
-    Body: "And this is the body",
-  }).then((message) => alert(message));
+    Host : "smtp.elasticemail.com",
+    Username : "confirmation.noreply.enow@gmail.com",
+    Password : "A2F1D47BEB846BFFE94469E005DF652366C3",
+    To : 'leo.triffault@gmail.com',
+    From : "confirmation.noreply.enow@gmail.com",
+    Subject : "Yo bg",
+    Body : "Ptit message depuis un bouton en despi"
+  }).then(
+    message => alert(message)
+  );
 }
 
 function convertToLowercase() {
