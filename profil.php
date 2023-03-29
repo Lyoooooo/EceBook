@@ -1,11 +1,9 @@
 <?php
 include "fonction.php";
 include "fonctionRequete.php";
+
+connecte();
 $pdo = connexion();
-session_start();
-if (connecte() == False) {
-  header("location:index.php");
-}
 
 if ($_GET == null) {
   $idu = $_SESSION["idu"];
@@ -63,9 +61,11 @@ if ($profil == "autre") {
 mainHeader()
 ?>
 
-<body style="background-color: #f0dfd8;">
+<body style="background-color: #f0dfd8;"><br>
   <header class="col-7 mx-auto">
     <div class="bg-white shadow overflow-hidden rounded-top">
+    <br><br>
+    <h3>Votre Profil</h3>
       <div class="px-5 pt-0 pb-4">
         <div class="profile-head border border-light">
 
@@ -156,7 +156,7 @@ mainHeader()
       <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F">Vous n'avez pas de post !!</p>
       <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-grid gap-2 col-4 mx-auto" style="color:#FF621F;border-radius:5px;padding:2px;font-weight: 500;font-size: 20px;padding:auto">
         Créez votre premier post ici
-      </button> <?php
+      </button> <?php ajoutpost();
         } else if ($ami == 1) { ?>
           <p style="font-weight: 500;font-size: 28px;text-align: center;color:#FF621F"><?= $user["pnom"] ?> <?= $user["nom"] ?> a 0 post...</p> <?php
         } else { ?>
@@ -165,7 +165,7 @@ mainHeader()
         ?>
     </div>
   </main>
-</body>
+</body><br>
 <?php
 footer();
 ?>

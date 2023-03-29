@@ -1,14 +1,15 @@
 <?php
 include "fonction.php";
 include "fonctionRequete.php";
-session_start();
-mainHeader();
+
+connecte();
 $pdo = connexion();
-$res = $pdo->prepare("SELECT * FROM post");
+
+$res = $pdo->prepare("SELECT * FROM post ORDER BY date DESC");
 $res->execute();
 $tab = $res->fetchAll();
+mainHeader();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +26,7 @@ $tab = $res->fetchAll();
 
 
 <body>
-<?=recherche();?>
+    <?= recherche(); ?>
     <div class="central">
         <!-- post feed actualité -->
         <div class="container-fluid page-body-wrapper">
@@ -37,9 +38,9 @@ $tab = $res->fetchAll();
                                 <h4 class="px-5 p-3 bg-white border-warning text-center" style="color:#FF621F; "> POSTS </h4>
                                 <div class="container px-5 p-3">
                                     <div class="row">
-                                       
+
                                         <?php
-                                         
+
                                         if (count($tab) > 0) {
                                             foreach ($tab as $post) {
                                                 post($post);
@@ -57,12 +58,11 @@ $tab = $res->fetchAll();
             </div>
         </div>
     </div>
-    <?php if(connecte() == True){?>
-    <!-- Button trigger modal -->
-    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: fixed; bottom: 10%; right: 5%; border: 0px; background-color:rgba(0,0,0,0); z-index: 1;">
-        <img src="images/boutonAddPost.webp" alt="" style="height: 60px;">
-    </button>
-    <?php ajoutpost(); }?>
+        <!-- Button trigger modal -->
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: fixed; bottom: 10%; right: 5%; border: 0px; background-color:rgba(0,0,0,0); z-index: 1;">
+            <img src="images/boutonAddPost.webp" alt="" style="height: 60px;">
+        </button>
+    <?php ajoutpost(); ?>
     <!-- Modal -->
     <?php
     footer();

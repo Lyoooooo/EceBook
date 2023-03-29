@@ -1,5 +1,13 @@
 <?php
 
+function connecte() //vérifie que l'user est connecté et avec un compte validé
+{
+  session_start();
+  if (!isset($_SESSION["idu"]) || $_SESSION["grade"] == 0) {
+    header("location:connexion.php");
+  }
+}
+
 function connexion()
 {
   try {
@@ -19,88 +27,13 @@ function encode($mdp, $mail)
   return $crypt;
 }
 
-function connecte()
-{
-  if (!isset($_SESSION["idu"])) {
-    return False;
-  } else return True;
-}
-
-function footer()
-{ ?>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-  <!-- Modal -->
-  <!-- Footer -->
-  <footer class="text-center " style="background-color: #FFE2D6;">
-    <!-- Grid container -->
-    <div class="container p-4 pb-0">
-      <!-- Section: CTA -->
-      <section class="">
-        <p class="d-flex justify-content-center align-items-center">
-          <a href="./docs/CGU.pdf" class="btn btn-outline-light btn-rounded text-dark" target="blank" role="button" aria-pressed="true">CGU</a>
-          <button type="button" class="btn btn-outline-light btn-rounded text-dark" data-toggle="modal" data-target="#cookieConsent">
-            Police des Cookies
-          </button>
-        <div class="modal fade" id="cookieConsent">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                <div class="modal-header" style="background-color: FFE2D6;">
-                  <h5 class="modal-title" id="cookieconsentLabel2">Cookies & Vie Privée</h5>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-3 d-flex align-items-center justify-content-center">
-                      <i class="fas fa-cookie-bite fa-4x"></i>
-                    </div>
-
-                    <div class="col-9">
-                      <p>Ce site utilise des cookies pour vous garantir une meilleure expérience sur notre site internet.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: rgba(0, 0, 0, 0.2);" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn" style="background-color: FFE2D6;" data-dismiss="modal">Accepter</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Modal -->
-        </p>
-      </section>
-      <!-- Section: CTA -->
-    </div>
-    <!-- Grid container -->
-
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2023 Tous droits réservés :
-      <a class="text-white" href="https://e-now.fr/">E-now.fr</a>
-      <p>Nos concepteurs : 
-      audran.reminiac@edu.ece.fr |  leo.triffault@edu.ece.fr  |  nathan.novier@edu.ece.fr  |  matteo.pereira@edu.ece.fr  |  astrid.krekounian@edu.ece.fr  |  julie.kouassi@edu.ece.fr
-      </p>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  <!-- Footer -->
 
 
-<?php
-}
-
+  
 function mainHeader()
 {
-  
   $pdo = connexion();
 ?>
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
@@ -217,20 +150,74 @@ function mainHeader()
 
 }
 
+function footer()
+{ ?>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
+  <!-- Modal -->
+  <!-- Footer -->
+  <footer class="text-center " style="background-color: #FFE2D6;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: CTA -->
+      <section class="">
+        <p class="d-flex justify-content-center align-items-center">
+          <a href="./docs/CGU.pdf" class="btn btn-outline-light btn-rounded text-dark" target="blank" role="button" aria-pressed="true">CGU</a> &nbsp&nbsp&nbsp
+          <button type="button" class="btn btn-outline-light btn-rounded text-dark" data-toggle="modal" data-target="#cookieConsent">
+            Police des Cookies
+          </button>
+        <div class="modal fade" id="cookieConsent">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <div class="modal-header" style="background-color: FFE2D6;">
+                  <h5 class="modal-title" id="cookieconsentLabel2">Cookies & Vie Privée</h5>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-3 d-flex align-items-center justify-content-center">
+                      <i class="fas fa-cookie-bite fa-4x"></i>
+                    </div>
+
+                    <div class="col-9">
+                      <p>Ce site utilise des cookies pour vous garantir une meilleure expérience sur notre site internet.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn" style="background-color: rgba(0, 0, 0, 0.2);" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn" style="background-color: FFE2D6;" data-dismiss="modal">Accepter</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        </p>
+      </section>
+      <!-- Section: CTA -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Tous droits réservés :
+      <a class="text-white" href="https://e-now.fr/">E-now.fr</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
 
 
-
-
-
-
-
-
-
-
-
-
+<?php
+}
 
 function post($post)
 {
@@ -277,7 +264,7 @@ function post($post)
     <div class="card-body">
       <p class="ms-5 px-3"><?= $post["texte"] ?></p>
       <?php if ($post["photo"] != "vide") { ?>
-        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:40rem;height:auto;">
+        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:40rem;height:auto;weight:auto;">
       <?php } ?>
       <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
     </div>
@@ -327,6 +314,13 @@ function ajoutpost()
               <option value="Général">Général</option>
               <option value="Actualité">Actualité</option>
               <option value="Evènement">Evènement</option>
+              <?php 
+                if ($_SESSION["grade"] == 4) { //Pour les admins ?>
+                  <option value="Tous">Tous</option>
+                  <option value="Etudiant">Etudiant</option>
+                  <option value="Enseignant">Enseignant</option> <?php
+                }
+              ?>
             </select><br>
 
             <div class="input-group mb-3">
@@ -349,7 +343,7 @@ function ajoutpost()
     extract($_FILES);
     $idu = $_SESSION["idu"];
     $pdo = connexion();
-    if ($photo == "") {
+    if ($_FILES['photo']['name'] == "" || $_FILES['photo']['error'] == 4 || $_FILES['photo']['error'] == 1) {
       $photo = NULL;
     } else {
       $photo = ajoutphoto($idu, $photo);

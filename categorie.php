@@ -1,6 +1,7 @@
 <?php
 include "fonction.php";
-session_start();
+connecte();
+$pdo = connexion();
 mainHeader();
 ?>
 <!DOCTYPE html>
@@ -17,7 +18,6 @@ mainHeader();
 </head>
 <?php
 $idcategorie = $_GET["idcategorie"];
-$pdo=connexion();
 if($idcategorie == 1){
     $req = "SELECT * FROM post WHERE typep = 'general' ";
     $stmt = $pdo->prepare($req);

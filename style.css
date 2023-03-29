@@ -5,49 +5,49 @@
 }
 
 body {
-  background-color:#f0dfd8;
+  background-color: #f0dfd8;
   z-index: 1;
   min-height: 100vh;
   margin: 0;
   display: flex;
   flex-direction: column;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .central {
-    background-color: white;
-    height: 100vmax;
-    width: 70%;
-    margin-left: 15%;
+  background-color: white;
+  min-height: 100vmax;
+  max-height: fit-content;
+  width: 70%;
+  margin-left: 15%;
 }
 
 span.etoile {
-    color: #FF621F;
+  color: #ff621f;
 }
 
 h3 {
-    text-align: center;
+  text-align: center;
 }
 
 #mid {
-    border-radius: 5px;
-    border-color: rgb(120, 112, 112);
-    border-width: 1px;
-    border-style: solid;
+  border-radius: 5px;
+  border-color: rgb(120, 112, 112);
+  border-width: 1px;
+  border-style: solid;
 }
 
 #legende {
-    text-align: end;
-    font-weight: bold;
+  text-align: end;
+  font-weight: bold;
 }
 
-#pn{
-    margin-top: 6px;
+#pn {
+  margin-top: 6px;
 }
 
-#separation{
+#separation {
   border-color: rgb(120, 112, 112);
   border-width: 1px;
   border-left: 0px;
@@ -57,10 +57,6 @@ h3 {
   text-align: center;
 }
 
-
-
-
-
 /* PROFIL */
 
 .profile-head {
@@ -69,19 +65,19 @@ h3 {
   flex-wrap: wrap;
 }
 
-.grid a, .grid a:hover {
+.grid a,
+.grid a:hover {
   color: inherit;
 }
 
 .colonneAdmin {
-    width: 80%;
-    margin-left: 10%;
-    height: 800;
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    background-color: white;
+  width: 80%;
+  margin-left: 10%;
+  height: 800;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  background-color: white;
 }
-
 
 .modif {
   background-color: white;
@@ -89,18 +85,12 @@ h3 {
   width: 100%;
 }
 
-
-
-
-
-
 /* debut css chat */
 :root {
-
   --msger-bg: #fff;
   --border: 2px solid #ddd;
   --left-msg-bg: #ececec;
-  --right-msg-bg: #FF621F;
+  --right-msg-bg: #ff621f;
 }
 
 html {
@@ -255,24 +245,23 @@ html {
 
 /* fin css chat */
 
-
-/*css inscription/connexion */ 
+/*css inscription/connexion */
 .btn-primary {
   background-color: #ffffff;
-  border-color: #FF621F;
-  color: #FF621F;
+  border-color: #ff621f;
+  color: #ff621f;
 }
 .btn-primary:hover {
-  background-color: #FF621F;
-  border-color: #FF621F;
+  background-color: #ff621f;
+  border-color: #ff621f;
   color: #ffffff;
 }
 .nav-link.active {
-  background-color: #FF621F;
+  background-color: #ff621f;
   color: #ffffff;
 }
 input[type="radio"]:checked {
-  background-color: #FF621F;
+  background-color: #ff621f;
   box-shadow: 0 0 2px 2px #ff621f;
 }
 
