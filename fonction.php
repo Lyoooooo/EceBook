@@ -274,7 +274,9 @@ function post($post)
       <p class="ms-5 px-3"><?= $post["texte"] ?></p>
       <?php if ($post["photo"] != "vide") { ?>
         <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:100%;max-height:20rem;height:auto;">
-      <?php } ?>
+      <?php } 
+        $idp = $post["idp"];
+      ?>
       <button id="like-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-up"></i></button>
       <button id="dislike-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-down"></i></button>
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
