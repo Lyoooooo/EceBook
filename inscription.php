@@ -319,26 +319,24 @@ $pdo = connexion();
     <?php
     if (isset($_POST["valide"])) {
         extract($_POST);
-        $promo = implode(',', $promo);
-
         extract($_FILES);
-        if ($pp == "") {
-            $pp = "vide";
+        $promo = implode(',', $promo);
+        var_dump($pp);
+
+        if ($_FILES['pp']['name'] == "" || $_FILES['pp']['error'] == 4 || $_FILES['pp']['error'] == 1) {
+            $pp = NULL;
         } else {
             $pp = ajoutpp($nom, $pp);
         }
 
-
         if ($ville == "") {
-            $ville = "";
+            $ville = NULL;
         }
-
         if ($descrip == "") {
-            $descrip = "";
+            $descrip = NULL;
         }
-
         if ($interet == "") {
-            $interet = "";
+            $interet = NULL;
         }
 
         $mdp2 = encode($mdp, $mail);
