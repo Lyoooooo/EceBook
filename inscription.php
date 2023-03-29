@@ -19,7 +19,7 @@ $pdo = connexion();
 </head>
 
 <body style="background-color: white;">
-    <form action="inscription2.php" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
+     <form action="inscription2.php" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()"> <!--quand le bouton qui envois les données du formulaire est cliqué alors on nous redirige vers inscription2.php , on appel la fonction convertolowercase qui fait simplement en sorte que tout les mails rentré sois en minuscule meme si rentré en majuscule -->
         <div class="tab">
             <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
