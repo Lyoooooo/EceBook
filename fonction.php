@@ -280,14 +280,6 @@ function post($post)
 <?php
 }
 
-function supprimerPost($idp)
-{
-?><script>
-    alert("hello")
-  </script>
-<?php
-}
-
 function ajoutpost()
 { ?>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
