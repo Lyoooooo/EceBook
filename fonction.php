@@ -40,7 +40,7 @@ function mainHeader()
 
   <!-- Navbar-->
 
-  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
+  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white;">
     <div class="container-fluid justify-content-between">
       <!-- Left elements -->
       <div class="d-flex">
@@ -126,37 +126,43 @@ function mainHeader()
       <!-- Right elements -->
 
   </nav>
-
-  <nav class="bottom-navbar sticky-top text-center" style=" background-color: white; box-shadow: 2px 2px 3px #FFE2D6;">
-    <div class="container col-8 mx-auto" style="text-align:center;">
-      <div class="container px-5 p-3 ">
-        <div class="row ">
-          <ul class="nav page-navigation  ">
-            <li class="nav-item  ">
-              <a class="nav-link" href="categorie.php?idcategorie=1">
-                <i class="fas fa-circle-notch" style="color:FF621F"></i>
-                <span class="menu-title" style="color:FF621F">Général</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="categorie.php?idcategorie=2">
-                <i class="fas fa-globe" style="color:FF621F"></i>
-                <span class="menu-title" style="color:FF621F"> Actualités</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="categorie.php?idcategorie=3">
-                <i class="fas fa-calendar" style="color:FF621F"></i>
-                <span class="menu-title" style="color:FF621F"> Evénements </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <nav class="bottom-navbar" style=" background-color: white; ">
+  <div class="container">
+  <ul class="navbar-nav page-navigation">
+  <div class="row">
+    <div class="col-md-3">
+        
+                <li class="nav-item text-center">
+                    <a class="nav-link" href="categorie.php?idcategorie=1">
+                        <i class="fas fa-circle-notch" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Général</span>
+                    </a>
+                </li>
+                
+                
+            
     </div>
-  </nav>
+    <div class="col-md-6">
+                <li class="nav-item text-center">
+                    <a class="nav-link" href="categorie.php?idcategorie=2">
+                        <i class="fas fa-globe" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Actualités</span>
+                    </a>
+                </li>
+    </div>
+    <div class="col-md-3">
+    <li class="nav-item">
+                    <a class="nav-link text-center" href="categorie.php?idcategorie=3">
+                        <i class="fas fa-calendar" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Evènements</span>
+                    </a>
+                </li>
+                
+    </div>
   </div>
-  </div>
+  </ul>
+</div>
+    </nav>
 <?php
 
 }
