@@ -3,7 +3,7 @@
 function connecte() //vérifie que l'user est connecté et avec un compte validé
 {
   session_start();
-  if (!isset($_SESSION["idu"]) || $_SESSION["statut"] == 0) {
+  if (!isset($_SESSION["idu"]) || $_SESSION["grade"] == 0) {
     header("location:connexion.php");
   }
 }
