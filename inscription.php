@@ -293,7 +293,7 @@ $pdo = connexion();
                             <br>
                         </div>
                         <input type="button" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour2()">
-                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide">
+                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="envoyerMail()">
                     </div>
                 </div>
             </div>
