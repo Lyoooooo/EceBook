@@ -234,6 +234,9 @@ function post($post)
   $stmt->execute([$post["idu"]]);
   $user = $stmt->fetch();
   $idu = $_SESSION["idu"];
+  $nbr = $post["vu"] + 1;
+  $stmt2 = $pdo->prepare("UPDATE post SET vu=vu + 1 WHERE idp=?");
+  $stmt2->execute([$post["idp"]]);
 ?>
   <div class="card p-0 mb-4" style="text-align: left;">
 
@@ -261,10 +264,10 @@ function post($post)
 
           <ul class="dropdown-menu">
             <li><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
-            <?php $idp = $post["idp"];          
-            modifpost($idu, $idp); ?>
             <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
           </ul>
+          <?php $idp = $post["idp"];          
+            modifpost($idu, $idp); ?>
         </div>
       <?php } ?>
     </div>
@@ -476,17 +479,18 @@ function modifpost($idu, $idp)
         </form>
       </div>
     </div>
-    <?php
-    if (isset($_POST["boutonEdit"])) {
-      $pdo = connexion();
-      extract($_POST);
-      extract($_FILES);
-      if($idp = $_POST["boutonEdit"]){
-        $stmt = $pdo->prepare("UPDATE post SET titre = ?, texte = ?, typep = ? WHERE idp = $idp");
-        $stmt->execute([$titre, $texte, $type]);
-      }
-    ?>
-      <meta http-equiv="refresh" content="1">
-  <?php   }
-  }
+  </div>
+  <?php
+  if (isset($_POST["boutonEdit"])) {
+    $pdo = connexion();
+    extract($_POST);
+    extract($_FILES);
+    if ($idp = $_POST["boutonEdit"]) {
+      $stmt = $pdo->prepare("UPDATE post SET titre = ?, texte = ?, typep = ? WHERE idp = $idp");
+      $stmt->execute([$titre, $texte, $type]);
+    }
   ?>
+    <meta http-equiv="refresh" content="1">
+<?php   }
+}
+?>
