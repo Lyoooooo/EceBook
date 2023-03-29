@@ -54,12 +54,12 @@ function retireami($idu, $ida, $page)
   $query->execute();
   $ami = $query->fetch();
 
-  if ($ami["valide"] == 1) { //si ils sont en ami
+  if (($ami["valide"] == 1) && ($ami["idu1"] != $idu)) { //si ils sont en ami
     $query = $pdo->prepare("UPDATE ami SET valide = 0 WHERE idu1 = :idu1 AND idu2 = :idu2"); //modifie le valide 
     $query->bindParam(':idu1', $ami["idu1"]);
     $query->bindParam(':idu2', $ami["idu2"]);
     $query->execute();
-  } else if ($ami["valide"] == 0) { //si ils ne sont pas ami == l'ami n'a pas accepté sa demande donc il la retire
+  } else if (($ami["valide"] == 0) || ($ami["idu1"] == $idu)) { //si ils ne sont pas ami == l'ami n'a pas accepté sa demande donc il la retire
     $query = $pdo->prepare("DELETE FROM ami WHERE idu1 = :idu1 AND idu2 = :idu2"); //supprime sa demande
     $query->bindParam(':idu1', $ami["idu1"]);
     $query->bindParam(':idu2', $ami["idu2"]);

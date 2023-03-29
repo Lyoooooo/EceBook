@@ -64,24 +64,23 @@ $listAmi = $ami->fetchAll();
                         <hr>
                             <?php
                             $pdo = connexion();
-                            if (count($listAmi) > 0) {
+                            if (count($listAmi) > 0) {              // si la listeAmi est plus grande que 0
                                 foreach ($listAmi as $friend) {
-                                    if ($friend["idu1"] == $idu) {
-
-                                        $contact = $pdo->prepare("SELECT * FROM user WHERE idu=?");
-                                        $contact->execute([$friend["idu2"]]);
-                                        $boug = $contact->fetch();
+                                    if ($friend["idu1"] == $idu) {          // si l'idu1 correspond à l'idu connecté
+                                        $contact = $pdo->prepare("SELECT * FROM user WHERE idu=?");   // requête SQL pour récupérer idu du user ami
+                                        $contact->execute([$friend["idu2"]]);       // appel de la requête sur l'idu2
+                                        $boug = $contact->fetch();              // déclaration de la variable $boug qui récupère le résultat
                                     } else {
-                                        $contact = $pdo->prepare("SELECT * FROM user WHERE idu=?");
-                                        $contact->execute([$friend["idu1"]]);
-                                        $boug = $contact->fetch();
+                                        $contact = $pdo->prepare("SELECT * FROM user WHERE idu=?");   // requête SQL pour récupérer idu du user ami
+                                        $contact->execute([$friend["idu1"]]);       // appel de la requête sur l'idu1
+                                        $boug = $contact->fetch();              // déclaration de la variable $boug qui récupère le résultat
                                     }
-                                    $nom = $boug["nom"];
-                                    $pnom = $boug["pnom"];
+                                    $nom = $boug["nom"];        // déclaration de $nom pour récupérer le nom de l'ami
+                                    $pnom = $boug["pnom"];      // déclaration de $pnom pour récupérer le prénom de l'ami
                             ?>
                                     <div class="amiMessage">
                                         <a href="message.php?idenvoyeur=<?php echo $boug["idu"] ?>" style="color: black;">
-                                            <?php echo ("$pnom $nom") ?>
+                                            <?php echo ("$pnom $nom") // afficher le nom et le prénom de l'ami  ?>
                                             <br>
                                             <hr>
                                         </a>
@@ -111,38 +110,34 @@ $listAmi = $ami->fetchAll();
                                     </header>
 
                                     <main class="msger-chat" id="messageBody">
-                                        <?php
+                                        <?php           // requêtes pour récuperer les messages de la discussion par ordre croissant
                                         $stmt = $pdo->prepare("SELECT * FROM messages WHERE (idenvoyeur = ? AND idreceveur = ?) OR (idenvoyeur = ? AND idreceveur = ?) ORDER BY dates ASC");
-                                        $stmt->execute([$idu, $idreceveur, $idreceveur, $idu]);
+                                        $stmt->execute([$idu, $idreceveur, $idreceveur, $idu]);     // exécution de la requête pour récuperer tous les messages de la discussion
                                         while ($ligne2 = $stmt->fetch()) {
-                                            $time = $ligne2["dates"];
-                                            $message = $ligne2["texte"];
-                                            if ($ligne2["idreceveur"] == $idu) { ?>
-                                                <div class="msg left-msg">
-
+                                            $time = $ligne2["dates"];       // déclaration de $time pour les dates des messages
+                                            $message = $ligne2["texte"];        // déclaration de $message pour les textes des messages
+                                            if ($ligne2["idreceveur"] == $idu) {  // si l'idenvoyeur est celui de idu connecté  ?>
+                                               <div class="msg left-msg">          <!--  message de gauche -->
                                                     <div class="msg-bubble">
                                                         <div class="msg-info">
-                                                            <div class="msg-info-name"><?php echo $nomr ?></div>
-                                                            <div class="msg-info-time"><?php echo "$time" ?></div>
+                                                            <div class="msg-info-name"><?php echo $nomr     // affichage du nom et du prénom ?></div>
+                                                            <div class="msg-info-time"><?php echo "$time"  // affichage de la date du message  ?></div>
                                                         </div>
-
                                                         <div class="msg-text" style="word-wrap: break-word;">
-                                                            <?php echo "$message" ?>
+                                                            <?php echo "$message"   // affichage du contenu du message  ?>
                                                         </div>
                                                     </div>
                                                 </div>
                                             <?php } else { ?>
-                                                <div class="msg right-msg">
-
-
+                                                <div class="msg right-msg">         <!--  message de droite -->
                                                     <div class="msg-bubble">
                                                         <div class="msg-info">
-                                                            <div class="msg-info-name"><?php echo "$nomu" ?></div>
-                                                            <div class="msg-info-time"><?php echo "$time" ?></div>
+                                                            <div class="msg-info-name"><?php echo "$nomu"   // affichage du nom et du prénom du user connecté ?></div>
+                                                            <div class="msg-info-time"><?php echo "$time"   // affichage de la date du message  ?></div>
                                                         </div>
 
                                                         <div class="msg-text" style="word-wrap: break-word;">
-                                                            <?php echo "$message" ?>
+                                                            <?php echo "$message"   // affichage du contenu du message ?>
                                                         </div>
                                                     </div>
                                                 </div>

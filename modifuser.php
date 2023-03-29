@@ -11,8 +11,16 @@ $user = $stmt->fetch();
 
 if (isset($_POST["modif"])) {
     extract($_POST);
-    $sql = "UPDATE user SET nom=?, pnom=?, naissance=?, promo=?, ville=?, descrip=?, interet=? WHERE idu=?";
-    $pdo->prepare($sql)->execute([$nom, $pnom, $naissance, $promo, $ville, $descrip, $interet, $idu]);
+    extract($_FILES);
+
+    if ($_FILES['pp']['name'] == "" || $_FILES['pp']['error'] == 4 || $_FILES['pp']['error'] == 1) {
+        $pp = $user["pp"];
+    } else {
+        $pp = ajoutpp($nom, $pp);
+    }
+
+    $sql = "UPDATE user SET nom=?, pnom=?, naissance=?, promo=?, pp=?, ville=?, descrip=?, interet=? WHERE idu=?";
+    $pdo->prepare($sql)->execute([$nom, $pnom, $naissance, $promo, $pp, $ville, $descrip, $interet, $idu]);
     header("location:index.php");
 }
 mainHeader();
@@ -46,7 +54,7 @@ mainHeader();
                         <h3>Modifier Profil</h3><br>
 
                         <div class=text-end>
-                            <form action="" method="post">
+                            <form action="" method="post" enctype="multipart/form-data">
                         </div>
                         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -114,7 +122,7 @@ mainHeader();
                             <div class="container">
                                 <div class="row">
                                     <div class="col-4" id="legende">
-                                        <label id="pn" for="validationDefaultUsername" class="form-label">Adresse mail</label>
+                                        <label id="pn" for="validationDefaultUsername" class="form-label">Adresse mail</label><span class="etoile">*</span>
                                     </div>
                                     <div class="col-6">
                                         <div class="input-group">
@@ -156,7 +164,7 @@ mainHeader();
                             <div class="container">
                                 <div class="row">
                                     <div class="col-4" id="legende">
-                                        <label id="pn" for="6" class="form-label">Ville</label><span class="etoile">*</span>
+                                        <label id="pn" for="6" class="form-label">Ville</label>
                                     </div>
                                     <div class="col-6">
                                         <input type="text" name="ville" class="form-control" value="<?= $user["ville"] ?>">
@@ -171,7 +179,7 @@ mainHeader();
                             <div class="container">
                                 <div class="row">
                                     <div class="col-4" id="legende">
-                                        <label id="pn" for="validationDefault04" class="form-label">Description</label><span class="etoile">*</span>
+                                        <label id="pn" for="validationDefault04" class="form-label">Description</label>
                                     </div>
                                     <div class="col-6">
                                         <input type="text" name="descrip" class="form-control" value="<?= $user["descrip"] ?>">
@@ -186,7 +194,7 @@ mainHeader();
                             <div class="container">
                                 <div class="row">
                                     <div class="col-4" id="legende">
-                                        <label id="pn" for="validationDefault05" class="form-label">Interet</label><span class="etoile">*</span>
+                                        <label id="pn" for="validationDefault05" class="form-label">Interet</label>
                                     </div>
                                     <div class="col-6">
                                         <input type="text" name="interet" class="form-control" value="<?= $user["interet"] ?>">
@@ -196,6 +204,22 @@ mainHeader();
                                 </div>
                             </div>
                         </div><br>
+
+                        <div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-4" id="legende">
+                                    <label for="formFile" class="form-label">Photo de profil</label>
+                                    </div>
+                                    <div class="col-6">
+                                    <input class="form-control" type="file" id="pp" name="pp" accept=".png, .jpg, .jpeg .webp">
+                                    </div>
+                                    <div class="col-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+
                         
                         <div class="d-grid gap-2 col-5 mx-auto m-5">
                             <input class="btn btn-success text-center" type="submit" value="Valider" name="modif">

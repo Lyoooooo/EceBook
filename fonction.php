@@ -40,7 +40,7 @@ function mainHeader()
 
   <!-- Navbar-->
 
-  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
+  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white;">
     <div class="container-fluid justify-content-between">
       <!-- Left elements -->
       <div class="d-flex">
@@ -84,8 +84,9 @@ function mainHeader()
             <!-- Avatar -->
             <div class="dropdown">
               <?php
+              //récupère les informations de l'user pour pouvoir afficher ensuite son nom, son prénom et son avatar
               if (isset($_SESSION["idu"])) {
-                $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
+                $idu = $_SESSION["idu"]; 
                 $pdo = connexion();
                 $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
                 $infoUser->execute(array($idu));
@@ -94,11 +95,12 @@ function mainHeader()
               if (isset($idu)) : ?>
                 <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="profil.php" id="navbarDropdownMenuAvatar" role="button" data-toggle="dropdown" aria-expanded="false">
                   <img src="<?php if ($infoUser["pp"] == null) {
-                              echo "./images/avatarbasique.png";
+                              echo "./images/avatarbasique.png"; //affiche un avatar de base si l'user n'a pas mis de photo de profil
                             } else { ?>./<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" /> &nbsp;
                   <p class="text-black"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
-                </a>
+                          </a>
               <?php else : ?>
+                <!--si l'utilisateur n'est pas connecté -->
                 <a class="nav-link text-center " href="connexion.php">
                   <i class="fa-regular fa-user"><br>
                     <p style="font-family: 'Courier New', Courier, monospace" class="fw-bold d-none d-lg-flex note-icon">Connexion</p>
@@ -126,37 +128,43 @@ function mainHeader()
       <!-- Right elements -->
 
   </nav>
-
-  <nav class="bottom-navbar sticky-top text-center" style=" background-color: white; box-shadow: 2px 2px 3px #FFE2D6;">
-    <div class="container col-8 mx-auto" style="text-align:center;">
-      <div class="container px-5 p-3 ">
-        <div class="row ">
-          <ul class="nav page-navigation  ">
-            <li class="nav-item  ">
-              <a class="nav-link" href="categorie.php?idcategorie=1">
-                <i class="fas fa-circle-notch" style="color:FF621F"></i>
-                <span class="menu-title" style="color:FF621F">Général</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="categorie.php?idcategorie=2">
-                <i class="fas fa-globe" style="color:FF621F"></i>
-                <span class="menu-title" style="color:FF621F"> Actualités</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="categorie.php?idcategorie=3">
-                <i class="fas fa-calendar" style="color:FF621F"></i>
-                <span class="menu-title" style="color:FF621F"> Evénements </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <nav class="bottom-navbar" style=" background-color: white; ">
+  <div class="container">
+  <ul class="navbar-nav page-navigation">
+  <div class="row">
+    <div class="col-md-3">
+        
+                <li class="nav-item text-center">
+                    <a class="nav-link" href="categorie.php?idcategorie=1">
+                        <i class="fas fa-circle-notch" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Général</span>
+                    </a>
+                </li>
+                
+                
+            
     </div>
-  </nav>
+    <div class="col-md-6">
+                <li class="nav-item text-center">
+                    <a class="nav-link" href="categorie.php?idcategorie=2">
+                        <i class="fas fa-globe" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Actualités</span>
+                    </a>
+                </li>
+    </div>
+    <div class="col-md-3">
+    <li class="nav-item">
+                    <a class="nav-link text-center" href="categorie.php?idcategorie=3">
+                        <i class="fas fa-calendar" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Evènements</span>
+                    </a>
+                </li>
+                
+    </div>
   </div>
-  </div>
+  </ul>
+</div>
+    </nav>
 <?php
 
 }
@@ -220,6 +228,8 @@ function footer()
 
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <p>Ce site est un projet scolaire réalisé par</p>
+    <p>leo.triffault@edu.ece.fr audran.reminiac@edu.ece.fr matteo.pereira@edu.ece.fr nathan.novier@edu.ece.fr julie.kouassi@edu.ece.fr astrid.krekounian@edu.ece.fr</p>
       © 2023 Tous droits réservés :
       <a class="text-white" href="https://e-now.fr/">E-now.fr</a>
     </div>
@@ -238,6 +248,9 @@ function post($post)
   $stmt->execute([$post["idu"]]);
   $user = $stmt->fetch();
   $idu = $_SESSION["idu"];
+  $nbr = $post["vu"] + 1;
+  $stmt2 = $pdo->prepare("UPDATE post SET vu=vu + 1 WHERE idp=?");
+  $stmt2->execute([$post["idp"]]);
 ?>
   <div class="card p-0 mb-4">
 
@@ -250,7 +263,7 @@ function post($post)
           <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
         <?php } ?>
       </a></div>
-      <div class="grid">
+      <div class="grid" style="width:95%;">
         <a href="profil.php?u=<?= $user["idu"] ?>">
           <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
         </a>
@@ -265,10 +278,10 @@ function post($post)
 
           <ul class="dropdown-menu">
             <li><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
-            <?php $idp = $post["idp"];          
-            modifpost($idu, $idp); ?>
             <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
           </ul>
+          <?php $idp = $post["idp"];          
+            modifpost($idu, $idp); ?>
         </div>
       <?php } ?>
     </div>
@@ -482,17 +495,18 @@ function modifpost($idu, $idp)
         </form>
       </div>
     </div>
-    <?php
-    if (isset($_POST["boutonEdit"])) {
-      $pdo = connexion();
-      extract($_POST);
-      extract($_FILES);
-      if($idp = $_POST["boutonEdit"]){
-        $stmt = $pdo->prepare("UPDATE post SET titre = ?, texte = ?, typep = ? WHERE idp = $idp");
-        $stmt->execute([$titre, $texte, $type]);
-      }
-    ?>
-      <meta http-equiv="refresh" content="1">
-  <?php   }
-  }
+  </div>
+  <?php
+  if (isset($_POST["boutonEdit"])) {
+    $pdo = connexion();
+    extract($_POST);
+    extract($_FILES);
+    if ($idp = $_POST["boutonEdit"]) {
+      $stmt = $pdo->prepare("UPDATE post SET titre = ?, texte = ?, typep = ? WHERE idp = $idp");
+      $stmt->execute([$titre, $texte, $type]);
+    }
   ?>
+    <meta http-equiv="refresh" content="1">
+<?php   }
+}
+?>

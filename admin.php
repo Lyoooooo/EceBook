@@ -117,6 +117,7 @@ mainHeader();
 
                 </div>
             </div>
+            <!-- Filtres des resultats posts admin -->
             <div class="col-6">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 90%; margin-left: 5%;">
                     <div class="container-fluid">
@@ -128,7 +129,7 @@ mainHeader();
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Trier
-                                    </a>
+                                    </a> 
                                     <ul class="dropdown-menu">
                                         <li><button class="dropdown-item" id="tri" value="date" onclick="trierPosts(this.value);">Plus récent</button></li>
                                         <li><button class="dropdown-item" id="tri" value="fav" onclick="trierPosts(this.value);">Plus like</button></li>
@@ -137,10 +138,11 @@ mainHeader();
                                     </ul>
                                 </li>
                             </ul>
-
+                                
                         </div>
                     </div>
                 </nav>
+                <!-- Affichage des posts -->
                 <div class="colonneAdmin" id="afficherPosts">
 
                 </div>

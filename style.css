@@ -17,7 +17,7 @@ body {
 
 .central {
   background-color: white;
-  min-height: 100vmax;
+  min-height: 50vmax;
   max-height: fit-content;
   width: 70%;
   margin-left: 15%;
@@ -283,4 +283,12 @@ input[type="radio"]:checked {
 .pagination-link:hover {
   background-color: #ccc; /* changer la couleur de fond au survol */
   color: #fff; /* changer la couleur du texte au survol */
+}
+a{
+  text-decoration: none;
+  color: #ff621f ;
+}
+a:hover{
+  text-decoration: none;
+  color: white;
 }
