@@ -17,7 +17,7 @@ body {
 
 .central {
   background-color: white;
-  min-height: 100vmax;
+  min-height: 50vmax;
   max-height: fit-content;
   width: 70%;
   margin-left: 15%;
