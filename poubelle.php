@@ -12,7 +12,7 @@ $pdo = connexion();
     <link rel="icon" href="images/e_now_logo2.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="securite.js"></script>
+    <script src="securite2.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Inscription</title>
@@ -52,28 +52,6 @@ $pdo = connexion();
                             <input type="email" name="mail" class="form-control" id="mail" aria-describedby="inputGroupPrepend2" placeholder="Adresse mail" required>
                         </div>
 
-                        <p id="email-error" style="display: none; color: red;">Adresse email invalide <br> Veuillez entrer une adresse e-mail valide de la forme prenom.non@edu.ece.fr/omnesintervenant.com</p>
-
-
-                        <script>
-                            const emailInput = document.querySelector("#mail");
-                            const submitButton = document.querySelector("input[type='submit']");
-                            const emailError = document.querySelector("#email-error");
-
-                            emailInput.addEventListener("input", () => {
-                                const email = emailInput.value.trim();
-                                const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-                                const isAllowedDomain = /.*@(edu\.ece\.fr|omnesintervenant\.com)$/.test(email);
-
-                                if (!isValidEmail || !isAllowedDomain) {
-                                    emailError.style.display = "block";
-                                    submitButton.disabled = true;
-                                } else {
-                                    emailError.style.display = "none";
-                                    submitButton.disabled = false;
-                                }
-                            });
-                        </script>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Entrez votre mot de passe </label><span class="etoile"> *</span>
                             <div class="input-group">
@@ -293,7 +271,7 @@ $pdo = connexion();
                             <br>
                         </div>
                         <input type="button" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour2()">
-                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide">
+                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="envoyerMail()">
                     </div>
                 </div>
             </div>
@@ -331,8 +309,8 @@ $pdo = connexion();
         //     if ($user) {
         //         // echo "Cette adresse mail est déjà utilisée";
         //     } else {
-        $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
+        // $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        // $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
         //     }
         //     exit();
         // } else echo "Le mot de passe est incorect ";
