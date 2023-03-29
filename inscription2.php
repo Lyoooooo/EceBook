@@ -87,13 +87,13 @@ $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, 
                     });
                 </script>
 
-                <!-- page 4-->
+                <!-- tab 4-->
 
 
 
-                <div class="tab-pane fade show active" id="insc4-tab-pane" role="tabpanel" aria-labelledby="insc4-tab" tabindex="0">
+                <div class="tab-pane fade show active" id="insc4-tab-pane" role="tabpanel" aria-labelledby="insc4-tab" tabindex="0"> <!--  affiche un message demande de clique sur le lien pour etre redirigé-->
                     <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
-                    <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: #ff621f ;text-decoration: none;">Connexion</a></button>
+                    <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: #ff621f ;text-decoration: none;">Connexion</a></button><!-- lien de redirection vers la connexion -->
                 </div>
             </div>
         </div>

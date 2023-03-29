@@ -56,7 +56,7 @@ function mailAmi() {
     From: "confirmation.noreply.enow@gmail.com",
     Subject: prenom + " " + nom + " souhaite devenir votre ami!",
     Body:
-      "Cliqué sur le lien suivant pour validé votre demande d'ami et être redirigé vers notre page d'acceuil \nhttp://localhost/EceBook/valider_ami.php?idu=" +
+      "Cliquez sur le lien suivant pour valider votre demande d'ami et être redirigé vers notre page d'acceuil \nhttp://localhost/EceBook/valider_ami.php?idu=" +
       idu +
       "&ida=" +
       ida,
