@@ -22,7 +22,7 @@ function envoyerMail() {
     From: "confirmation.noreply.enow@gmail.com",
     Subject: "Lien de confirmation d'inscription",
     Body:
-      "Cliqué sur le lien suivant pour validé votre inscription et être redirigé vers notre page connexion \n " +
+      "Cliquez sur le lien suivant pour valider votre inscription et être redirigé vers notre page connexion \n " +
       lien,
   }).then((message) => alert(message));
 }
@@ -49,6 +49,6 @@ function mailAmi() {
     To: mail,
     From: "confirmation.noreply.enow@gmail.com",
     Subject: nom + " " + prenom + " souhaite devenir votre ami!",
-    Body: "Cliqué sur le lien suivant pour validé votre demande d'ami et être redirigé vers notre page d'acceuil \n http://localhost/EceBook/index.php",
+    Body: "Cliquez sur le lien suivant pour valider votre demande d'ami et être redirigé vers notre page d'accueil \n http://localhost/EceBook/index.php",
   }).then((message) => alert(message));
 }
