@@ -40,7 +40,7 @@ function mainHeader()
 
   <!-- Navbar-->
 
-  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
+  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white;">
     <div class="container-fluid justify-content-between">
       <!-- Left elements -->
       <div class="d-flex">
@@ -56,11 +56,14 @@ function mainHeader()
 
       <!-- Center elements -->
       <!--Recherche-->
-
-      <form class="input-group w-auto my-auto d-none d-sm-flex" method="get">
-        <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" style="min-width: 125px;" />
-        <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span>
-
+      
+      <form class="input-group w-auto my-auto d-none d-sm-flex" method="post" action="search.php">
+        <!-- <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" " />
+        <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span> -->
+        <input type="text" class="form-control" style="min-width: 125px;" placeholder="Chercher un utilisateur" name="search" aria-label="Text input with dropdown button">
+        <div class="input-group-append">
+        <input type="submit" class="btn btn-white" style="border: 1px solid; color:#FF621F" name="ok" value="Rechercher">
+        </div>
       </form>
 
 
@@ -116,40 +119,50 @@ function mainHeader()
                 <a class="dropdown-item" href="deconnexion.php">
                   <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
               </div>
+            </div>
+          </li>
         </ul>
       </div>
       <!-- Right elements -->
 
   </nav>
-
-  <nav class="bottom-navbar sticky-top text-center" style=" background-color: white; box-shadow: 2px 2px 3px #FFE2D6;">
-    <div class="container col-8 mx-auto" style="text-align:center;">
-      <div class="container px-5 p-3 ">
-        <div class="row ">
-          <ul class="nav page-navigation  ">
-            <li class="nav-item  ">
-              <a class="nav-link" href="categorie.php?idcategorie=1">
-                <i class="fas fa-circle-notch" style="color:FF621F"></i>
-                <span class="menu-title" style="color:FF621F">Général</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="categorie.php?idcategorie=2">
-                <i class="fas fa-globe" style="color:FF621F"></i>
-                <span class="menu-title" style="color:FF621F"> Actualités</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="categorie.php?idcategorie=3">
-                <i class="fas fa-calendar" style="color:FF621F"></i>
-                <span class="menu-title" style="color:FF621F"> Evénements </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-  </nav>
+  <nav class="bottom-navbar" style=" background-color: white; ">
+  <div class="container">
+  <ul class="navbar-nav page-navigation">
+  <div class="row">
+    <div class="col-md-3">
+        
+                <li class="nav-item text-center">
+                    <a class="nav-link" href="categorie.php?idcategorie=1">
+                        <i class="fas fa-circle-notch" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Général</span>
+                    </a>
+                </li>
+                
+                
+            
+    </div>
+    <div class="col-md-6">
+                <li class="nav-item text-center">
+                    <a class="nav-link" href="categorie.php?idcategorie=2">
+                        <i class="fas fa-globe" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Actualités</span>
+                    </a>
+                </li>
+    </div>
+    <div class="col-md-3">
+    <li class="nav-item">
+                    <a class="nav-link text-center" href="categorie.php?idcategorie=3">
+                        <i class="fas fa-calendar" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Evènements</span>
+                    </a>
+                </li>
+                
+    </div>
   </div>
-  </div>
+  </ul>
+</div>
+    </nav>
 <?php
 
 }
@@ -230,23 +243,26 @@ function post($post)
   $stmt->execute([$post["idu"]]);
   $user = $stmt->fetch();
   $idu = $_SESSION["idu"];
+  $nbr = $post["vu"] + 1;
+  $stmt2 = $pdo->prepare("UPDATE post SET vu=vu + 1 WHERE idp=?");
+  $stmt2->execute([$post["idp"]]);
 ?>
   <div class="card p-0 mb-4">
 
     <!-- HEADER -->
     <div class="header d-flex ps-2">
       <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
-          <?php if ($user["pp"] == NULL) { ?>
-            <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
-          <?php } else { ?>
-            <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
-          <?php } ?>
-        </a></div>
+        <?php if ($user["pp"] == NULL) { ?>
+          <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
+        <?php } else { ?>
+          <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
+        <?php } ?>
+      </a></div>
       <div class="grid">
         <a href="profil.php?u=<?= $user["idu"] ?>">
           <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
         </a>
-        <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
+        <div class="ps-3 pt-0 fs-4 fw-bolder" style="width:90%;"><?= $post["titre"] ?></div>
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
       <?php if ($_SESSION["idu"] == $post["idu"] || $_SESSION["grade"] == 4) { ?>
@@ -256,12 +272,11 @@ function post($post)
           </button>
 
           <ul class="dropdown-menu">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
+            <li><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
             <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
           </ul>
-          <?php $idp = $post["idp"];
-          modifpost($idu, $idp); ?>
-          </ul>
+          <?php $idp = $post["idp"];          
+            modifpost($idu, $idp); ?>
         </div>
       <?php } ?>
     </div>
@@ -270,21 +285,79 @@ function post($post)
     <div class="card-body">
       <p class="ms-5 px-3"><?= $post["texte"] ?></p>
       <?php if ($post["photo"] != "vide") { ?>
-        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:20rem;height:auto;weight:auto;">
-      <?php } ?>
-      <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
+        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:100%;max-height:20rem;height:auto;">
+      <?php } 
+        $idp = $post["idp"];
+      ?>
+      <button id="like-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-up"></i></button>
+      <button id="dislike-btn" data-post-id="<?=$idp?>"><i class="fa fa-thumbs-o-down"></i></button>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+      <script>
+        const likeBtn = document.getElementById('like-btn');
+        const dislikeBtn = document.getElementById('dislike-btn');
+
+        likeBtn.addEventListener('click', function() {
+          likeBtn.classList.toggle('liked');
+          if (likeBtn.classList.contains('liked')) {
+            likeBtn.innerHTML = '<i class="fa fa-thumbs-up"></i>';
+            dislikeBtn.innerHTML = '<i class="fa fa-thumbs-o-down"></i>';
+          } else {
+            likeBtn.innerHTML = '<i class="fa fa-thumbs-o-up"></i>';
+          }
+        });
+        dislikeBtn.addEventListener('click', function() {
+          dislikeBtn.classList.toggle('disliked');
+          if (dislikeBtn.classList.contains('disliked')) {
+            dislikeBtn.innerHTML = '<i class="fa fa-thumbs-down"></i>';
+            likeBtn.innerHTML = '<i class="fa fa-thumbs-o-up"></i>';
+          } else {
+            dislikeBtn.innerHTML = '<i class="fa fa-thumbs-o-down"></i>';
+          }
+        });
+        $('#like-btn').on('click', function() {
+          var postId = $(this).data('post-id');
+          $.ajax({
+            url: 'like.php',
+            type: 'POST',
+            data: {postId: postId},
+            success: function(response) {
+            },
+            error: function(xhr, status, error) {
+              console.log("erreur")
+            }
+          });
+        });
+        
+        $('#dislike-btn').on('click', function() {
+          var postId = $(this).data('post-id');
+          $.ajax({
+            url: 'dislike.php',
+            type: 'POST',
+            data: {postId: postId},
+            success: function(response) {
+            },
+            error: function(xhr, status, error) {
+              console.log("erreur")
+            }
+          });
+        });
+      </script>
     </div>
 
     <!-- FOOTER -->
-    <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;">
+    <div class="fw-semibold text-muted pt-2" style="background-color:#e8e8e8;height:2.5rem;width: 100%;">
       <span class="ps-3"><?= $post["likes"] ?> Likes</span>
-      <span class=""><?= $post["dislike"] ?> Dislikes</span>
-      <span class=""><?= $post["vu"] ?> Vues</span>
-      <span class=""><?= $post["date"] ?></span>
+      <span class="ps-3"><?= $post["dislike"] ?> Dislikes</span>
+      <span class="ps-3"><?= $post["vu"] ?> Vues</span>
+      <span class="ps-3 text-end"><?= $post["date"] ?></span>
     </div>
+    <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
   </div>
 <?php
 }
+
+
 
 function ajoutpost()
 { ?>

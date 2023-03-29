@@ -4,11 +4,31 @@ include "fonctionRequete.php";
 
 connecte();
 $pdo = connexion();
+// On détermine sur quelle page on se trouve
+// Récupération du nombre total d'éléments
+$total = $pdo->query("SELECT COUNT(*) FROM post")->fetchColumn();
+// Détermination du nombre d'éléments à afficher par page
+$per_page = 10;
+// Calcul du nombre total de pages
+$total_pages = ceil($total / $per_page);
+// Récupération du numéro de page courant à partir de l'URL
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+// Calcul de l'offset pour la requête SQL
+$offset = ($current_page - 1) * $per_page;
+// Exécution de la requête SQL pour récupérer les éléments de la page courante
+$stmt = $pdo->prepare("SELECT * FROM post LIMIT $offset, $per_page");
+$stmt->execute();
+$results = $stmt->fetchAll();
 
-$res = $pdo->prepare("SELECT * FROM post ORDER BY date DESC");
+
+//on selectionne tous les  posts
+$res = $pdo->prepare("SELECT * FROM post ORDER BY date DESC limit 10");
 $res->execute();
 $tab = $res->fetchAll();
 mainHeader();
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +46,7 @@ mainHeader();
 
 
 <body>
-    <?= recherche(); ?>
+
     <div class="central">
         <!-- post feed actualité -->
         <div class="container-fluid page-body-wrapper">
@@ -38,16 +58,25 @@ mainHeader();
                                 <h4 class="px-5 p-3 bg-white border-warning text-center" style="color:#FF621F; "> POSTS </h4>
                                 <div class="container px-5 p-3">
                                     <div class="row">
-
+                                        
                                         <?php
-
+                                       
+                                        
                                         if (count($tab) > 0) {
                                             foreach ($tab as $post) {
                                                 post($post);
                                             }
                                         }
-
+                                        echo '<div class="pagination">';
+                                        for ($i = 1; $i <= $total_pages; $i++) {
+                                        // Ajout d'un lien pour chaque page
+                                        echo '<a class="btn btn-inverse-warning" style="border: 1px solid; color:#FF621F" href="index.php?page=' . $i . '">' . $i . '</a> ';
+                                    }
+                                    echo '</div>';
+                                    
+                                        
                                         ?>
+                                       
 
                                     </div>
                                 </div>
