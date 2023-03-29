@@ -129,17 +129,6 @@ mainHeader()
             <?php } else if ($profil == "autre" && $demande == 0) { //Si c'est le compte de quelqu'un que j'ai pas en ami ?>
 
               <form method="POST" action="fonctionRequete.php">
-                <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">
-                <input type="hidden" name="ida" value="<?= $idu ?>">
-                <input type="hidden" name="page" value="profil.php">
-                <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Accepter la demande d'ami</button>
-              </form>
-              <a href="message.php?idenvoyeur=<?= $_SESSION['idu'] ?>" style="text-decoration:none;"><button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Messagerie</button></a>
-
-            <?php } else if ($profil == "autre" && $demande == 0) { //Si c'est le compte de quelqu'un que j'ai pas en ami 
-            ?>
-
-              <form method="POST" action="fonctionRequete.php">
                 <input type="hidden" name="idu" id="idu" value="<?= $_SESSION['idu'] ?>">
                 <input type="hidden" name="ida" id="ida" value="<?= $idu ?>">
                 <input type="hidden" name="page" value="profil.php">
@@ -147,14 +136,13 @@ mainHeader()
               </form>
               <a href="message.php?idenvoyeur=<?= $_SESSION['idu'] ?>" style="text-decoration:none;"><button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Messagerie</button></a>
 
-            <?php } else if ($profil == "autre" && $demande == 1 && $valide == 0) { //Si j'ai envoyé une demande 
-            ?>
+            <?php } else if ($profil == "autre" && $demande == 1 && $valide == 0) { //Si j'ai envoyé une demande ?>
 
               <form method="POST" action="fonctionRequete.php">
                 <input type="hidden" name="idu" value="<?= $_SESSION['idu'] ?>">
                 <input type="hidden" name="ida" value="<?= $idu ?>">
                 <input type="hidden" name="page" value="profil.php">
-                <button type="submit" name="ami" value="retireami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Demande d'ami en attente... <br> (retirer ma demande)</button>
+                <button type="submit" name="pami" value="retireami" class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Demande d'ami en attente... <br> (retirer ma demande)</button>
               </form>
               <a href="message.php?idenvoyeur=<?= $_SESSION['idu'] ?>" style="text-decoration:none;"><button class="btn btn-outline-dark btn-sm btn-block mx-3 mt-2 mb-4">Messagerie</button></a>
 

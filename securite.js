@@ -22,7 +22,7 @@ function envoyerMail() {
     From: "confirmation.noreply.enow@gmail.com",
     Subject: "Lien de confirmation d'inscription",
     Body:
-      "Cliqué sur le lien suivant pour validé votre inscription et être redirigé vers notre page connexion \n " +
+      "Cliquez sur le lien suivant pour valider votre inscription et être redirigé vers notre page connexion \n " +
       lien,
   }).then((message) => alert(message));
 }
