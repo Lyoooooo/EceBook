@@ -206,7 +206,7 @@ mainHeader();
                         </div>
 
                         <div class="d-grid gap-2 col-5 mx-auto m-5">
-                            <button type="button" class="btn btn-danger"><a href="supprimer.php" style="text-decoration:none;color:white">Supprimer mon compte</a></button>
+                            <button type="button" class="btn btn-danger"><a href="supprimer.php?idu=<?php $_SESSION["idu"] ?>" style="text-decoration:none;color:white">Supprimer mon compte</a></button>
                         </div>
                     </div>
                 </div>
