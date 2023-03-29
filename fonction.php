@@ -235,7 +235,7 @@ function post($post)
   $user = $stmt->fetch();
   $idu = $_SESSION["idu"];
 ?>
-  <div class="card p-0 mb-4">
+  <div class="card p-0 mb-4" style="text-align: left;">
 
     <!-- HEADER -->
     <div class="header d-flex ps-2">
