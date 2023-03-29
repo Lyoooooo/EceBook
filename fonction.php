@@ -31,7 +31,7 @@ function encode($mdp, $mail)
 
 
 
-  
+
 function mainHeader()
 {
   $pdo = connexion();
@@ -39,7 +39,7 @@ function mainHeader()
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
 
   <!-- Navbar-->
-  
+
   <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
     <div class="container-fluid justify-content-between">
       <!-- Left elements -->
@@ -49,21 +49,21 @@ function mainHeader()
           <img src="./images/e_now_logo2.png" height="65" alt="logo" loading="lazy" />
         </a>
 
-        
+
 
       </div>
       <!-- Left elements -->
 
       <!-- Center elements -->
       <!--Recherche-->
-      
+
       <form class="input-group w-auto my-auto d-none d-sm-flex" method="get">
         <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" style="min-width: 125px;" />
         <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span>
-       
+
       </form>
-      
-      
+
+
       <!--Center elements-->
 
       <!-- Right elements -->
@@ -104,46 +104,50 @@ function mainHeader()
                 </a>
 
               <?php endif; ?>
-                    </a>
-                    <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item" href="profil.php">
-                            <i class="fa-solid fa-user"></i> Profil</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="deconnexion.php">
-                            <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
-                    </div>
-            </ul>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="profil.php">
+                  <i class="fa-solid fa-user"></i> Profil</a>
+                <?php if ($_SESSION["grade"] == 4) { ?>
+                  <a class="dropdown-item" href="admin.php">
+                    <i class="fa-solid fa-user"></i> Gestion admin</a>
+                <?php } ?>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="deconnexion.php">
+                  <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
+              </div>
+        </ul>
       </div>
       <!-- Right elements -->
-    
+
   </nav>
-  
+
   <nav class="bottom-navbar sticky-top text-center" style=" background-color: white; box-shadow: 2px 2px 3px #FFE2D6;">
-        <div class="container col-8 mx-auto" style="text-align:center;">
-          <div class="container px-5 p-3 ">
-              <div class="row ">
-            <ul class="nav page-navigation  ">
-                <li class="nav-item  ">
-                    <a class="nav-link" href="categorie.php?idcategorie=1">
-                      <i class="fas fa-circle-notch" style="color:FF621F"></i>
-                        <span class="menu-title" style="color:FF621F">Général</span>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="categorie.php?idcategorie=2">
-                        <i class="fas fa-globe" style="color:FF621F"></i>
-                        <span class="menu-title" style="color:FF621F"> Actualités</span>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="categorie.php?idcategorie=3">
-                        <i class="fas fa-calendar" style="color:FF621F"></i>
-                        <span class="menu-title" style="color:FF621F"> Evénements </span>
-                    </a>
-                </li>
-            </ul>
+    <div class="container col-8 mx-auto" style="text-align:center;">
+      <div class="container px-5 p-3 ">
+        <div class="row ">
+          <ul class="nav page-navigation  ">
+            <li class="nav-item  ">
+              <a class="nav-link" href="categorie.php?idcategorie=1">
+                <i class="fas fa-circle-notch" style="color:FF621F"></i>
+                <span class="menu-title" style="color:FF621F">Général</span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="categorie.php?idcategorie=2">
+                <i class="fas fa-globe" style="color:FF621F"></i>
+                <span class="menu-title" style="color:FF621F"> Actualités</span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="categorie.php?idcategorie=3">
+                <i class="fas fa-calendar" style="color:FF621F"></i>
+                <span class="menu-title" style="color:FF621F"> Evénements </span>
+              </a>
+            </li>
+          </ul>
         </div>
-    </nav>
+  </nav>
   </div>
   </div>
 <?php
@@ -232,12 +236,12 @@ function post($post)
     <!-- HEADER -->
     <div class="header d-flex ps-2">
       <div class="pt-2"><a href="profil.php?u=<?= $user["idu"] ?>">
-        <?php if ($user["pp"] == NULL) { ?>
-          <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
-        <?php } else { ?>
-          <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
-        <?php } ?>
-      </a></div>
+          <?php if ($user["pp"] == NULL) { ?>
+            <img src="images/pp/pp.jpg" alt="..." style="border-radius:50%;height:4rem">
+          <?php } else { ?>
+            <img src="<?= $user["pp"] ?>" alt="Photo de @<?= $user["mail"] ?>" style="border-radius:50%;height:4rem">
+          <?php } ?>
+        </a></div>
       <div class="grid">
         <a href="profil.php?u=<?= $user["idu"] ?>">
           <div class="ps-3 pt-2 fs-6 fst-italic text-decoration-underline"><?= $user["pnom"] ?> <?= $user["nom"] ?></div>
@@ -245,19 +249,21 @@ function post($post)
         <div class="ps-3 pt-0 fs-4 fw-bolder"><?= $post["titre"] ?></div>
       </div>
       <div class="position-absolute top-0 end-0 p-3 fw-semibold text-uppercase" style="color:#FF621F"><?= $post["typep"] ?></div>
-      <div class="position-absolute end-0" style="top: 50px;">
-        <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
-          <img src="images/boutonPosts.png" alt="" style="height: 40px;">
-        </button>
-        <ul class="dropdown-menu">
-          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
-          <li><a class="dropdown-item" href="#">Encore un autre truc</a></li>
-          <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
-        </ul>
+      <?php if ($_SESSION["idu"] == $post["idu"] || $_SESSION["grade"] == 4) { ?>
+        <div class="position-absolute end-0" style="top: 50px;">
+          <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color:rgba(0,0,0,0); border-width:0px;">
+            <img src="images/boutonPosts.png" alt="" style="height: 40px;">
+          </button>
+
+          <ul class="dropdown-menu">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $post["idp"] ?>" class="dropdown-item"> Modifier le post </button></li>
+            <li><a class="dropdown-item" href="deletePost.php?idp=<?php echo $post["idp"] ?>" style="color:red;">SUPPRIMER LE POST</a></li>
+          </ul>
           <?php $idp = $post["idp"];
           modifpost($idu, $idp); ?>
-        </ul>
-      </div>
+          </ul>
+        </div>
+      <?php } ?>
     </div>
 
     <!-- MAIN -->
@@ -277,14 +283,6 @@ function post($post)
       <span class=""><?= $post["date"] ?></span>
     </div>
   </div>
-<?php
-}
-
-function supprimerPost($idp)
-{
-?><script>
-    alert("hello")
-  </script>
 <?php
 }
 
@@ -314,13 +312,14 @@ function ajoutpost()
               <option value="Général">Général</option>
               <option value="Actualité">Actualité</option>
               <option value="Evènement">Evènement</option>
-              <?php 
-                if ($_SESSION["grade"] == 4) { //Pour les admins ?>
-                  <option value="Tous">Tous</option>
-                  <option value="Etudiant">Etudiant</option>
-                  <option value="Enseignant">Enseignant</option> <?php
-                }
+              <?php
+              if ($_SESSION["grade"] == 4) { //Pour les admins 
               ?>
+                <option value="Tous">Tous</option>
+                <option value="Etudiant">Etudiant</option>
+                <option value="Enseignant">Enseignant</option> <?php
+                                                              }
+                                                                ?>
             </select><br>
 
             <div class="input-group mb-3">

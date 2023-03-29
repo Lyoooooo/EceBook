@@ -95,7 +95,6 @@ $pdo = connexion();
                                 ongletActif.style.color = "#fff";
                             }
 
-                            // Changer la couleur de fond et le texte des autres onglets
                             var onglets = document.querySelectorAll('.nav-link:not(.active)');
                             onglets.forEach(function(onglet) {
                                 onglet.style.backgroundColor = "#fff";
@@ -129,14 +128,13 @@ $pdo = connexion();
                                 document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc3-tab-pane').classList.add('show', 'active');
 
-                                // Changer la couleur de fond de l'onglet actif
+
                                 var ongletActif = document.querySelector('.nav-link.active');
                                 if (ongletActif) {
                                     ongletActif.style.backgroundColor = "#ff621f";
                                     ongletActif.style.color = "#fff";
                                 }
 
-                                // Changer la couleur de fond et le texte des autres onglets
                                 var onglets = document.querySelectorAll('.nav-link:not(.active)');
                                 onglets.forEach(function(onglet) {
                                     onglet.style.backgroundColor = "#fff";
@@ -150,14 +148,13 @@ $pdo = connexion();
                                 document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc1-tab-pane').classList.add('show', 'active');
 
-                                // Changer la couleur de fond de l'onglet actif
+
                                 var ongletActif = document.querySelector('.nav-link.active');
                                 if (ongletActif) {
                                     ongletActif.style.backgroundColor = "#ff621f";
                                     ongletActif.style.color = "#fff";
                                 }
 
-                                // Changer la couleur de fond et le texte des autres onglets
                                 var onglets = document.querySelectorAll('.nav-link:not(.active)');
                                 onglets.forEach(function(onglet) {
                                     onglet.style.backgroundColor = "#fff";
@@ -171,14 +168,13 @@ $pdo = connexion();
                                 document.getElementById('insc3-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc4-tab-pane').classList.add('show', 'active');
 
-                                // Changer la couleur de fond de l'onglet actif
+
                                 var ongletActif = document.querySelector('.nav-link.active');
                                 if (ongletActif) {
                                     ongletActif.style.backgroundColor = "#ff621f";
                                     ongletActif.style.color = "#fff";
                                 }
 
-                                // Changer la couleur de fond et le texte des autres onglets
                                 var onglets = document.querySelectorAll('.nav-link:not(.active)');
                                 onglets.forEach(function(onglet) {
                                     onglet.style.backgroundColor = "#fff";
@@ -192,14 +188,13 @@ $pdo = connexion();
                                 document.getElementById('insc2-tab').classList.add('active');
                                 document.getElementById('insc3-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc2-tab-pane').classList.add('show', 'active');
-                                // Changer la couleur de fond de l'onglet actif
+
                                 var ongletActif = document.querySelector('.nav-link.active');
                                 if (ongletActif) {
                                     ongletActif.style.backgroundColor = "#ff621f";
                                     ongletActif.style.color = "#fff";
                                 }
 
-                                // Changer la couleur de fond et le texte des autres onglets
                                 var onglets = document.querySelectorAll('.nav-link:not(.active)');
                                 onglets.forEach(function(onglet) {
                                     onglet.style.backgroundColor = "#fff";
@@ -264,13 +259,11 @@ $pdo = connexion();
                         <input type="button" class="btn btn-primary mb-3" value="Suivant" name="suivant" onclick="pageSuivante2()">
 
                         <script>
-                            // Récupération des éléments DOM
                             const professeurRadio = document.getElementById('professeur');
                             const eleveRadio = document.getElementById('eleve');
                             const classeSelection = document.getElementById('classe-selection');
                             const matieresSelection = document.getElementById('promo-prof');
 
-                            // Gestion de l'affichage des éléments en fonction du choix de l'utilisateur
                             eleveRadio.addEventListener('change', () => {
                                 classeSelection.style.display = 'block';
                                 matieresSelection.style.display = 'none';
@@ -300,17 +293,8 @@ $pdo = connexion();
                             <br>
                         </div>
                         <input type="button" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour2()">
-                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide">
+                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="envoyerMail()">
                     </div>
-
-                    <!-- page 4-->
-
-
-                    <!-- 
-                    <div class="tab-pane fade" id="insc4-tab-pane" role="tabpanel" aria-labelledby="insc4-tab" tabindex="0">
-                        <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
-                        <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: #ff621f ;text-decoration: none;">Connexion</a></button>
-                    </div> -->
                 </div>
             </div>
         </div>

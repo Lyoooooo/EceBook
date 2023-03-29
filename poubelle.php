@@ -12,26 +12,26 @@ $pdo = connexion();
     <link rel="icon" href="images/e_now_logo2.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="securite.js"></script>
+    <script src="securite2.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Poubelle</title>
+    <title>Inscription</title>
 </head>
 
 <body style="background-color: white;">
-    <form action="#insc4-tab-pane" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
+    <form action="inscription2.php" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
         <div class="tab">
             <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true">Etape1</button>
+                        <button class="nav-link active disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true">Etape 1</button>
 
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link disabled" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false">Etape2</button>
+                        <button class="nav-link disabled" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false">Etape 2</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link disabled" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false">Etape3</button>
+                        <button class="nav-link disabled" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false">Etape 3</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link disabled" id="insc4-tab" data-bs-toggle="tab" data-bs-target="#insc4-tab-pane" type="button" role="tab" aria-controls="insc4-tab-pane" aria-selected="false">Etape finale</button>
@@ -46,17 +46,14 @@ $pdo = connexion();
                             <a href="connexion.php" class="text-end" style="text-decoration: none; color: #ff621f;">Retour</a>
                         </div>
                         <h1>Inscription</h1>
-                        <label for="validationDefault01" class="form-label">Entrez votre adresse mail</label> <span class="etoile">*</span><br>
+                        <label for="validationDefault01" class="form-label">Entrez votre adresse mail </label> <span class="etoile"> *</span><br>
                         <div class="input-group">
                             <span class="input-group-text" id="inputGroupPrepend2">@</span>
                             <input type="email" name="mail" class="form-control" id="mail" aria-describedby="inputGroupPrepend2" placeholder="Adresse mail" required>
                         </div>
 
-
-
-
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Entrez votre mot de passe</label><span class="etoile">*</span>
+                            <label for="exampleInputPassword1" class="form-label">Entrez votre mot de passe </label><span class="etoile"> *</span>
                             <div class="input-group">
                                 <span class="input-group-text" id="inputGroupPrepend2"> <svg fill="none" viewBox="0 0 24 24" height="20" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
                                         <path stroke-linecap="round" stroke-width="1.5" stroke="#141B34" d="M18 11.0041C17.4166 9.91704 16.273 9.15775 14.9519 9.0993C13.477 9.03404 11.9788 9 10.329 9C8.67911 9 7.18091 9.03404 5.70604 9.0993C3.95328 9.17685 2.51295 10.4881 2.27882 12.1618C2.12602 13.2541 2 14.3734 2 15.5134C2 16.6534 2.12602 17.7727 2.27882 18.865C2.51295 20.5387 3.95328 21.8499 5.70604 21.9275C6.42013 21.9591 7.26041 21.9834 8 22"></path>
@@ -67,8 +64,8 @@ $pdo = connexion();
                             </div>
                         </div>
 
-                        <!-- <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="val"> -->
-                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" id="bouton-suivant" onclick="pageSuivante()">
+                        <input type="button" class="btn btn-primary mb-3" value="Suivant" onclick="pageSuivante()">
+
                         <script>
                             var ongletActif = document.querySelector('.nav-link.active');
                             if (ongletActif) {
@@ -76,7 +73,6 @@ $pdo = connexion();
                                 ongletActif.style.color = "#fff";
                             }
 
-                            // Changer la couleur de fond et le texte des autres onglets
                             var onglets = document.querySelectorAll('.nav-link:not(.active)');
                             onglets.forEach(function(onglet) {
                                 onglet.style.backgroundColor = "#fff";
@@ -110,14 +106,13 @@ $pdo = connexion();
                                 document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc3-tab-pane').classList.add('show', 'active');
 
-                                // Changer la couleur de fond de l'onglet actif
+
                                 var ongletActif = document.querySelector('.nav-link.active');
                                 if (ongletActif) {
                                     ongletActif.style.backgroundColor = "#ff621f";
                                     ongletActif.style.color = "#fff";
                                 }
 
-                                // Changer la couleur de fond et le texte des autres onglets
                                 var onglets = document.querySelectorAll('.nav-link:not(.active)');
                                 onglets.forEach(function(onglet) {
                                     onglet.style.backgroundColor = "#fff";
@@ -131,14 +126,13 @@ $pdo = connexion();
                                 document.getElementById('insc2-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc1-tab-pane').classList.add('show', 'active');
 
-                                // Changer la couleur de fond de l'onglet actif
+
                                 var ongletActif = document.querySelector('.nav-link.active');
                                 if (ongletActif) {
                                     ongletActif.style.backgroundColor = "#ff621f";
                                     ongletActif.style.color = "#fff";
                                 }
 
-                                // Changer la couleur de fond et le texte des autres onglets
                                 var onglets = document.querySelectorAll('.nav-link:not(.active)');
                                 onglets.forEach(function(onglet) {
                                     onglet.style.backgroundColor = "#fff";
@@ -152,14 +146,13 @@ $pdo = connexion();
                                 document.getElementById('insc3-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc4-tab-pane').classList.add('show', 'active');
 
-                                // Changer la couleur de fond de l'onglet actif
+
                                 var ongletActif = document.querySelector('.nav-link.active');
                                 if (ongletActif) {
                                     ongletActif.style.backgroundColor = "#ff621f";
                                     ongletActif.style.color = "#fff";
                                 }
 
-                                // Changer la couleur de fond et le texte des autres onglets
                                 var onglets = document.querySelectorAll('.nav-link:not(.active)');
                                 onglets.forEach(function(onglet) {
                                     onglet.style.backgroundColor = "#fff";
@@ -173,14 +166,13 @@ $pdo = connexion();
                                 document.getElementById('insc2-tab').classList.add('active');
                                 document.getElementById('insc3-tab-pane').classList.remove('show', 'active');
                                 document.getElementById('insc2-tab-pane').classList.add('show', 'active');
-                                // Changer la couleur de fond de l'onglet actif
+
                                 var ongletActif = document.querySelector('.nav-link.active');
                                 if (ongletActif) {
                                     ongletActif.style.backgroundColor = "#ff621f";
                                     ongletActif.style.color = "#fff";
                                 }
 
-                                // Changer la couleur de fond et le texte des autres onglets
                                 var onglets = document.querySelectorAll('.nav-link:not(.active)');
                                 onglets.forEach(function(onglet) {
                                     onglet.style.backgroundColor = "#fff";
@@ -234,22 +226,22 @@ $pdo = connexion();
                             <input type="checkbox" name="promo[]" value="ING2" id="ING2">ING2 &nbsp;
                             <input type="checkbox" name="promo[]" value="ING3" id="ING3">ING3 &nbsp;
                             <input type="checkbox" name="promo[]" value="ING4" id="ING4">ING4 &nbsp;
-                            <input type="checkbox" name="promo[]" value="ING5" id="ING5">ING5 &nbsp;
+                            <input type="checkbox" name="promo[]" value="ING5" id="ING5">ING5 &nbsp; <br>
                             <input type="checkbox" name="promo[]" value="B1" id="B1">B1 &nbsp;
                             <input type="checkbox" name="promo[]" value="B2" id="B2">B2 &nbsp;
                             <input type="checkbox" name="promo[]" value="B3" id="B3">B3 &nbsp;
                             <br><br>
                         </div>
-                        <br> <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour1()">
+                        <br>
+                        <input type="button" class="btn btn-primary mb-3" value="Précendent" name="précedent" onclick="pageRetour1()">
                         <input type="button" class="btn btn-primary mb-3" value="Suivant" name="suivant" onclick="pageSuivante2()">
+
                         <script>
-                            // Récupération des éléments DOM
                             const professeurRadio = document.getElementById('professeur');
                             const eleveRadio = document.getElementById('eleve');
                             const classeSelection = document.getElementById('classe-selection');
                             const matieresSelection = document.getElementById('promo-prof');
 
-                            // Gestion de l'affichage des éléments en fonction du choix de l'utilisateur
                             eleveRadio.addEventListener('change', () => {
                                 classeSelection.style.display = 'block';
                                 matieresSelection.style.display = 'none';
@@ -278,37 +270,38 @@ $pdo = connexion();
                             </div>
                             <br>
                         </div>
-                        <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour2()">
-                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="pageSuivante4()">
-                    </div>
-
-                    <!-- page 4-->
-
-
-
-                    <div class="tab-pane fade" id="insc4-tab-pane" role="tabpanel" aria-labelledby="insc4-tab" tabindex="0">
-                        <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
-                        <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: #ff621f ;text-decoration: none;">Connexion</a></button>
+                        <input type="button" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour2()">
+                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="envoyerMail()">
                     </div>
                 </div>
             </div>
         </div>
     </form>
+
     <?php
     if (isset($_POST["valide"])) {
         extract($_POST);
+        extract($_FILES);
         $promo = implode(',', $promo);
 
-        extract($_FILES);
-        if ($pp == "") {
-            $pp = "vide";
+        if ($_FILES['pp']['name'] == "" || $_FILES['pp']['error'] == 4 || $_FILES['pp']['error'] == 1) {
+            $pp = NULL;
         } else {
             $pp = ajoutpp($nom, $pp);
         }
-        var_dump($_FILES, $pp);
+
+        if ($ville == "") {
+            $ville = NULL;
+        }
+        if ($descrip == "") {
+            $descrip = NULL;
+        }
+        if ($interet == "") {
+            $interet = NULL;
+        }
 
         $mdp2 = encode($mdp, $mail);
-        echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $statut, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
+        // echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $statut, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
         // if ($mdp == $mdp) {
         $stmt = $pdo->prepare("SELECT mail FROM user WHERE mail=?");
         $stmt->execute([$mail]);
@@ -316,8 +309,8 @@ $pdo = connexion();
         //     if ($user) {
         //         // echo "Cette adresse mail est déjà utilisée";
         //     } else {
-        $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
+        // $sql = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        // $pdo->prepare($sql)->execute([null, $nom, $prenom, 0, $mail, $mdp2, $naissance, $statut, $promo, $pp, $ville, $descrip, $interet]);
         //     }
         //     exit();
         // } else echo "Le mot de passe est incorect ";
