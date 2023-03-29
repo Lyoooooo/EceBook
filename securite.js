@@ -39,16 +39,26 @@ function encode($mdp, $mail) {
 }
 
 function mailAmi() {
-  var mail = document.getElementById("mail").value;
+  var idu = document.getElementById("idu").value;
+  var ida = document.getElementById("ida").value;
+  var mailu = document.getElementById("mailu").value;
   var nom = document.getElementById("nom").value;
   var prenom = document.getElementById("prenom").value;
+  // alert( mailu + " " + nom + " " + prenom);
+  //   var lien =
+  //     "http://localhost/EceBook/valider_ami.php?idu=" + idu + "&ida=" + ida;
+
   Email.send({
     Host: "smtp.elasticemail.com",
     Username: "confirmation.noreply.enow@gmail.com",
-    Password: "A2F1D47BEB846BFFE94469E005DF652366C3",
-    To: mail,
+    Password: "AF1D47BEB846BFFE94469E005DF652366C3",
+    To: mailu,
     From: "confirmation.noreply.enow@gmail.com",
-    Subject: nom + " " + prenom + " souhaite devenir votre ami!",
-    Body: "Cliqué sur le lien suivant pour validé votre demande d'ami et être redirigé vers notre page d'acceuil \n http://localhost/EceBook/index.php",
+    Subject: prenom + " " + nom + " souhaite devenir votre ami!",
+    Body:
+      "Cliqué sur le lien suivant pour validé votre demande d'ami et être redirigé vers notre page d'acceuil \nhttp://localhost/EceBook/valider_ami.php?idu=" +
+      idu +
+      "&ida=" +
+      ida,
   }).then((message) => alert(message));
 }
