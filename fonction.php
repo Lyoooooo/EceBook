@@ -337,6 +337,7 @@ function ajoutphoto($idu, $photo)
   }
   return $photo;
 }
+
 function ajoutpp($nom, $pp)
 {
   $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions
