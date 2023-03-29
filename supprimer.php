@@ -1,6 +1,7 @@
 <?php
 include "fonction.php";
 session_start();
+connecte();
 // Vérifie si le bouton "supprimer" a été cliqué  
 // Connexion à la base de données
 
