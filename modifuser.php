@@ -31,7 +31,7 @@ mainHeader();
     <title>Modification de mon profil</title>
 </head>
 
-<body style="background-color:#FFE2D6">
+<body style="background-color:#f0dfd8">
     <br><br><br>
     <div class="container">
         <div class="row">
@@ -102,7 +102,7 @@ mainHeader();
                                         <label id="pn" for="validationDefault02" class="form-label">Date de naissance</label><span class="etoile">*</span>
                                     </div>
                                     <div class="col-6">
-                                        <input type="text" name="naissance" class="form-control" value="<?= $user["naissance"] ?>" required>
+                                        <input type="date" name="naissance" class="form-control" value="<?= $user["naissance"] ?>" required>
                                     </div>
                                     <div class="col-2">
                                     </div>

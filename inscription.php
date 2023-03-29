@@ -19,19 +19,19 @@ $pdo = connexion();
 </head>
 
 <body style="background-color: white;">
-    <form action="#insc4-tab-pane" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
+    <form action="" method="post" enctype="multipart/form-data" onsubmit="convertToLowercase()">
         <div class="tab">
             <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true">Etape1</button>
+                        <button class="nav-link active disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true">Etape 1</button>
 
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link disabled" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false">Etape2</button>
+                        <button class="nav-link disabled" id="insc2-tab" data-bs-toggle="tab" data-bs-target="#insc2-tab-pane" type="button" role="tab" aria-controls="insc2-tab-pane" aria-selected="false">Etape 2</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link disabled" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false">Etape3</button>
+                        <button class="nav-link disabled" id="insc3-tab" data-bs-toggle="tab" data-bs-target="#insc3-tab-pane" type="button" role="tab" aria-controls="insc3-tab-pane" aria-selected="false">Etape 3</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link disabled" id="insc4-tab" data-bs-toggle="tab" data-bs-target="#insc4-tab-pane" type="button" role="tab" aria-controls="insc4-tab-pane" aria-selected="false">Etape finale</button>
@@ -253,14 +253,15 @@ $pdo = connexion();
                             <input type="checkbox" name="promo[]" value="ING2" id="ING2">ING2 &nbsp;
                             <input type="checkbox" name="promo[]" value="ING3" id="ING3">ING3 &nbsp;
                             <input type="checkbox" name="promo[]" value="ING4" id="ING4">ING4 &nbsp;
-                            <input type="checkbox" name="promo[]" value="ING5" id="ING5">ING5 &nbsp;
+                            <input type="checkbox" name="promo[]" value="ING5" id="ING5">ING5 &nbsp; <br>
                             <input type="checkbox" name="promo[]" value="B1" id="B1">B1 &nbsp;
                             <input type="checkbox" name="promo[]" value="B2" id="B2">B2 &nbsp;
                             <input type="checkbox" name="promo[]" value="B3" id="B3">B3 &nbsp;
                             <br><br>
                         </div>
-                        <br> <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour1()">
-                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="suivant" onclick="pageSuivante2()">
+                        <br>
+                        <input type="button" class="btn btn-primary mb-3" value="Précendent" name="précedent" onclick="pageRetour1()">
+                        <input type="button" class="btn btn-primary mb-3" value="Suivant" name="suivant" onclick="pageSuivante2()">
 
                         <script>
                             // Récupération des éléments DOM
@@ -299,33 +300,43 @@ $pdo = connexion();
                             <br>
                         </div>
                         <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour2()">
-                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide" onclick="pageSuivante4()">
+                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="valide">
                     </div>
 
                     <!-- page 4-->
 
 
-
+                    <!-- 
                     <div class="tab-pane fade" id="insc4-tab-pane" role="tabpanel" aria-labelledby="insc4-tab" tabindex="0">
                         <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
                         <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: #ff621f ;text-decoration: none;">Connexion</a></button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </form>
+
     <?php
     if (isset($_POST["valide"])) {
         extract($_POST);
+        extract($_FILES);
         $promo = implode(',', $promo);
 
-        extract($_FILES);
-        if ($pp == "") {
-            $pp = "vide";
+        if ($_FILES['pp']['name'] == "" || $_FILES['pp']['error'] == 4 || $_FILES['pp']['error'] == 1) {
+            $pp = NULL;
         } else {
             $pp = ajoutpp($nom, $pp);
         }
 
+        if ($ville == "") {
+            $ville = NULL;
+        }
+        if ($descrip == "") {
+            $descrip = NULL;
+        }
+        if ($interet == "") {
+            $interet = NULL;
+        }
 
         $mdp2 = encode($mdp, $mail);
         echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $statut, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;

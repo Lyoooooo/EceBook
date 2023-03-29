@@ -3,7 +3,7 @@
 function connecte() //vérifie que l'user est connecté et avec un compte validé
 {
   session_start();
-  if (!isset($_SESSION["idu"]) || $_SESSION["statut"] == 0) {
+  if (!isset($_SESSION["idu"]) || $_SESSION["grade"] == 0) {
     header("location:connexion.php");
   }
 }
@@ -29,7 +29,6 @@ function encode($mdp, $mail)
 
 function mainHeader()
 {
-  ob_start();
   $pdo = connexion();
 ?>
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
@@ -141,7 +140,7 @@ function mainHeader()
   </div>
   </div>
 <?php
-ob_end_flush();
+
 }
 
 function footer()
@@ -160,7 +159,7 @@ function footer()
       <!-- Section: CTA -->
       <section class="">
         <p class="d-flex justify-content-center align-items-center">
-          <a href="./docs/CGU.pdf" class="btn btn-outline-light btn-rounded text-dark" target="blank" role="button" aria-pressed="true">CGU</a>
+          <a href="./docs/CGU.pdf" class="btn btn-outline-light btn-rounded text-dark" target="blank" role="button" aria-pressed="true">CGU</a> &nbsp&nbsp&nbsp
           <button type="button" class="btn btn-outline-light btn-rounded text-dark" data-toggle="modal" data-target="#cookieConsent">
             Police des Cookies
           </button>
@@ -258,7 +257,7 @@ function post($post)
     <div class="card-body">
       <p class="ms-5 px-3"><?= $post["texte"] ?></p>
       <?php if ($post["photo"] != "vide") { ?>
-        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:20rem;height:auto;">
+        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:40rem;height:auto;weight:auto;">
       <?php } ?>
       <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
     </div>

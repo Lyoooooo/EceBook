@@ -61,9 +61,11 @@ if ($profil == "autre") {
 mainHeader()
 ?>
 
-<body style="background-color: #f0dfd8;">
+<body style="background-color: #f0dfd8;"><br>
   <header class="col-7 mx-auto">
     <div class="bg-white shadow overflow-hidden rounded-top">
+    <br><br>
+    <h3>Votre Profil</h3>
       <div class="px-5 pt-0 pb-4">
         <div class="profile-head border border-light">
 
@@ -163,7 +165,7 @@ mainHeader()
         ?>
     </div>
   </main>
-</body>
+</body><br>
 <?php
 footer();
 ?>

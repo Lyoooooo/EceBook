@@ -15,7 +15,7 @@ $pdo = connexion();
     <script src="securite.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Inscription</title>
+    <title>Poubelle</title>
 </head>
 
 <body style="background-color: white;">
@@ -24,7 +24,7 @@ $pdo = connexion();
             <div class="row g-3 position-absolute top-50 start-50 translate-middle rounded shadow text-center " id="primal">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true">Etape1</button>
+                        <button class="nav-link active disabled" id="insc1-tab" data-bs-toggle="tab" data-bs-target="#insc1-tab-pane" type="button" role="tab" aria-controls="insc1-tab-pane" aria-selected="true">Etape1</button>
 
                     </li>
                     <li class="nav-item" role="presentation">
@@ -43,7 +43,7 @@ $pdo = connexion();
 
                     <div class="tab-pane fade show active" id="insc1-tab-pane" role="tabpanel" aria-labelledby="insc1-tab" tabindex="0">
                         <div class="text-end">
-                            <a href="connexion.php" class="text-end" style="text-decoration: none;">Retour</a>
+                            <a href="connexion.php" class="text-end" style="text-decoration: none; color: #ff621f;">Retour</a>
                         </div>
                         <h1>Inscription</h1>
                         <label for="validationDefault01" class="form-label">Entrez votre adresse mail</label> <span class="etoile">*</span><br>
@@ -52,28 +52,9 @@ $pdo = connexion();
                             <input type="email" name="mail" class="form-control" id="mail" aria-describedby="inputGroupPrepend2" placeholder="Adresse mail" required>
                         </div>
 
-                        <p id="email-error" style="display: none; color: red;">Adresse email invalide <br> Veuillez entrer une adresse e-mail valide de la forme prenom.non@edu.ece.fr/omnesintervenant.com</p>
 
 
-                        <script>
-                            const emailInput = document.querySelector("#mail");
-                            const submitButton = document.querySelector("input[type='submit']");
-                            const emailError = document.querySelector("#email-error");
 
-                            emailInput.addEventListener("input", () => {
-                                const email = emailInput.value.trim();
-                                const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-                                const isAllowedDomain = /.*@(edu\.ece\.fr|omnesintervenant\.com)$/.test(email);
-
-                                if (!isValidEmail || !isAllowedDomain) {
-                                    emailError.style.display = "block";
-                                    submitButton.disabled = true;
-                                } else {
-                                    emailError.style.display = "none";
-                                    submitButton.disabled = false;
-                                }
-                            });
-                        </script>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Entrez votre mot de passe</label><span class="etoile">*</span>
                             <div class="input-group">
@@ -87,8 +68,21 @@ $pdo = connexion();
                         </div>
 
                         <!-- <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="val"> -->
-                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" id="bouton-suivant" onclick="envoyerMail()">
+                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" id="bouton-suivant" onclick="pageSuivante()">
                         <script>
+                            var ongletActif = document.querySelector('.nav-link.active');
+                            if (ongletActif) {
+                                ongletActif.style.backgroundColor = "#ff621f";
+                                ongletActif.style.color = "#fff";
+                            }
+
+                            // Changer la couleur de fond et le texte des autres onglets
+                            var onglets = document.querySelectorAll('.nav-link:not(.active)');
+                            onglets.forEach(function(onglet) {
+                                onglet.style.backgroundColor = "#fff";
+                                onglet.style.color = "#000";
+                            });
+
                             function pageSuivante() {
                                 document.getElementById('insc1-tab').classList.remove('active');
                                 document.getElementById('insc2-tab').classList.add('active');
@@ -247,8 +241,7 @@ $pdo = connexion();
                             <br><br>
                         </div>
                         <br> <input type="submit" class="btn btn-primary mb-3 " value="Précendent" name="précedent" onclick="pageRetour1()">
-                        <input type="submit" class="btn btn-primary mb-3" value="Suivant" name="suivant" onclick="pageSuivante2()">
-
+                        <input type="button" class="btn btn-primary mb-3" value="Suivant" name="suivant" onclick="pageSuivante2()">
                         <script>
                             // Récupération des éléments DOM
                             const professeurRadio = document.getElementById('professeur');
@@ -295,7 +288,7 @@ $pdo = connexion();
 
                     <div class="tab-pane fade" id="insc4-tab-pane" role="tabpanel" aria-labelledby="insc4-tab" tabindex="0">
                         <p>Veuillez vérifier votre boîte de réception pour compléter votre inscription.</p>
-                        <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: white;text-decoration: none;">Connexion</a></button>
+                        <button type="button" class="btn btn-primary mb-3"><a href="connexion.php" style="color: #ff621f ;text-decoration: none;">Connexion</a></button>
                     </div>
                 </div>
             </div>
@@ -312,7 +305,7 @@ $pdo = connexion();
         } else {
             $pp = ajoutpp($nom, $pp);
         }
-
+        var_dump($_FILES, $pp);
 
         $mdp2 = encode($mdp, $mail);
         echo $nom, " ", $prenom, " ",  $mail, " ", $mdp2, " ", $naissance, " ", $promo, " ", $statut, " ", $pp, " ", $ville, " ", $descrip, " ", $interet;
