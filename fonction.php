@@ -27,14 +27,19 @@ function encode($mdp, $mail)
   return $crypt;
 }
 
+
+
+
+
+  
 function mainHeader()
 {
-  ob_start();
   $pdo = connexion();
 ?>
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
 
   <!-- Navbar-->
+  
   <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
     <div class="container-fluid justify-content-between">
       <!-- Left elements -->
@@ -57,6 +62,7 @@ function mainHeader()
         <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span>
        
       </form>
+      
       
       <!--Center elements-->
 
@@ -111,7 +117,7 @@ function mainHeader()
       <!-- Right elements -->
     
   </nav>
-  <div >
+  
   <nav class="bottom-navbar sticky-top text-center" style=" background-color: white; box-shadow: 2px 2px 3px #FFE2D6;">
         <div class="container col-8 mx-auto" style="text-align:center;">
           <div class="container px-5 p-3 ">
@@ -141,7 +147,7 @@ function mainHeader()
   </div>
   </div>
 <?php
-ob_end_flush();
+
 }
 
 function footer()
@@ -345,7 +351,7 @@ function ajoutpost()
     $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
     $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
   ?>
-    <!-- <meta http-equiv="refresh" content="1"> -->
+    <meta http-equiv="refresh" content="1">
   <?php   }
 }
 
@@ -359,7 +365,6 @@ function ajoutphoto($idu, $photo)
   }
   return $photo;
 }
-
 function ajoutpp($nom, $pp)
 {
   $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions

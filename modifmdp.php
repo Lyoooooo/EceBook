@@ -4,7 +4,7 @@ include "fonction.php";
 connecte();
 $pdo = connexion();
 
-mainHeader();
+
 $idu = $_SESSION["idu"];
 $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
 $stmt->execute([$idu]);
@@ -22,7 +22,7 @@ if (isset($_POST["bouton"])) {
         $sql = "UPDATE user SET mdp=? WHERE idu=?";
         $pdo->prepare($sql)->execute([$mdp, $idu]);
         echo "<h3>Votre mot de passe à bien été modifié ! <br>Retour à votre profil...</h3>";
-        header("refresh:2;url=modifuser.php");
+        header("refresh:2;url=profil.php");
       } else {
         echo "<h3>Votre nouveau mot de passe est identique à votre ancien mot de passe</h3>";
       }
@@ -48,40 +48,93 @@ if (isset($_POST["bouton"])) {
   <title>Modification de mon mot de passe</title>
 </head>
 
+
+<?php
+mainHeader();
+?>
+
+
+<body style="background-color:#f0dfd8">
+    <br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-1 col-sm-1">
+            </div>
+
+            <div class="col-xl-8 col-lg-8 col-md-10 col-sm-10">
+                <div class="modif">
+
+
+                    <div id="mid"><br>
+                        <h3>Changement du mot de passe</h3><br>
+
+                        <div class=text-end>
+                            <form action="" method="post">
+                        </div>
+
+
+                        <div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-4" id="legende">
+                                        <label for="validationDefault01" class="form-label">Ancien mot de passe</label><span class="etoile">*</span>
+                                    </div>
+                                    <div class="col-6">
+                                      <input type="password" name="oldmdp" class="form-control" id="second" required>
+                                    </div>
+                                    <div class="col-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+
+                        <div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-4" id="legende">
+                                      <label for="validationDefault01" class="form-label">Nouveau mot de passe</label><span class="etoile">*</span>
+                                    </div>
+                                    <div class="col-6">
+                                      <input type="password" name="newmdp" class="form-control" id="second" required>
+                                    </div>
+                                    <div class="col-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+
+                        <div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-4" id="legende">
+                                      <label for="validationDefault01" class="form-label">Confirmer votre nouveau mot de passe</label><span class="etoile">*</span>
+                                    </div>
+                                    <div class="col-6">
+                                      <input type="password" name="newmdp2" class="form-control" id="second" required>
+                                    </div>
+                                    <div class="col-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+                        
+                        <div class="d-grid gap-2 col-5 mx-auto m-5">
+                          <input class="btn btn-success text-center" type="submit" value="Modifier" name="bouton"><br>
+                        </div>
+
+                    </div>
+                </div>
+            </div><!-- col-8 etc...-->
+            <div class="col-xl-2 col-lg-2 col-md-1 col-sm-1">
+            </div>
+
+        </div> <!-- row -->
+    </div><br><br><!-- container -->
+
+  <?php
+  footer();
+  ?>
+
 <body>
-  <div id="second">
-    <div class="rounded shadow text-left">
-      <div id="divmid">
-        <div class="h1 text-center">
-          <h1>Votre compte</h1><br>
-          <div class="position-absolute top-0 end-0 p-3 m3">
-            <h5><a href="modifuser.php">retour</a></H5>
-          </div>
-        </div>
-        <div class=text-end>
-          <form action="" method="post">
-        </div>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        </div>
-        <div class="col-md-4">
-          <label for="validationDefault01" class="form-label">Ancien mot de passe</label><span class="etoile">*</span>
-          <input type="password" name="oldmdp" class="form-control" id="second" required>
-        </div><br>
-        <div class="col-md-4">
-          <label for="validationDefault01" class="form-label">Nouveau mot de passe</label><span class="etoile">*</span>
-          <input type="password" name="newmdp" class="form-control" id="second" required>
-        </div><br>
-        <div class="col-md-4">
-          <label for="validationDefault01" class="form-label">Confirmer votre nouveau mot de passe</label><span class="etoile">*</span>
-          <input type="password" name="newmdp2" class="form-control" id="second" required>
-        </div><br>
-        <div class="d-grid gap-2 col-6 mx-auto">
-          <input class="btn btn-success text-center" type="submit" value="Modifier" name="bouton"><br><br>
-        </div>
-      </div>
-    </div>
-  </div><br><br>
-</body>
-<?php footer(); ?>
 
 </html>
