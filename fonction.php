@@ -29,7 +29,6 @@ function encode($mdp, $mail)
 
 function mainHeader()
 {
-  ob_start();
   $pdo = connexion();
 ?>
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
@@ -141,7 +140,7 @@ function mainHeader()
   </div>
   </div>
 <?php
-ob_end_flush();
+
 }
 
 function footer()
@@ -345,7 +344,7 @@ function ajoutpost()
     $stmt = $pdo->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
     $stmt->execute([null, $idu, $titre, $texte, $photo, $type, 0, 0, 0, date("Y-m-d H:i:s")]);
   ?>
-    <!-- <meta http-equiv="refresh" content="1"> -->
+    <meta http-equiv="refresh" content="1">
   <?php   }
 }
 
@@ -359,7 +358,6 @@ function ajoutphoto($idu, $photo)
   }
   return $photo;
 }
-
 function ajoutpp($nom, $pp)
 {
   $extensions = array('jpg', 'jpeg', 'png'); //liste des extensions

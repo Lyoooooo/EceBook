@@ -31,7 +31,7 @@ mainHeader();
     <title>Modification de mon profil</title>
 </head>
 
-<body style="background-color:#FFE2D6">
+<body style="background-color:#f0dfd8">
     <br><br><br>
     <div class="container">
         <div class="row">
