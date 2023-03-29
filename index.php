@@ -27,8 +27,6 @@ $res->execute();
 $tab = $res->fetchAll();
 mainHeader();
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +62,15 @@ mainHeader();
                                         
                                         if (count($tab) > 0) {
                                             foreach ($tab as $post) {
-                                                post($post);
+                                                $query = $pdo->prepare("SELECT * FROM ami WHERE ((idu1 = :idu AND idu2 = :ida) OR (idu1 = :ida AND idu2 = :idu)) AND valide=1"); //regarde si il y a une demande
+                                                $query->bindParam(':idu', $_SESSION["idu"]);
+                                                $query->bindParam(':ida', $post["idu"]);
+                                                $query->execute();
+                                                if ($query->rowCount() > 0 || $_SESSION["grade"]==4 || $_SESSION["idu"]=$post["idu"]) { 
+                                                    post($post);
+                                                  
+                                                }
+                                
                                             }
                                         }
                                         echo '<div class="pagination">';
