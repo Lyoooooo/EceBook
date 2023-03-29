@@ -1,19 +1,21 @@
 <?php
 include "fonction.php";
-session_start();
 
-if(isset($_GET['txt']) AND !empty($_GET['txt'])){
-$pdo=connexion();
-$stmt = $pdo->prepare('SELECT nom FROM user WHERE nom LIKE :nom ORDER BY nom ASC');
-$stmt->bindValue(':nom', '%'.$_GET['txt'].'%');
-$stmt->execute();
-$resultat2 = $stmt->fetchAll();
+connecte();
+if ($_SESSION["grade"] != 4) {
+    header("location:connexion.php");
+}
+$pdo = connexion();
 
-
+if (isset($_GET['txt']) and !empty($_GET['txt'])) {
+    $stmt = $pdo->prepare('SELECT nom FROM user WHERE nom LIKE :nom ORDER BY nom ASC');
+    $stmt->bindValue(':nom', '%' . $_GET['txt'] . '%');
+    $stmt->execute();
+    $resultat2 = $stmt->fetchAll();
 }
 mainHeader();
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,76 +43,76 @@ mainHeader();
                                     <input class="form-control me-2" type="search" placeholder="Search" name="txt" aria-label="Search">
                                     <button class="btn btn-outline-success" type="submit" value="Valider">Search</button>
                                 </form>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Trier
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item" id="tri" value="ami" onclick="">//</button></li>
-                                    <li><a class="dropdown-item" href="#">//</a></li>
-                                    </ul>
-                                </li>
                         </div>
                     </div>
                 </nav>
-                
-                <div class="colonneAdmin" style="width: 90%; margin-left: 5%; " >
-                <table class="table table-striped">
-                    <tr>
-                    <th>Photo</th><th>ID</th><th>Nom</th><th>Action</th>
-                    </tr>
-                <?php
-                
-                if(isset($_GET['txt']) && !empty($_GET['txt'])){
-                    $pdo = connexion();
-                    $stmt = $pdo->prepare('SELECT * FROM user WHERE nom LIKE :nom ORDER BY nom ASC');
-                    $stmt->bindValue(':nom', '%'.$_GET['txt'].'%');
-                    $stmt->execute();
-                    $resultat2 = $stmt->fetchAll();
-                
-                    if(count($resultat2) > 0){
-                        foreach($resultat2 as $ligne2){
-                            $pp = $ligne2["pp"];
-                            if(empty($pp)){
-                                $pp = 'images/avatarbasique.png';
-                            }
-                            echo "<tr>
-                                  <td class='align-middle'><img src='".$pp."' width='60'></td> 
-                                  <td class='align-middle'>". $ligne2["idu"]."</td>
-                                  <td class='align-middle'>". $ligne2["nom"]."</td>
-                                  <td class='align-middle'> &nbsp;&nbsp;&nbsp;<a href='supprimer.php?idu=".$ligne2["idu"]."'<i class='fas fa-trash'></i></a></td>
-                                  </tr>";
 
-                                  
-                        }
-                    }else{
-                        ?>
-                        <td style="background-color: red; height: 40px;">Erreur, aucun user trouvé</td>
+                <div class="colonneAdmin" style="width: 90%; margin-left: 5%; ">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Photo</th>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Action</th>
+                        </tr>
                         <?php
-                    }
-                }else{
-                    $pdo = connexion();
-                    $req = "SELECT * FROM user";
-                    $resultat = $pdo->prepare($req);
-                    $resultat->execute();
-                
-                    while($ligne = $resultat->fetch()){
-                        $pp = $ligne["pp"];
-                        if(empty($pp)){
-                            $pp = 'images/avatarbasique.png';
-                        }
-                        echo "<tr>
-                              <td class='align-middle'><img src='".$pp."' width='60'></td> 
-                              <td class='align-middle'>". $ligne["idu"]."</td>
-                              <td class='align-middle'>". $ligne["nom"]."</td>
-                              <td class='align-middle'> &nbsp;&nbsp;&nbsp;<a href='supprimer.php?idu=".$ligne["idu"]."'<i class='fas fa-trash'></i></a></td>
-                              </tr>";
-                    }
-                }
-                
-                ?>
-                </table>
-                            </ul>
+
+                        if (isset($_GET['txt']) && !empty($_GET['txt'])) {
+                            $pdo = connexion();
+                            $stmt = $pdo->prepare('SELECT * FROM user WHERE nom LIKE :nom ORDER BY nom ASC');
+                            $stmt->bindValue(':nom', '%' . $_GET['txt'] . '%');
+                            $stmt->execute();
+                            $resultat2 = $stmt->fetchAll();
+
+                            if (count($resultat2) > 0) {
+                                foreach ($resultat2 as $ligne2) {
+                                    $pp = $ligne2["pp"];
+                                    $link = "profil.php?u=" . $ligne2["idu"];
+                                    if (empty($pp)) {
+                                        $pp = 'images/avatarbasique.png';
+                                    }
+                        ?>
+                                    <tr>
+                                        <td class='align-middle'><a href="<?php echo $link ?>"><img src="<?php echo $pp ?>" width='60'></td>
+                                        <td class='align-middle'><?php echo $ligne2["idu"] ?></td>
+                                        
+                                            <td class='align-middle'><a href="<?php echo $link ?>"><?php echo $ligne2["nom"] ?></a></td>
+                                        
+                                        <td class='align-middle'> &nbsp;&nbsp;&nbsp;<a href="supprimer.php?idu=<?php echo $ligne2["idu"] ?>"><i class="fas fa-trash"></i></a></td>
+                                    </tr><?php
+                                        }
+                                    } else {
+                                            ?>
+                                <td style="background-color: red; height: 40px;">Erreur, aucun user trouvé</td>
+                        <?php
+                                    }
+                                } else {
+                                    $pdo = connexion();
+                                    $req = "SELECT * FROM user";
+                                    $resultat = $pdo->prepare($req);
+                                    $resultat->execute();
+
+                                    while ($ligne = $resultat->fetch()) {
+                                        $link = "profil.php?u=" . $ligne["idu"];
+                                        $pp = $ligne["pp"];
+                                        if (empty($pp)) {
+                                            $pp = 'images/avatarbasique.png';
+                                        }
+                                        ?>
+                                    <tr>
+                                        <td class='align-middle'><a href="<?php echo $link ?>"><img src="<?php echo $pp ?>" width='60'></td>
+                                        <td class='align-middle'><?php echo $ligne["idu"] ?></td>
+                                        
+                                            <td class='align-middle'><a href="<?php echo $link ?>"><?php echo $ligne["nom"] ?></a></td>
+                                        
+                                        <td class='align-middle'> &nbsp;&nbsp;&nbsp;<a href="supprimer.php?idu=<?php echo $ligne["idu"] ?>"><i class="fas fa-trash"></i></a></td>
+                                    </tr><?php
+                                    }
+                                }
+
+                        ?>
+                    </table>
+                    </ul>
 
 
                 </div>
@@ -120,10 +122,9 @@ mainHeader();
                     <div class="container-fluid">
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <form class="d-flex" role="search">
                                     <input class="form-control me-2" id="recherche" type="search" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-outline-success"  id="look" value="look" onclick="trierPosts(recherche.value);">Search</button>
-                                </form>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-outline-success" id="look" value="look" onclick="trierPosts(recherche.value);">Search</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Trier
@@ -146,6 +147,7 @@ mainHeader();
             </div>
         </div>
     </div>
+    <br>
 </body>
 <?php
 footer();
