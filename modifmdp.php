@@ -1,11 +1,10 @@
 <?php
 include "fonction.php";
-session_start();
-if (connecte() == False) {
-  header("location:connexion.php");
-}
-mainHeader();
+
+connecte();
 $pdo = connexion();
+
+mainHeader();
 $idu = $_SESSION["idu"];
 $stmt = $pdo->prepare("SELECT * FROM user WHERE idu=?");
 $stmt->execute([$idu]);

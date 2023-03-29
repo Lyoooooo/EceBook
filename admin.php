@@ -1,19 +1,18 @@
 <?php
 include "fonction.php";
-session_start();
 
-if(isset($_GET['txt']) AND !empty($_GET['txt'])){
-$pdo=connexion();
-$stmt = $pdo->prepare('SELECT nom FROM user WHERE nom LIKE :nom ORDER BY nom ASC');
-$stmt->bindValue(':nom', '%'.$_GET['txt'].'%');
-$stmt->execute();
-$resultat2 = $stmt->fetchAll();
+connecte();
+$pdo = connexion();
 
-
+if(isset($_GET['txt']) AND !empty($_GET['txt'])) {
+    $stmt = $pdo->prepare('SELECT nom FROM user WHERE nom LIKE :nom ORDER BY nom ASC');
+    $stmt->bindValue(':nom', '%'.$_GET['txt'].'%');
+    $stmt->execute();
+    $resultat2 = $stmt->fetchAll();
 }
 mainHeader();
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

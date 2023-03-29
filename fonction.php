@@ -1,5 +1,13 @@
 <?php
 
+function connecte() //vérifie que l'user est connecté et avec un compte validé
+{
+  session_start();
+  if (!isset($_SESSION["idu"]) || $_SESSION["grade"] == 0) {
+    header("location:connexion.php");
+  }
+}
+
 function connexion()
 {
   try {
@@ -19,11 +27,121 @@ function encode($mdp, $mail)
   return $crypt;
 }
 
-function connecte()
+function mainHeader()
 {
-  if (!isset($_SESSION["idu"])) {
-    return False;
-  } else return True;
+  ob_start();
+  $pdo = connexion();
+?>
+  <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
+
+  <!-- Navbar-->
+  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
+    <div class="container-fluid justify-content-between">
+      <!-- Left elements -->
+      <div class="d-flex">
+        <!-- Brand -->
+        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="index.php">
+          <img src="./images/e_now_logo2.png" height="65" alt="logo" loading="lazy" />
+        </a>
+
+        
+
+      </div>
+      <!-- Left elements -->
+
+      <!-- Center elements -->
+      <!--Recherche-->
+      
+      <form class="input-group w-auto my-auto d-none d-sm-flex" method="get">
+        <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Chercher un utilisateur" style="min-width: 125px;" />
+        <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span>
+       
+      </form>
+      
+      <!--Center elements-->
+
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- Messages -->
+          <li class="nav-item">
+            <a class="nav-link text-center" href="message.php">
+              <i class="fa-regular fa-comments">
+                <p style="font-family: 'Courier New', Courier, monospace" class="d-lg-flex d-none note-icon">Messages</p>
+              </i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <!-- Avatar -->
+            <div class="dropdown">
+              <?php
+              if (isset($_SESSION["idu"])) {
+                $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
+                $pdo = connexion();
+                $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
+                $infoUser->execute(array($idu));
+                $infoUser = $infoUser->fetch();
+              }
+              if (isset($idu)) : ?>
+                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="profil.php" id="navbarDropdownMenuAvatar" role="button" data-toggle="dropdown" aria-expanded="false">
+                  <img src="<?php if ($infoUser["pp"] == null) {
+                              echo "./images/avatarbasique.png";
+                            } else { ?>../<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" /> &nbsp;
+                  <p class="text-black"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
+                </a>
+              <?php else : ?>
+                <a class="nav-link text-center " href="connexion.php">
+                  <i class="fa-regular fa-user"><br>
+                    <p style="font-family: 'Courier New', Courier, monospace" class="fw-bold d-none d-lg-flex note-icon">Connexion</p>
+                  </i>
+
+                </a>
+
+              <?php endif; ?>
+                    </a>
+                    <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="profil.php">
+                            <i class="fa-solid fa-user"></i> Profil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="deconnexion.php">
+                            <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
+                    </div>
+            </ul>
+      </div>
+      <!-- Right elements -->
+    
+  </nav>
+  <div >
+  <nav class="bottom-navbar sticky-top text-center" style=" background-color: white; box-shadow: 2px 2px 3px #FFE2D6;">
+        <div class="container col-8 mx-auto" style="text-align:center;">
+          <div class="container px-5 p-3 ">
+              <div class="row ">
+            <ul class="nav page-navigation  ">
+                <li class="nav-item  ">
+                    <a class="nav-link" href="categorie.php?idcategorie=1">
+                      <i class="fas fa-circle-notch" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F">Général</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="categorie.php?idcategorie=2">
+                        <i class="fas fa-globe" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F"> Actualités</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="categorie.php?idcategorie=3">
+                        <i class="fas fa-calendar" style="color:FF621F"></i>
+                        <span class="menu-title" style="color:FF621F"> Evénements </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+  </div>
+  </div>
+<?php
+ob_end_flush();
 }
 
 function footer()
@@ -95,109 +213,6 @@ function footer()
 <?php
 }
 
-function mainHeader()
-{
-  $pdo = connexion();
-?>
-  <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
-
-  <!-- Navbar-->
-  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
-    <div class="container-fluid justify-content-between">
-      <!-- Left elements -->
-      <div class="d-flex">
-        <!-- Brand -->
-        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="index.php">
-          <img src="./images/e_now_logo2.png" height="65" alt="logo" loading="lazy" />
-        </a>
-
-        <!-- Search form -->
-
-      </div>
-      <!-- Left elements -->
-
-      <!-- Center elements -->
-      <!--Recherche-->
-      <form class="input-group w-auto my-auto d-none d-sm-flex">
-        <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder="Search" style="min-width: 125px;" />
-        <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span>
-      </form>
-      <?php
-      recherche();
-      ?>
-      <!--Center elements-->
-
-      <!-- Right elements -->
-      <div class="d-flex align-items-center">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <!-- Messages -->
-          <li class="nav-item">
-            <a class="nav-link text-center" href="message.php">
-              <i class="fa-regular fa-comments">
-                <p style="font-family: 'Courier New', Courier, monospace" class="d-lg-flex d-none note-icon">Messages</p>
-              </i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <!-- Avatar -->
-            <div class="dropdown">
-              <?php
-              if (isset($_SESSION["idu"])) {
-                $idu = $_SESSION["idu"]; //stock l'id de l'utilisateur dans une session
-                $pdo = connexion();
-                $infoUser = $pdo->prepare("SELECT * FROM user WHERE idu = ?");
-                $infoUser->execute(array($idu));
-                $infoUser = $infoUser->fetch();
-              }
-              if (isset($idu)) : ?>
-                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-toggle="dropdown" aria-expanded="false">
-                  <img src="<?php if ($infoUser["pp"] == NULL) {
-                              echo "./images/avatarbasique.png";
-                            } else { ?>../<?= $infoUser["pp"] ?><?php } ?>" class="rounded-circle" height="25" alt="image" loading="lazy" /> &nbsp;
-                  <p class="text-black"><?= $infoUser["pnom"] ?> <?= $infoUser["nom"] ?></p>
-                </a>
-              <?php else : ?>
-                <a class="nav-link text-center " href="connexion.php">
-                  <i class="fa-regular fa-user"><br>
-                    <p style="font-family: 'Courier New', Courier, monospace" class="fw-bold d-none d-lg-flex note-icon">Connexion</p>
-                  </i>
-
-                </a>
-
-              <?php endif; ?>
-              </a>
-              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="profil.php">
-                  <i class="fa-solid fa-user"></i> Profil</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="deconnexion.php">
-                  <i class="fa-solid fa-right-from-bracket"></i> Déconnexion </a>
-              </div>
-        </ul>
-
-
-
-      </div>
-      <!-- Right elements -->
-    </div>
-  </nav>
-<?php
-}
-
-function recherche()
-{
-  $pdo = connexion();
-  if (isset($_POST["search"])) {
-    $search = $_POST["search"];
-    $statement = $pdo->prepare("SELECT * from post where titre like :search inner join user on post.idu = user.idu");
-    $statement->bindValue(':search', "%$search%", PDO::PARAM_STR);
-    $statement->execute();
-    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-    $_SESSION["search"] = $result;
-    header("Location: recherche.php");
-  }
-}
-
 function post($post)
 {
   $pdo = connexion();
@@ -243,7 +258,7 @@ function post($post)
     <div class="card-body">
       <p class="ms-5 px-3"><?= $post["texte"] ?></p>
       <?php if ($post["photo"] != "vide") { ?>
-        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:40rem;height:auto;">
+        <img src="<?= $post["photo"] ?>" class="img-fluid rounded mx-auto d-block" style="overflow:hidden;max-width:40rem;max-height:40rem;height:auto;weight:auto;">
       <?php } ?>
       <button><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
     </div>
@@ -293,6 +308,13 @@ function ajoutpost()
               <option value="Général">Général</option>
               <option value="Actualité">Actualité</option>
               <option value="Evènement">Evènement</option>
+              <?php 
+                if ($_SESSION["grade"] == 4) { //Pour les admins ?>
+                  <option value="Tous">Tous</option>
+                  <option value="Etudiant">Etudiant</option>
+                  <option value="Enseignant">Enseignant</option> <?php
+                }
+              ?>
             </select><br>
 
             <div class="input-group mb-3">
@@ -315,7 +337,7 @@ function ajoutpost()
     extract($_FILES);
     $idu = $_SESSION["idu"];
     $pdo = connexion();
-    if ($photo == "") {
+    if ($_FILES['photo']['name'] == "" || $_FILES['photo']['error'] == 4 || $_FILES['photo']['error'] == 1) {
       $photo = NULL;
     } else {
       $photo = ajoutphoto($idu, $photo);
