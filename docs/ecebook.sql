@@ -45,9 +45,11 @@ CREATE TABLE IF NOT EXISTS `ami` (
 
 DROP TABLE IF EXISTS `jaime`;
 CREATE TABLE IF NOT EXISTS `jaime` (
+  `idj` int(10) NOT NULL AUTO_INCREMENT,
   `idp` int(11) NOT NULL,
   `idu` int(11) NOT NULL,
   `ld` int(11) NOT NULL
+  PRIMARY KEY (`idj`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
