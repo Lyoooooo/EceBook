@@ -70,11 +70,11 @@
                                     <form method="POST" action="" class="ms-auto">
 
                                         <?php if (!$is_friend) { ?>
-                                            <input type="hidden" id="nom" value="<?= $ligne['nom'] ?>">
-                                            <input type="hidden" id="prenom" value="<?= $ligne['pnom'] ?>">
+                                            <input type="hidden" id="nom" value="<?= $_SESSION['nom'] ?>">
+                                            <input type="hidden" id="prenom" value="<?= $_SESSION['prenom'] ?>">
                                             <input type="hidden" id="mailu" value="<?= $ligne['mail'] ?>">
                                             <input type="hidden" name="idu" id="idu" value="<?= $_SESSION['idu'] ?>">
-                                            <input type="hidden" name="ida" id="ida" value="<?= $friend_id ?>">
+                                            <input type="hidden" name="ida" id="ida" value="<?= $ligne["idu"] ?>">
                                             <input type="hidden" name="page" value="index.php">
                                             <button type="submit" name="ami" value="ajoutami" class="btn btn-outline-dark btn-sm ms-5 mt-2 mb-4" onclick="mailAmi()">Ajouter en ami </button>
                                         <?php } else if ($is_friend["valide"] == 0) { ?>
