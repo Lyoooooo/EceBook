@@ -79,7 +79,10 @@ $cat = $stmt->fetchAll();
         </div>
     </div>
    
-
+    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: fixed; bottom: 10%; right: 5%; border: 0px; background-color:rgba(0,0,0,0); z-index: 1;">
+        <img src="images/boutonAddPost.webp" alt="" style="height: 60px;">
+    </button>
+    <?php ajoutpost(); ?>
 <?php
     footer();
 ?>

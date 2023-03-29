@@ -67,11 +67,9 @@ mainHeader();
                                                 $query->bindParam(':idu', $_SESSION["idu"]);
                                                 $query->bindParam(':ida', $post["idu"]);
                                                 $query->execute();
-                                                if ($query->rowCount() > 0 || $_SESSION["grade"]==4 || $_SESSION["idu"]=$post["idu"]) { 
-                                                    post($post);
-                                                  
-                                                }
-                                
+                                                if ($query->rowCount() > 0 || $_SESSION["grade"]==4 || $_SESSION["idu"]==$post["idu"]) { 
+                                                    post($post);                            
+                                                }           
                                             }
                                         }
                                         echo '<div class="pagination">';
