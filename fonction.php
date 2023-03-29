@@ -86,6 +86,9 @@ function footer()
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
       © 2023 Tous droits réservés :
       <a class="text-white" href="https://e-now.fr/">E-now.fr</a>
+      <p>Nos concepteurs : 
+      audran.reminiac@edu.ece.fr |  leo.triffault@edu.ece.fr  |  nathan.novier@edu.ece.fr  |  matteo.pereira@edu.ece.fr  |  astrid.krekounian@edu.ece.fr  |  julie.kouassi@edu.ece.fr
+      </p>
     </div>
     <!-- Copyright -->
   </footer>
@@ -97,12 +100,13 @@ function footer()
 
 function mainHeader()
 {
-  ob_start();
+  
   $pdo = connexion();
 ?>
   <script src="https://kit.fontawesome.com/13086b36a6.js" crossorigin="anonymous"></script>
 
   <!-- Navbar-->
+  
   <nav class="navbar navbar-expand-lg sticky-top" style="background-color: white; box-shadow: 0px 2px 3px #FFE2D6;">
     <div class="container-fluid justify-content-between">
       <!-- Left elements -->
@@ -125,6 +129,7 @@ function mainHeader()
         <span class="input-group-text border-0 d-none d-lg-flex" style="background-color: white;"><i class="fa-solid fa-magnifying-glass"></i></span>
        
       </form>
+      
       
       <!--Center elements-->
 
@@ -179,7 +184,7 @@ function mainHeader()
       <!-- Right elements -->
     
   </nav>
-  <div >
+  
   <nav class="bottom-navbar sticky-top text-center" style=" background-color: white; box-shadow: 2px 2px 3px #FFE2D6;">
         <div class="container col-8 mx-auto" style="text-align:center;">
           <div class="container px-5 p-3 ">
@@ -209,7 +214,7 @@ function mainHeader()
   </div>
   </div>
 <?php
-ob_end_flush();
+
 }
 
 
