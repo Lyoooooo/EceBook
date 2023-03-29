@@ -69,7 +69,7 @@ if(count($result) > 0){
 }
 ?>
 
-        </div>
+    </div>
         
-        <?= footer();?>
+<?= footer();?>
       

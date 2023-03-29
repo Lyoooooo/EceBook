@@ -191,6 +191,7 @@ function footer()
                 <div class="modal-header" style="background-color: FFE2D6;">
                   <h5 class="modal-title" id="cookieconsentLabel2">Cookies & Vie Privée</h5>
                 </div>
+
                 <div class="modal-body">
                   <div class="row">
                     <div class="col-3 d-flex align-items-center justify-content-center">
@@ -198,7 +199,7 @@ function footer()
                     </div>
 
                     <div class="col-9">
-                      <p>Ce site utilise des cookies pour vous garantir une meilleure expérience sur notre site internet.</p>
+                    <p>Ce site utilise des cookies pour vous garantir une meilleure expérience sur notre site internet.</p>
                     </div>
                   </div>
                 </div>

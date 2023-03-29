@@ -1,10 +1,14 @@
 <?php
 include "fonction.php";
 include "fonctionRequete.php";
-
 connecte();
+
+mainHeader();
+$idu=$_SESSION["idu"];
+
 $pdo = connexion();
-// On détermine sur quelle page on se trouve
+
+
 // Récupération du nombre total d'éléments
 $total = $pdo->query("SELECT COUNT(*) FROM post")->fetchColumn();
 // Détermination du nombre d'éléments à afficher par page
@@ -22,14 +26,42 @@ $results = $stmt->fetchAll();
 
 
 //on selectionne tous les  posts
-$res = $pdo->prepare("SELECT * FROM post ORDER BY date DESC limit 10");
-$res->execute();
-$tab = $res->fetchAll();
-mainHeader();
+// $res = $pdo->prepare("SELECT * FROM post ORDER BY date DESC limit 10");
+// $res->execute();
+// $tab = $res->fetchAll();
+
+// on verifie avec qui l'user est ami
+$stmt = $pdo->prepare('SELECT * FROM ami  WHERE (idu1 = :idu OR idu2 = :idu) AND valide = 1');
+$stmt->bindValue(':idu', $_SESSION['idu']);
+$stmt->execute();
+$amis = $stmt->fetchAll();
+
+foreach($amis as $p){
+$stmt = $pdo->prepare('SELECT * FROM post  WHERE idu=:idu');
+$stmt->bindValue(':idu', $amis["idu"]);
+$stmt->execute();
+$amis = $stmt->fetchAll();
+
+?>
+
+<script>
+alert("ca marche");
+
+</script>
+<?php
+
+
+}
+
+
 
 
 
 ?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">

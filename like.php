@@ -20,14 +20,9 @@ if($verif == false)
     $recup->execute(array($postId));
     $recup = $recup->fetch();
     $totalLikes = $recup["likes"] + 1;
-    if($recup["dislike"]==0)
-    {
-        $totalDislikes = 0;
-    }else{
-        $totalDislikes = $recup["dislike"]-1;
-    }
-    $stmt = $pdo->prepare("UPDATE post SET likes = ?, dislike = ? WHERE idp = ?");
-    $stmt->execute(array($totalLikes, $totalDislikes, $postId));
+    
+    $stmt = $pdo->prepare("UPDATE post SET likes = ?  WHERE idp = ?");
+    $stmt->execute(array($totalLikes , $postId));
     $req = $pdo->prepare("INSERT INTO jaime (idp,idu, ld) VALUES (?,?, 1)"); //insérer dans favoris l'id de l'annonce et celui de l'utilisateur
     $req->execute(array($postId, $idu));
 }else{
