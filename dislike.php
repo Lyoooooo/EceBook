@@ -20,9 +20,14 @@ if($verif == false)
     $recup->execute(array($postId));
     $recup = $recup->fetch();
     $totalDislikes = $recup["dislike"] + 1;
-    
-    $stmt = $pdo->prepare("UPDATE post SET dislike = ? WHERE idp = ?");
-    $stmt->execute(array($totalDislikes, $postId));
+    if($recup["likes"]==0)
+    {
+        $totalLikes = 0;
+    }else{
+        $totalLikes = $recup["likes"]-1;
+    }
+    $stmt = $pdo->prepare("UPDATE post SET dislike = ?, likes = ? WHERE idp = ?");
+    $stmt->execute(array($totalDislikes, $totalLikes, $postId));
     $req = $pdo->prepare("INSERT INTO jaime (idp,idu, ld) VALUES (?,?, 2)"); 
     $req->execute(array($postId, $idu));
 }else{
