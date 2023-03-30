@@ -41,26 +41,8 @@ $stmt = $pdo->prepare('SELECT * FROM post  WHERE idu=:idu');
 $stmt->bindValue(':idu', $amis["idu"]);
 $stmt->execute();
 $amis = $stmt->fetchAll();
-
-?>
-
-<script>
-alert("ca marche");
-
-</script>
-<?php
-
-
 }
-
-
-
 ?>
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
