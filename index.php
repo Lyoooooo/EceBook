@@ -1,11 +1,14 @@
-
 <?php
 include "fonction.php";
 include "fonctionRequete.php";
-
 connecte();
+
+mainHeader();
+$idu=$_SESSION["idu"];
+
 $pdo = connexion();
-// On détermine sur quelle page on se trouve
+
+
 // Récupération du nombre total d'éléments
 $total = $pdo->query("SELECT COUNT(*) FROM post")->fetchColumn();
 // Détermination du nombre d'éléments à afficher par page
@@ -23,12 +26,40 @@ $results = $stmt->fetchAll();
 
 
 //on selectionne tous les  posts
-$res = $pdo->prepare("SELECT * FROM post ORDER BY date DESC limit 10");
-$res->execute();
-$tab = $res->fetchAll();
-mainHeader();
+// $res = $pdo->prepare("SELECT * FROM post ORDER BY date DESC limit 10");
+// $res->execute();
+// $tab = $res->fetchAll();
+
+// on verifie avec qui l'user est ami
+$stmt = $pdo->prepare('SELECT * FROM ami  WHERE (idu1 = :idu OR idu2 = :idu) AND valide = 1');
+$stmt->bindValue(':idu', $_SESSION['idu']);
+$stmt->execute();
+$amis = $stmt->fetchAll();
+
+foreach($amis as $p){
+$stmt = $pdo->prepare('SELECT * FROM post  WHERE idu=:idu');
+$stmt->bindValue(':idu', $amis["idu"]);
+$stmt->execute();
+$amis = $stmt->fetchAll();
 
 ?>
+
+<script>
+alert("ca marche");
+
+</script>
+<?php
+
+
+}
+
+
+
+?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,22 +89,43 @@ mainHeader();
                                 <h4 class="px-5 p-3 bg-white border-warning text-center" style="color:#FF621F; "> POSTS </h4>
                                 <div class="container px-5 p-3">
                                     <div class="row">
-
                                         <?php
-
-
                                         if (count($tab) > 0) {
                                             foreach ($tab as $post) {
                                                 $query = $pdo->prepare("SELECT * FROM ami WHERE ((idu1 = :idu AND idu2 = :ida) OR (idu1 = :ida AND idu2 = :idu)) AND valide=1"); //regarde si il y a une demande
-
+                                                $query->bindParam(':idu', $_SESSION["idu"]);
+                                                $query->bindParam(':ida', $post["idu"]);
+                                                $query->execute();
+                                                if ($query->rowCount() > 0 || $_SESSION["grade"]==4 || $_SESSION["idu"]==$post["idu"]) { 
+                                                    post($post);                            
+                                                }           
+                                            }
+                                        }
+                                        echo '<div class="pagination">';
+                                        for ($i = 1; $i <= $total_pages; $i++) {
+                                            // Ajout d'un lien pour chaque page
                                             echo '<a class="btn btn-inverse-warning" style="border: 1px solid; color:#FF621F" href="index.php?page=' . $i . '">' . $i . '</a> ';
                                         }
                                         echo '</div>';
-                                    }
-
                                         ?>
-
-
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: fixed; bottom: 10%; right: 5%; border: 0px; background-color:rgba(0,0,0,0); z-index: 1;">
+        <img src="images/boutonAddPost.webp" alt="" style="height: 60px;">
+    </button>
+    <?php ajoutpost(); ?>
+    <!-- Modal -->
+    <?php
+    footer();
+    ?>
+</body>
+
+</html>
